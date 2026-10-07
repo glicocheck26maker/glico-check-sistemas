@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Compromissos Cadastrados</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Paciente</th>
+            <th>Tipo</th>
+            <th>Data e Hora</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comp in compromissos %}
+        <tr>
+            <td>{{ comp.id_compromisso }}</td>
+            <td>{{ comp.id_paciente }}</td>
+            <td>{{ comp.tipo_compromisso }}</td>
+            <td>{{ comp.data_hora }}</td>
+            <td>{{ comp.observacao }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

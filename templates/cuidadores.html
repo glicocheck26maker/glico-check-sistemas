@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Cuidadores Cadastrados</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cuidador in cuidadores %}
+        <tr>
+            <td>{{ cuidador.id_cuidador }}</td>
+            <td>{{ cuidador.nome }}</td>
+            <td>{{ cuidador.telefone }}</td>
+            <td>{{ cuidador.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

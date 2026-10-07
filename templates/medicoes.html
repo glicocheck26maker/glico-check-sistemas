@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Medições Cadastradas</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Paciente</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Data e Hora</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medicao in medicoes %}
+        <tr>
+            <td>{{ medicao.id_medicao }}</td>
+            <td>{{ medicao.id_paciente }}</td>
+            <td>{{ medicao.tipo_medicao }}</td>
+            <td>{{ medicao.valor }}</td>
+            <td>{{ medicao.data_hora }}</td>
+            <td>{{ medicao.observacao }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

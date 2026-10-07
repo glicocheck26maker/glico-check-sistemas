@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlicoCheck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>GlicoCheck</h1>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/pacientes">Pacientes</a>
+            <a href="/cuidadores">Cuidadores</a>
+            <a href="/medicoes">Medições</a>
+            <a href="/medicamentos">Medicamentos</a>
+            <a href="/compromissos">Compromissos</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+
+    <!-- RODAPÉ ESTILO APPLE + PORSCHE -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <a href="#top" class="back-to-top">Deslocar para cima ↑</a>
+            </div>
+
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4>Sistema</h4>
+                    <ul>
+                        <li><a href="/">Página Inicial</a></li>
+                        <li><a href="/pacientes">Gestão de Pacientes</a></li>
+                        <li><a href="/cuidadores">Rede de Cuidadores</a></li>
+                        <li><a href="/medicoes">Histórico de Glicemia</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="/medicamentos">Controle de Medicamentos</a></li>
+                        <li><a href="/compromissos">Agenda & Consultas</a></li>
+                        <li><a href="/pacientes/novo">Cadastrar Paciente</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>GlicoCheck Brasil</h4>
+                    <ul>
+                        <li><a href="#">Sobre o Projeto</a></li>
+                        <li><a href="#">Privacidade & Termos</a></li>
+                        <li><a href="#">Suporte ao Usuário</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 GlicoCheck Brasil Sistema de Monitoramento de Saúde Ltda.</p>
+                <p class="footer-legal">
+                    <a href="#">Política de Privacidade</a> | 
+                    <a href="#">Termos de Uso</a> | 
+                    <a href="#">Segurança da Informação</a>
+                </p>
+                <p class="footer-disclaimer">
+                    * As informações cadastradas neste sistema são de uso exclusivo para auxílio no acompanhamento glicêmico e não substituem o diagnóstico médico profissional.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

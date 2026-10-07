@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Medicamentos Cadastrados</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Paciente</th>
+            <th>Medicamento</th>
+            <th>Instrução de Uso</th>
+            <th>Data Início</th>
+            <th>Observações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for med in medicamentos %}
+        <tr>
+            <td>{{ med.id_medicamento }}</td>
+            <td>{{ med.id_paciente }}</td>
+            <td>{{ med.nome_medicamento }}</td>
+            <td>{{ med.informacao_uso }}</td>
+            <td>{{ med.data_inicio }}</td>
+            <td>{{ med.observacoes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

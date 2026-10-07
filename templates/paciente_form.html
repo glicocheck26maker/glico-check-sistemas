@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Novo Paciente</h2>
+
+<form action="/pacientes/cadastrar" method="POST">
+    <p>
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required>
+    </p>
+
+    <p>
+        <label>Data de Nascimento:</label><br>
+        <input type="date" name="data_nascimento" required>
+    </p>
+
+    <p>
+        <label>Telefone:</label><br>
+        <input type="text" name="telefone">
+    </p>
+
+    <p>
+        <label>E-mail:</label><br>
+        <input type="email" name="email" required>
+    </p>
+
+    <p>
+        <label>Senha:</label><br>
+        <input type="password" name="senha" required>
+    </p>
+
+    <p>
+        <button type="submit">Salvar Paciente</button>
+        <a href="/pacientes">Cancelar</a>
+    </p>
+</form>
+
+{% endblock %}
