@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="dashboard-container" style="max-width: 1120px !important; margin: 40px auto !important; padding: 0 24px !important;">
+    
+    <div class="dashboard-header-section" style="margin-bottom: 24px !important; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <h2 style="font-size: 28px !important; font-weight: 700 !important; color: #1d1d1f !important; margin: 0 0 4px 0 !important;">Painel Médico</h2>
+            <p class="welcome-subtitle" style="font-size: 14px !important; color: #86868b !important; margin: 0 !important;">Dr. {{ session.get('nome_usuario') }}</p>
+        </div>
+        <button onclick="abrirModal('modalNovoVinculoMedico')" style="background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 12px; border: none; cursor: pointer;">+ Vincular Paciente</button>
+    </div>
+
+    <!-- SELETOR DINÂMICO DE PACIENTES DO MÉDICO -->
+    <div class="patient-selector-card" style="background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; padding: 20px 24px !important; margin-bottom: 24px !important;">
+        <label for="selectPaciente" style="display: block !important; font-size: 13px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 8px !important;">Selecione o Paciente em Acompanhamento:</label>
+        <select id="selectPaciente" style="width: 100% !important; padding: 11px 14px !important; border: 1px solid #d2d2d7 !important; border-radius: 12px !important; background-color: #f9fafb !important; font-size: 14px !important; color: #1d1d1f !important; outline: none !important;">
+            {% if pacientes %}
+                {% for pac in pacientes %}
+                    <option value="{{ pac.id }}">{{ pac.nome }} ({{ pac.email }})</option>
+                {% endfor %}
+            {% else %}
+                <option value="" disabled selected>Nenhum paciente vinculado ainda. Clique em "+ Vincular Paciente".</option>
+            {% endif %}
+        </select>
+    </div>
+
+    <!-- CARDS DE MANEJO MÉDICO -->
+    <div class="cards-grid" style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 20px !important;">
+        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
+            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Medições & Análise</h3>
+            <span style="font-size: 28px; font-weight: 700; color: #c89368; display: block;">110 mg/dL</span>
+            <small style="font-size: 11px; color: #86868b;">Apenas leitura (Registrado pelo paciente/cuidador)</small>
+        </div>
+
+        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
+            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Alterar Prescrição</h3>
+            <span style="font-size: 18px; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 16px;">Insulina NPH (10 UI)</span>
+            <button onclick="abrirModal('modalPrescricao')" style="width: 100%; background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 12px; border: none; cursor: pointer;">Editar Prescrição</button>
+        </div>
+
+        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
+            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Consultas & Exames</h3>
+            <span style="font-size: 18px; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 16px;">Retorno de Rotina</span>
+            <button onclick="abrirModal('modalConsulta')" style="width: 100%; background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 12px; border: none; cursor: pointer;">Agendar Consulta</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VINCULAR PACIENTE -->
+<div id="modalNovoVinculoMedico" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 99999; align-items: center; justify-content: center;">
+    <div style="background: #ffffff; width: 100%; max-width: 420px; padding: 24px; border-radius: 18px;">
+        <h3 style="margin-top: 0; font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 16px;">Vincular Paciente Existente</h3>
+        <form action="/vincular-paciente-medico" method="POST">
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">Selecione o Paciente Cadastrado</label>
+                <select name="id_paciente" required style="width: 100%; padding: 11px; border: 1px solid #e5e7eb; border-radius: 10px; background: #f9fafb; font-size: 13px;">
+                    {% for p in todos_pacientes %}
+                        <option value="{{ p.id }}">{{ p.nome }} — {{ p.email }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="fecharModal('modalNovoVinculoMedico')" style="flex: 1; background: #f3f4f6; color: #374151; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Cancelar</button>
+                <button type="submit" style="flex: 1; background: #c89368; color: #ffffff; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Adicionar Paciente</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
+</script>
+{% endblock %}

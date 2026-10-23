@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Novo Cuidador</h2>
+
+<form action="/cuidadores/cadastrar" method="POST">
+    <p>
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required>
+    </p>
+
+    <p>
+        <label>Telefone:</label><br>
+        <input type="text" name="telefone">
+    </p>
+
+    <p>
+        <label>E-mail:</label><br>
+        <input type="email" name="email" required>
+    </p>
+
+    <p>
+        <button type="submit">Salvar Cuidador</button>
+        <a href="/cuidadores">Cancelar</a>
+    </p>
+</form>
+
+{% endblock %}

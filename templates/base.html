@@ -6,76 +6,37 @@
     <title>GlicoCheck</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body style="margin: 0; padding-top: 70px; background-color: #f5f5f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-    <header>
-        <h1>GlicoCheck</h1>
+    <!-- CABEÇALHO DA APLICAÇÃO -->
+    <header class="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 60px !important; background: rgba(255, 255, 255, 0.85) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 40px !important; box-sizing: border-box !important;">
+        <a href="/inicio" style="font-size: 20px !important; font-weight: 700 !important; color: #1d1d1f !important; text-decoration: none !important;">GlicoCheck</a>
 
-        <nav>
-            <a href="/">Início</a>
-            <a href="/pacientes">Pacientes</a>
-            <a href="/cuidadores">Cuidadores</a>
-            <a href="/medicoes">Medições</a>
-            <a href="/medicamentos">Medicamentos</a>
-            <a href="/compromissos">Compromissos</a>
+        <nav style="display: flex !important; align-items: center !important; gap: 28px !important;">
+            <a href="/inicio" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Início</a>
+            
+            {% if session.get('perfil') not in ['medico', 'paciente'] %}
+                <a href="/pacientes" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Pacientes</a>
+            {% endif %}
+
+            {% if session.get('perfil') != 'medico' %}
+                <a href="/cuidadores" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Cuidadores</a>
+                <a href="/medicoes" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Medições</a>
+                <a href="/medicamentos" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Medicamentos</a>
+                <a href="/compromissos" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Compromissos</a>
+            {% endif %}
+            
+            <a href="{{ url_for('logout') }}" style="font-size: 13px !important; font-weight: 600 !important; color: #e53e3e !important; text-decoration: none !important;">Sair</a>
         </nav>
     </header>
 
+    <!-- CONTEÚDO DINÂMICO DOS DASHBOARDS -->
     <main>
-        {% block conteudo %}
-        {% endblock %}
+        {% block conteudo %}{% endblock %}
     </main>
 
-    <!-- RODAPÉ ESTILO APPLE + PORSCHE -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <a href="#top" class="back-to-top">Deslocar para cima ↑</a>
-            </div>
-
-            <div class="footer-columns">
-                <div class="footer-col">
-                    <h4>Sistema</h4>
-                    <ul>
-                        <li><a href="/">Página Inicial</a></li>
-                        <li><a href="/pacientes">Gestão de Pacientes</a></li>
-                        <li><a href="/cuidadores">Rede de Cuidadores</a></li>
-                        <li><a href="/medicoes">Histórico de Glicemia</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Recursos</h4>
-                    <ul>
-                        <li><a href="/medicamentos">Controle de Medicamentos</a></li>
-                        <li><a href="/compromissos">Agenda & Consultas</a></li>
-                        <li><a href="/pacientes/novo">Cadastrar Paciente</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>GlicoCheck Brasil</h4>
-                    <ul>
-                        <li><a href="#">Sobre o Projeto</a></li>
-                        <li><a href="#">Privacidade & Termos</a></li>
-                        <li><a href="#">Suporte ao Usuário</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>© 2026 GlicoCheck Brasil Sistema de Monitoramento de Saúde Ltda.</p>
-                <p class="footer-legal">
-                    <a href="#">Política de Privacidade</a> | 
-                    <a href="#">Termos de Uso</a> | 
-                    <a href="#">Segurança da Informação</a>
-                </p>
-                <p class="footer-disclaimer">
-                    * As informações cadastradas neste sistema são de uso exclusivo para auxílio no acompanhamento glicêmico e não substituem o diagnóstico médico profissional.
-                </p>
-            </div>
-        </div>
+    <footer style="text-align: center; padding: 30px 0; color: #86868b; font-size: 12px;">
+        © 2026 GlicoCheck Brasil Sistema de Monitoramento de Saúde Ltda.
     </footer>
-
 </body>
 </html>

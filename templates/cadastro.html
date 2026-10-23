@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: #ffffff !important; z-index: 999999 !important; display: flex !important; align-items: center !important; justify-content: center !important;">
+    
+    <div style="width: 100vw !important; height: 100vh !important; display: grid !important; grid-template-columns: 0.9fr 1.1fr !important; gap: 0 !important; padding: 24px !important; box-sizing: border-box !important; background: #ffffff !important;">
+        
+        <!-- Coluna Esquerda: Imagem com Título e Objetivo -->
+        <div style="position: relative !important; width: 100% !important; height: 100% !important; border-radius: 24px !important; overflow: hidden !important;">
+            <img src="https://plus.unsplash.com/premium_photo-1678459867076-c619d8adbd75?q=80&w=687&auto=format&fit=crop" alt="Medição de Glicemia" style="width: 100% !important; height: 100% !important; object-fit: cover !important;">
+            
+            <div style="position: absolute !important; bottom: 0 !important; left: 0 !important; width: 100% !important; padding: 36px 28px !important; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%) !important; color: #ffffff !important; box-sizing: border-box !important;">
+                <h1 style="font-size: 32px !important; font-weight: 700 !important; margin: 0 0 8px 0 !important; color: #ffffff !important;">GlicoCheck</h1>
+                <p style="font-size: 13px !important; line-height: 1.5 !important; color: rgba(255,255,255,0.9) !important; margin: 0 !important;">Unificando o acompanhamento glicêmico com simplicidade, segurança e integração total entre paciente, cuidador e médico.</p>
+            </div>
+        </div>
+
+        <!-- Coluna Direita: Formulário Sem Caixa Branca Interna -->
+        <div style="display: flex !important; flex-direction: column !important; justify-content: center !important; padding: 0 50px !important; width: 100% !important; max-width: 520px !important; margin: 0 auto !important; background: transparent !important; box-shadow: none !important; border: none !important;">
+            
+            <h2 style="font-size: 28px !important; font-weight: 700 !important; color: #111827 !important; margin-bottom: 16px !important; line-height: 1.2 !important;">Fazer cadastro<br>na GlicoCheck</h2>
+
+            {% if erro %}
+                <div style="background-color: #fee2e2 !important; color: #dc2626 !important; padding: 10px 14px !important; border-radius: 10px !important; font-size: 13px !important; margin-bottom: 14px !important; border: 1px solid #fca5a5 !important;">
+                    {{ erro }}
+                </div>
+            {% endif %}
+
+            <form action="/cadastro" method="POST" style="width: 100% !important;" onsubmit="return validarFormulario()">
+                
+                <div style="margin-bottom: 12px !important;">
+                    <label for="nome" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Nome completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required autofocus style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                </div>
+
+                <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; margin-bottom: 12px !important;">
+                    <div>
+                        <label for="data_nascimento" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Data nascimento</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" required style="width: 100% !important; padding: 10px 12px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                    </div>
+                    <div>
+                        <label for="telefone" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required style="width: 100% !important; padding: 10px 12px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px !important;">
+                    <label for="email" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Ex: glicocheck26@gmail.com" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                </div>
+
+                <div style="margin-bottom: 12px !important;">
+                    <label for="perfil" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Tipo de Perfil</label>
+                    <select id="perfil" name="perfil" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                        <option value="" disabled selected>Selecione seu perfil...</option>
+                        <option value="paciente">Paciente</option>
+                        <option value="cuidador">Cuidador(a)</option>
+                        <option value="medico">Médico(a)</option>
+                    </select>
+                </div>
+
+                <!-- CAMPOS DE SENHA CORRIGIDOS COM BOTÃO FORÇADO À DIREITA -->
+                <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; margin-bottom: 8px !important;">
+                    <!-- Criar Senha -->
+                    <div>
+                        <label for="senha" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Criar Senha</label>
+                        <div style="position: relative !important; width: 100% !important; display: block !important;">
+                            <input type="password" id="senha" name="senha" minlength="8" required placeholder="Mínimo 8 dígitos" style="width: 100% !important; padding: 10px 38px 10px 12px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                            <button type="button" onclick="togglePass('senha', 'eye1')" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; background: transparent !important; border: none !important; cursor: pointer !important; color: #9ca3af !important; padding: 0 !important; width: auto !important; height: auto !important; min-width: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 10 !important;">
+                                <svg id="eye1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Valide a Senha -->
+                    <div>
+                        <label for="confirmar_senha" style="display: block !important; font-size: 12px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Valide a Senha</label>
+                        <div style="position: relative !important; width: 100% !important; display: block !important;">
+                            <input type="password" id="confirmar_senha" name="confirmar_senha" minlength="8" required placeholder="Valide a senha" style="width: 100% !important; padding: 10px 38px 10px 12px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important;">
+                            <button type="button" onclick="togglePass('confirmar_senha', 'eye2')" style="position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%) !important; background: transparent !important; border: none !important; cursor: pointer !important; color: #9ca3af !important; padding: 0 !important; width: auto !important; height: auto !important; min-width: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 10 !important;">
+                                <svg id="eye2" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensagens de Erro sem Emojis -->
+                <div id="passError" style="display: none; color: #dc2626; font-size: 12px; margin-bottom: 10px; font-weight: 500;">
+                    As senhas digitadas não conferem.
+                </div>
+                <div id="passLengthError" style="display: none; color: #dc2626; font-size: 12px; margin-bottom: 10px; font-weight: 500;">
+                    A senha precisa ter no mínimo 8 dígitos.
+                </div>
+
+                <button type="submit" style="width: 100% !important; background-color: #c89368 !important; color: #ffffff !important; font-size: 14px !important; font-weight: 600 !important; padding: 12px !important; border-radius: 10px !important; border: none !important; cursor: pointer !important; margin-top: 6px !important;">Cadastrar na plataforma</button>
+
+                <p style="text-align: center !important; font-size: 12px !important; color: #6b7280 !important; margin-top: 14px !important;">Já tem uma conta? <a href="/login" style="color: #c89368 !important; text-decoration: none !important; font-weight: 600 !important;">Entrar</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePass(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        const isPassword = input.type === 'password';
+        
+        input.type = isPassword ? 'text' : 'password';
+        
+        if (isPassword) {
+            icon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
+        } else {
+            icon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`;
+        }
+    }
+
+    function validarFormulario() {
+        const p1 = document.getElementById('senha').value;
+        const p2 = document.getElementById('confirmar_senha').value;
+        const errMatch = document.getElementById('passError');
+        const errLen = document.getElementById('passLengthError');
+
+        errMatch.style.display = 'none';
+        errLen.style.display = 'none';
+
+        if (p1.length < 8) {
+            errLen.style.display = 'block';
+            return false;
+        }
+
+        if (p1 !== p2) {
+            errMatch.style.display = 'block';
+            return false;
+        }
+
+        return true;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Novo Compromisso</h2>
+
+<form action="/compromissos/cadastrar" method="POST">
+    <p>
+        <label>Paciente:</label><br>
+        <select name="id_paciente" required>
+            <option value="">Selecione o paciente</option>
+            {% for paciente in pacientes %}
+                <option value="{{ paciente.id_paciente }}">{{ paciente.nome }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label>Tipo de Compromisso:</label><br>
+        <input type="text" name="tipo_compromisso" placeholder="Ex: Consulta Endocrinologista, Exame de Sangue" required>
+    </p>
+
+    <p>
+        <label>Data e Hora:</label><br>
+        <input type="datetime-local" name="data_hora" required>
+    </p>
+
+    <p>
+        <label>Observação:</label><br>
+        <textarea name="observacao" rows="3"></textarea>
+    </p>
+
+    <p>
+        <button type="submit">Salvar Compromisso</button>
+        <a href="/compromissos">Cancelar</a>
+    </p>
+</form>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="landing-container">
+    <section class="hero-section">
+        <h1 class="hero-title">GlicoCheck</h1>
+        <p class="hero-subtitle">Sua saúde glicêmica integrada com facilidade, segurança e estilo.</p>
+    </section>
+
+    <div class="landing-content">
+        <section class="info-card">
+            <h2>O que é o GlicoCheck?</h2>
+            <p>O GlicoCheck é uma plataforma moderna e intuitiva projetada para unificar o acompanhamento glicêmico e a gestão da rotina de saúde entre pacientes, cuidadores e médicos especialistas.</p>
+        </section>
+
+        <section class="info-card">
+            <h2>Para quem é?</h2>
+            <ul>
+                <li><strong>Pacientes:</strong> Praticidade e clareza no acompanhamento do dia a dia.</li>
+                <li><strong>Cuidadores:</strong> Suporte contínuo, organização de compromissos e tarefas.</li>
+                <li><strong>Médicos:</strong> Dados precisos para prescrição e alteração de tratamento.</li>
+            </ul>
+        </section>
+
+        <section class="info-card">
+            <h2>Nossos Objetivos</h2>
+            <p>Facilitar a adesão ao tratamento, prevenir complicações por meio do monitoramento constante e proporcionar uma comunicação fluida e segura entre toda a rede de apoio do paciente.</p>
+        </section>
+
+        <section class="info-card">
+            <h2>Serviços Fornecidos</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>📊 Histórico de Medições</h3>
+                    <p>Registo claro e acessível das taxas de glicemia.</p>
+                </div>
+                <div class="service-item">
+                    <h3>💊 Prescrição & Medicamentos</h3>
+                    <p>Acompanhamento exato de doses prescritas pelo médico.</p>
+                </div>
+                <div class="service-item">
+                    <h3>📅 Agenda Integrada</h3>
+                    <p>Bloco de notas e compromissos sincronizados em tempo real.</p>
+                </div>
+                <div class="service-item">
+                    <h3>🚕 Farmácias & Delivery</h3>
+                    <p>Módulo estilo Uber com integração no Apple/Google Maps e WhatsApp.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="landing-actions">
+            <a href="/login" class="btn-submit-brown">Entrar na sua conta</a>
+            <a href="/cadastro" class="btn-outline-brown">Cadastrar nova conta</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

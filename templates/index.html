@@ -1,18 +1,94 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
+<!-- HERO FULL WIDTH -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1600&auto=format&fit=crop');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span class="hero-tag">Sistema Integrado de Saúde</span>
+        <h1>Controle glicêmico inteligente, simples e acessível.</h1>
+        <p>
+            O <strong>GlicoCheck</strong> conecta Pacientes, Cuidadores e Médicos em uma única plataforma.
+            Acompanhe histórico glicêmico, receituários de medicamentos e compromissos de forma centralizada e ágil.
+        </p>
+        <a href="#painel-usuario" class="btn-primary">Acessar Painel ↓</a>
+    </div>
+</section>
 
-<h2>Início</h2>
+<!-- SELETOR DE PERFIL -->
+<div class="perfil-selector-container">
+    <span>Simular visualização como:</span>
+    <a href="/mudar_perfil/paciente" class="perfil-btn {% if tipo_usuario == 'paciente' %}active{% endif %}">Paciente</a>
+    <a href="/mudar_perfil/cuidador" class="perfil-btn {% if tipo_usuario == 'cuidador' %}active{% endif %}">Cuidador</a>
+    <a href="/mudar_perfil/medico" class="perfil-btn {% if tipo_usuario == 'medico' %}active{% endif %}">Médico (Admin)</a>
+</div>
 
-<p>Projeto de Monitoramento e Controle com Python, Flask e MySQL.</p>
+<!-- PAINEL DE CONTROLE -->
+<section id="painel-usuario" class="dashboard-section">
+    <div class="dashboard-header">
+        <h2>Painel do {{ tipo_usuario|capitalize }}</h2>
+        <p>Recursos e atalhos disponíveis para o seu perfil.</p>
+    </div>
 
-<ul>
-    <li><a href="/pacientes">Ver pacientes cadastrados</a></li>
-    <li><a href="/pacientes/novo">Cadastrar novo paciente</a></li>
-    <li><a href="/cuidadores">Ver cuidadores cadastrados</a></li>
-    <li><a href="/medicoes">Ver medições cadastradas</a></li>
-    <li><a href="/medicamentos">Ver medicamentos cadastrados</a></li>
-    <li><a href="/compromissos">Ver compromissos cadastrados</a></li>
-</ul>
+    <div class="cards-grid">
+        {% if tipo_usuario in ['paciente', 'medico'] %}
+        <div class="card-item">
+            <h3>Rede de Cuidadores</h3>
+            <p>Consulte a lista de cuidadores acompanhantes.</p>
+            <div class="card-actions">
+                <a href="/cuidadores" class="card-link">Ver cuidadores</a>
+                {% if tipo_usuario == 'medico' %}
+                    <a href="/cuidadores/novo" class="card-link action-link">+ Cadastrar novo</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
 
+        <div class="card-item">
+            <h3>Histórico de Medições</h3>
+            <p>Acompanhe e registre os níveis de glicemia.</p>
+            <div class="card-actions">
+                <a href="/medicoes" class="card-link">Consultar medições</a>
+                {% if tipo_usuario in ['paciente', 'cuidador', 'medico'] %}
+                    <a href="/medicoes/nova" class="card-link action-link">+ Nova medição</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card-item">
+            <h3>Medicamentos & Doses</h3>
+            <p>Orientações e prescrições fornecidas pelo médico.</p>
+            <div class="card-actions">
+                <a href="/medicamentos" class="card-link">Ver prescrições</a>
+                {% if tipo_usuario == 'medico' %}
+                    <a href="/medicamentos/novo" class="card-link action-link">+ Prescrever novo</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card-item">
+            <h3>Agenda & Consultas</h3>
+            <p>Próximas consultas, exames e retornos.</p>
+            <div class="card-actions">
+                <a href="/compromissos" class="card-link">Ver compromissos</a>
+                {% if tipo_usuario in ['cuidador', 'medico'] %}
+                    <a href="/compromissos/novo" class="card-link action-link">+ Agendar novo</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if tipo_usuario in ['cuidador', 'medico'] %}
+        <div class="card-item">
+            <h3>Gestão de Pacientes</h3>
+            <p>Prontuários e cadastros de pacientes do sistema.</p>
+            <div class="card-actions">
+                <a href="/pacientes" class="card-link">Listar pacientes</a>
+                {% if tipo_usuario == 'medico' %}
+                    <a href="/pacientes/novo" class="card-link action-link">+ Cadastrar paciente</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}
