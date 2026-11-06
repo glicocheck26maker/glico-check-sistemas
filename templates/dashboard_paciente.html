@@ -1,71 +1,52 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-<div class="dashboard-container" style="max-width: 1120px !important; margin: 40px auto !important; padding: 0 24px !important;">
+<style>
+    header, .top-bar, .navbar, .header-container, [class*="nav"], [class*="header"] { display: none !important; }
+</style>
+
+<div style="padding: 40px 60px !important; background: #ffffff !important; min-height: 100vh !important; box-sizing: border-box !important; max-width: 1200px !important; margin: 0 auto !important;">
     
-    <div class="dashboard-header-section" style="margin-bottom: 24px !important; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 35px !important;">
         <div>
-            <h2 style="font-size: 28px !important; font-weight: 700 !important; color: #1d1d1f !important; margin: 0 0 4px 0 !important;">Meu Painel de Saúde</h2>
-            <p class="welcome-subtitle" style="font-size: 14px !important; color: #86868b !important; margin: 0 !important;">Bem-vindo(a), {{ session.get('nome_usuario') }}</p>
+            <h1 style="font-size: 26px !important; font-weight: 700 !important; color: #a10f06 !important; margin-bottom: 4px !important;">
+                Olá, João Silva (Paciente)
+            </h1>
+            <p style="font-size: 13px !important; color: #6b7280 !important; font-weight: 600 !important; margin: 0 !important; text-transform: uppercase;">
+                Seu Painel de Saúde &bull; Cuidador: Ana Paula
+            </p>
         </div>
-        <button onclick="abrirModal('modalVincularCuidador')" style="background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 12px; border: none; cursor: pointer;">+ Vincular Cuidador(a)</button>
+        <a href="/logout" style="background: #f3f4f6 !important; color: #374151 !important; padding: 10px 18px !important; border-radius: 10px !important; font-size: 13px !important; font-weight: 600 !important; text-decoration: none !important;">Sair</a>
     </div>
 
-    <div class="cards-grid" style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 20px !important;">
+    <div style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important;">
+        
         <!-- Registrar Medição -->
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Última Medição</h3>
-            <span style="font-size: 28px; font-weight: 700; color: #c89368; display: block; margin-bottom: 16px;">110 mg/dL</span>
-            <button onclick="abrirModal('modalRegistrarGlicemia')" style="width: 100%; background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 12px; border: none; cursor: pointer;">Registrar Nova Medição</button>
+        <div style="background: #fdfdfd; padding: 30px; border-radius: 20px; border: 1px solid #eaeaea; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+            <h3 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 15px;">Nova Medição de Glicemia</h3>
+            <form onsubmit="event.preventDefault(); alert('Medição registrada com sucesso e enviada ao médico!');">
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">Valor (mg/dL):</label>
+                    <input type="number" placeholder="Ex: 115" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; outline: none; box-sizing: border-box;">
+                </div>
+                <button type="submit" style="width: 100%; background-color: #a10f06; color: white; padding: 12px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Registrar Medição</button>
+            </form>
         </div>
 
-        <!-- Meus Cuidadores Vinculados -->
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Meus Cuidadores</h3>
-            {% if cuidadores %}
-                {% for c in cuidadores %}
-                    <p style="font-size: 14px; font-weight: 600; color: #1d1d1f; margin: 0 0 2px 0;">{{ c.nome }}</p>
-                    <p style="font-size: 12px; color: #86868b; margin: 0 0 10px 0;">{{ c.email }}</p>
-                {% endfor %}
-            {% else %}
-                <p style="font-size: 13px; color: #86868b;">Nenhum cuidador vinculado.</p>
-            {% endif %}
-        </div>
-
-        <!-- Meus Médicos Vinculados -->
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Médicos que me acompanham</h3>
-            {% if medicos %}
-                {% for m in medicos %}
-                    <p style="font-size: 14px; font-weight: 600; color: #1d1d1f; margin: 0 0 2px 0;">Dr(a). {{ m.nome }}</p>
-                    <p style="font-size: 12px; color: #86868b; margin: 0 0 10px 0;">{{ m.email }}</p>
-                {% endfor %}
-            {% else %}
-                <p style="font-size: 13px; color: #86868b;">Nenhum médico vinculado.</p>
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-<!-- MODAL VINCULAR CUIDADOR -->
-<div id="modalVincularCuidador" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 99999; align-items: center; justify-content: center;">
-    <div style="background: #ffffff; width: 100%; max-width: 400px; padding: 24px; border-radius: 18px;">
-        <h3 style="margin-top: 0; font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 16px;">Vincular Cuidador(a)</h3>
-        <form action="/vincular-cuidador-paciente" method="POST">
-            <div style="margin-bottom: 16px;">
-                <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">E-mail do Cuidador Cadastrado</label>
-                <input type="email" name="email_cuidador" placeholder="Ex: cuidador@gmail.com" required style="width: 100%; padding: 11px; border: 1px solid #e5e7eb; border-radius: 10px; background: #f9fafb; font-size: 13px; box-sizing: border-box;">
+        <!-- Meus Medicamentos e Avisos -->
+        <div style="background: #fdfdfd; padding: 30px; border-radius: 20px; border: 1px solid #eaeaea; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+            <h3 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 15px;">Próximos Medicamentos</h3>
+            <div style="background: #ffffff; padding: 16px; border-radius: 12px; border-left: 4px solid #a10f06; margin-bottom: 12px;">
+                <strong>Insulina NPH</strong>
+                <p style="font-size: 13px; color: #6b7280; margin: 4px 0 0 0;">Horário: 12:00 (Antes do almoço)</p>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button type="button" onclick="fecharModal('modalVincularCuidador')" style="flex: 1; background: #f3f4f6; color: #374151; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Cancelar</button>
-                <button type="submit" style="flex: 1; background: #c89368; color: #ffffff; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Vincular</button>
+            <div style="background: #ffffff; padding: 16px; border-radius: 12px; border-left: 4px solid #128c7e;">
+                <strong>Metformina 850mg</strong>
+                <p style="font-size: 13px; color: #6b7280; margin: 4px 0 0 0;">Horário: 20:00 (Após o jantar)</p>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<script>
-    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-</script>
+    </div>
+
+</div>
 {% endblock %}

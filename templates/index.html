@@ -1,94 +1,115 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlicoCheck | Cuidado que aproxima</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v=2) }}">
+</head>
+<body>
 
-{% block conteudo %}
-<!-- HERO FULL WIDTH -->
-<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1600&auto=format&fit=crop');">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <span class="hero-tag">Sistema Integrado de Saúde</span>
-        <h1>Controle glicêmico inteligente, simples e acessível.</h1>
-        <p>
-            O <strong>GlicoCheck</strong> conecta Pacientes, Cuidadores e Médicos em uma única plataforma.
-            Acompanhe histórico glicêmico, receituários de medicamentos e compromissos de forma centralizada e ágil.
-        </p>
-        <a href="#painel-usuario" class="btn-primary">Acessar Painel ↓</a>
+    <header class="main-header navbar">
+        <a href="#inicio" class="brand-logo">
+            GlicoCheck 
+            <img src="{{ url_for('static', filename='logo-g.svg') }}" alt="Logo G" class="nav-logo-icon">
+        </a>
+        <nav class="main-nav">
+            <a href="#inicio">Início</a>
+            <a href="#historia">Nossa história</a>
+            <a href="#proposito">Nosso propósito</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="/entrar" class="nav-register">Entrar</a>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO HERO (INÍCIO) -->
+    <section class="gc-hero" id="inicio">
+        <div class="gc-hero-content">
+            <span class="gc-eyebrow">CUIDADO, SAÚDE E CONEXÃO</span>
+            <h1>Cuidar da saúde pode ser mais <span>simples.</span></h1>
+            <p>Acompanhar a glicose é apenas o começo. O GlicoCheck nasceu para aproximar pessoas, facilitar o cuidado e transformar informações em mais qualidade de vida.</p>
+            <div class="gc-hero-buttons">
+                <a href="/cadastrar" class="gc-btn-primary">Conheça o GlicoCheck &rarr;</a>
+                <a href="#historia" class="gc-btn-link">Descubra nossa história</a>
+            </div>
+        </div>
+        <div class="gc-hero-image">
+            <div class="gc-image-overlay">
+                <span>GlicoCheck</span>
+                <p>Cuidado que aproxima.</p>
+            </div>
+        </div>
+    </section>
+
+   <!-- NOSSA HISTÓRIA -->
+<section class="gc-story-team-single" id="historia">
+
+    <div class="gc-story-container">
+
+        <!-- FOTO À ESQUERDA -->
+        <div class="gc-story-visual">
+
+            <div class="gc-story-image-wrapper">
+                <img
+                    src="{{ url_for('static', filename='img/equipe-glicocheck.png') }}"
+                    alt="Equipe criadora do GlicoCheck"
+                >
+            </div>
+
+            <span class="gc-photo-caption">
+                <span class="gc-caption-dot"></span>
+                Uma ideia construída para cuidar de pessoas.
+            </span>
+
+        </div>
+
+        <!-- TEXTO À DIREITA -->
+        <div class="gc-story-text">
+
+            <span class="gc-story-label">
+                NOSSA HISTÓRIA
+            </span>
+
+            <h2>
+                A tecnologia aproxima.
+                <span>O cuidado transforma.</span>
+            </h2>
+
+            <p class="gc-story-intro">
+                O GlicoCheck nasceu de uma ideia simples:
+                tornar o acompanhamento da glicose mais
+                acessível, organizado e próximo das pessoas.
+            </p>
+
+            <p>
+                Sabemos que conviver com a diabetes envolve
+                atenção diária, acompanhamento e muitas
+                informações. E acreditamos que ninguém
+                precisa enfrentar essa rotina sozinho.
+            </p>
+
+            <p>
+                Por isso, desenvolvemos uma plataforma que
+                conecta pacientes, cuidadores e profissionais
+                da saúde, facilitando o registro e o acompanhamento
+                da glicemia.
+            </p>
+
+            <div class="gc-story-signature">
+                <span class="gc-signature-line"></span>
+                <span>GlicoCheck — cuidado que aproxima.</span>
+            </div>
+
+        </div>
+
     </div>
+
 </section>
 
-<!-- SELETOR DE PERFIL -->
-<div class="perfil-selector-container">
-    <span>Simular visualização como:</span>
-    <a href="/mudar_perfil/paciente" class="perfil-btn {% if tipo_usuario == 'paciente' %}active{% endif %}">Paciente</a>
-    <a href="/mudar_perfil/cuidador" class="perfil-btn {% if tipo_usuario == 'cuidador' %}active{% endif %}">Cuidador</a>
-    <a href="/mudar_perfil/medico" class="perfil-btn {% if tipo_usuario == 'medico' %}active{% endif %}">Médico (Admin)</a>
-</div>
+    <!-- RODAPÉ -->
+    <footer>
+        <p>&copy; 2026 GlicoCheck. Todos os direitos reservados.</p>
+    </footer>
 
-<!-- PAINEL DE CONTROLE -->
-<section id="painel-usuario" class="dashboard-section">
-    <div class="dashboard-header">
-        <h2>Painel do {{ tipo_usuario|capitalize }}</h2>
-        <p>Recursos e atalhos disponíveis para o seu perfil.</p>
-    </div>
-
-    <div class="cards-grid">
-        {% if tipo_usuario in ['paciente', 'medico'] %}
-        <div class="card-item">
-            <h3>Rede de Cuidadores</h3>
-            <p>Consulte a lista de cuidadores acompanhantes.</p>
-            <div class="card-actions">
-                <a href="/cuidadores" class="card-link">Ver cuidadores</a>
-                {% if tipo_usuario == 'medico' %}
-                    <a href="/cuidadores/novo" class="card-link action-link">+ Cadastrar novo</a>
-                {% endif %}
-            </div>
-        </div>
-        {% endif %}
-
-        <div class="card-item">
-            <h3>Histórico de Medições</h3>
-            <p>Acompanhe e registre os níveis de glicemia.</p>
-            <div class="card-actions">
-                <a href="/medicoes" class="card-link">Consultar medições</a>
-                {% if tipo_usuario in ['paciente', 'cuidador', 'medico'] %}
-                    <a href="/medicoes/nova" class="card-link action-link">+ Nova medição</a>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="card-item">
-            <h3>Medicamentos & Doses</h3>
-            <p>Orientações e prescrições fornecidas pelo médico.</p>
-            <div class="card-actions">
-                <a href="/medicamentos" class="card-link">Ver prescrições</a>
-                {% if tipo_usuario == 'medico' %}
-                    <a href="/medicamentos/novo" class="card-link action-link">+ Prescrever novo</a>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="card-item">
-            <h3>Agenda & Consultas</h3>
-            <p>Próximas consultas, exames e retornos.</p>
-            <div class="card-actions">
-                <a href="/compromissos" class="card-link">Ver compromissos</a>
-                {% if tipo_usuario in ['cuidador', 'medico'] %}
-                    <a href="/compromissos/novo" class="card-link action-link">+ Agendar novo</a>
-                {% endif %}
-            </div>
-        </div>
-
-        {% if tipo_usuario in ['cuidador', 'medico'] %}
-        <div class="card-item">
-            <h3>Gestão de Pacientes</h3>
-            <p>Prontuários e cadastros de pacientes do sistema.</p>
-            <div class="card-actions">
-                <a href="/pacientes" class="card-link">Listar pacientes</a>
-                {% if tipo_usuario == 'medico' %}
-                    <a href="/pacientes/novo" class="card-link action-link">+ Cadastrar paciente</a>
-                {% endif %}
-            </div>
-        </div>
-        {% endif %}
-    </div>
-</section>
-{% endblock %}
+</body>
+</html>

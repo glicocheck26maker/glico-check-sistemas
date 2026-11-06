@@ -1,125 +1,60 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-<div class="dashboard-container" style="max-width: 1120px !important; margin: 40px auto !important; padding: 0 24px !important;">
+<style>
+    header, .top-bar, .navbar, .header-container, [class*="nav"], [class*="header"] { display: none !important; }
+</style>
+
+<div style="padding: 40px 60px !important; background: #ffffff !important; min-height: 100vh !important; box-sizing: border-box !important; max-width: 1200px !important; margin: 0 auto !important;">
     
-    <div class="dashboard-header-section" style="margin-bottom: 28px !important;">
-        <h2 style="font-size: 28px !important; font-weight: 700 !important; color: #1d1d1f !important; margin: 0 0 6px 0 !important;">Painel da Cuidadora</h2>
-        <p class="welcome-subtitle" style="font-size: 14px !important; color: #86868b !important; margin: 0 !important;">Cuidadora: {{ session.get('nome_usuario', 'Heloa Lacera') }} — Acompanhando a paciente: <strong>{{ paciente_nome }}</strong></p>
+    <div style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 35px !important;">
+        <div>
+            <h1 style="font-size: 26px !important; font-weight: 700 !important; color: #a10f06 !important; margin-bottom: 4px !important;">
+                Olá, Bem-vindo ({{ session.get('nome', 'Cuidador') }})
+            </h1>
+            <p style="font-size: 13px !important; color: #6b7280 !important; font-weight: 600 !important; margin: 0 !important; text-transform: uppercase;">
+                Painel do Cuidador(a) &bull; Gestão de Pacientes
+            </p>
+        </div>
+        <a href="/logout" style="background: #f3f4f6 !important; color: #374151 !important; padding: 10px 18px !important; border-radius: 10px !important; font-size: 13px !important; font-weight: 600 !important; text-decoration: none !important;">Sair</a>
     </div>
 
-    <div class="cards-grid" style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 20px !important;">
+    <!-- Lista de Pacientes Vinculados -->
+    <h3 style="font-size: 18px !important; font-weight: 700 !important; color: #111827 !important; margin-bottom: 20px !important;">Seus Pacientes</h3>
+    
+    <div style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; margin-bottom: 40px !important;">
         
-        <!-- Card 1: Registrar Medição do Paciente -->
-        <div class="dashboard-card" style="background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; padding: 24px !important; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
-            <div>
-                <div class="card-title-header" style="display: flex !important; align-items: center !important; gap: 10px !important; margin-bottom: 16px !important;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                    <h3 style="margin: 0 !important; font-size: 16px !important; font-weight: 600 !important; color: #1d1d1f !important;">Última Medição</h3>
-                </div>
-                <div class="card-body-info" style="margin-bottom: 20px !important;">
-                    <span id="valGlicemiaCuid" style="font-size: 28px !important; font-weight: 700 !important; color: #c89368 !important; display: block !important;">110 mg/dL</span>
-                    <p id="metaGlicemiaCuid" style="font-size: 12px !important; color: #86868b !important; margin: 4px 0 0 0 !important;">Hoje, 08:00</p>
+        <!-- Paciente 1 -->
+        <div style="background: #ffffff !important; padding: 24px !important; border-radius: 20px !important; border: 1px solid #f0f0f0 !important; box-shadow: 0 10px 25px rgba(0,0,0,0.03) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
+            <div style="display: flex !important; align-items: center !important; gap: 16px !important; margin-bottom: 16px !important;">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" alt="João" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover;">
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0 0 4px 0;">João Silva</h4>
+                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Diabetes Tipo 2 &bull; Méd: Dr. Carlos</p>
                 </div>
             </div>
-            <button class="btn-submit-brown" onclick="abrirModal('modalRegistrarGlicemiaCuid')" style="width: 100% !important; background-color: #c89368 !important; color: #ffffff !important; font-size: 13px !important; font-weight: 600 !important; padding: 12px !important; border-radius: 12px !important; border: none !important; cursor: pointer !important;">Registrar Medição do Paciente</button>
+            <div style="background: #f9fafb; padding: 10px 14px; border-radius: 10px; font-size: 12px; color: #374151; margin-bottom: 16px;">
+                Última Glicemia: <strong style="color: #a10f06;">110 mg/dL</strong> (Hoje, 08:00)
+            </div>
+            <a href="/inicio" onclick="alert('Abrindo prontuário de João Silva para edição de lembretes e medicamentos')" style="background-color: #a10f06; color: #ffffff; text-align: center; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; display: block;">Gerenciar Perfil e Rotina</a>
         </div>
 
-        <!-- Card 2: Medicamentos (Apenas Leitura) -->
-        <div class="dashboard-card" style="background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; padding: 24px !important; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
-            <div>
-                <div class="card-title-header" style="display: flex !important; align-items: center !important; gap: 10px !important; margin-bottom: 16px !important;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10.5 20.4l-7.9-7.9c-1.8-1.8-1.8-4.7 0-6.5l0 0c1.8-1.8 4.7-1.8 6.5 0l7.9 7.9c1.8 1.8 1.8 4.7 0 6.5l0 0c-1.8 1.8-4.7 1.8-6.5 0z"></path>
-                        <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"></line>
-                    </svg>
-                    <h3 style="margin: 0 !important; font-size: 16px !important; font-weight: 600 !important; color: #1d1d1f !important;">Próximo Medicamento</h3>
-                </div>
-                <div class="card-body-info" style="margin-bottom: 16px !important;">
-                    <span style="font-size: 18px !important; font-weight: 600 !important; color: #1d1d1f !important; display: block !important;">Insulina NPH</span>
-                    <p style="font-size: 12px !important; color: #86868b !important; margin: 4px 0 0 0 !important;">Prescrito pelo Dr. Matheus Consolari: 10 UI às 12:00</p>
+        <!-- Paciente 2 -->
+        <div style="background: #ffffff !important; padding: 24px !important; border-radius: 20px !important; border: 1px solid #f0f0f0 !important; box-shadow: 0 10px 25px rgba(0,0,0,0.03) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
+            <div style="display: flex !important; align-items: center !important; gap: 16px !important; margin-bottom: 16px !important;">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Maria" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover;">
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0 0 4px 0;">Maria Oliveira</h4>
+                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Diabetes Tipo 1 &bull; Méd: Dra. Ana</p>
                 </div>
             </div>
-            <small style="font-size: 11px !important; color: #86868b !important; font-weight: 500 !important;">Apenas leitura (Prescrito pelo médico)</small>
-        </div>
-
-        <!-- Card 3: Lembretes -->
-        <div class="dashboard-card" style="background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; padding: 24px !important; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
-            <div>
-                <div class="card-title-header" style="display: flex !important; align-items: center !important; gap: 10px !important; margin-bottom: 16px !important;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c89368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4a2 2 0 0 0-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42z"></path>
-                        <circle cx="7" cy="7" r="1.5"></circle>
-                    </svg>
-                    <h3 style="margin: 0 !important; font-size: 16px !important; font-weight: 600 !important; color: #1d1d1f !important;">Lembrete de Rotina</h3>
-                </div>
-                <div class="card-body-info" style="margin-bottom: 16px !important;">
-                    <span id="lembreteTexto" style="font-size: 16px !important; font-weight: 600 !important; color: #1d1d1f !important; display: block !important;">Medição pré-almoço</span>
-                    <p id="lembreteData" style="font-size: 12px !important; color: #86868b !important; margin: 4px 0 0 0 !important;">Hoje às 11:30</p>
-                </div>
+            <div style="background: #f9fafb; padding: 10px 14px; border-radius: 10px; font-size: 12px; color: #374151; margin-bottom: 16px;">
+                Última Glicemia: <strong style="color: #a10f06;">142 mg/dL</strong> (Hoje, 09:30)
             </div>
-            <button class="btn-submit-brown" onclick="abrirModal('modalLembreteCuid')" style="width: 100% !important; background-color: #c89368 !important; color: #ffffff !important; font-size: 13px !important; font-weight: 600 !important; padding: 12px !important; border-radius: 12px !important; border: none !important; cursor: pointer !important;">Criar Lembrete</button>
+            <a href="/inicio" onclick="alert('Abrindo prontuário de Maria Oliveira')" style="background-color: #a10f06; color: #ffffff; text-align: center; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; display: block;">Gerenciar Perfil e Rotina</a>
         </div>
+
     </div>
+
 </div>
-
-<!-- MODAL REGISTRAR MEDIÇÃO CUIDADOR -->
-<div id="modalRegistrarGlicemiaCuid" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 99999; align-items: center; justify-content: center;">
-    <div style="background: #ffffff; width: 100%; max-width: 380px; padding: 24px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-        <h3 style="margin-top: 0; font-size: 18px; font-weight: 700; color: #1d1d1f;">Registrar Medição para {{ paciente_nome }}</h3>
-        <div style="margin-bottom: 14px;">
-            <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">Valor da Glicemia (mg/dL)</label>
-            <input type="number" id="inGlicemiaCuid" placeholder="Ex: 110" style="width: 100%; padding: 11px; border: 1px solid #e5e7eb; border-radius: 10px; box-sizing: border-box; outline: none;">
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <button type="button" onclick="fecharModal('modalRegistrarGlicemiaCuid')" style="flex: 1; background: #f3f4f6; color: #374151; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600;">Cancelar</button>
-            <button type="button" onclick="salvarMedicaoCuid()" style="flex: 1; background: #c89368; color: #ffffff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600;">Salvar</button>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL NOVO LEMBRETE CUIDADOR -->
-<div id="modalLembreteCuid" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 99999; align-items: center; justify-content: center;">
-    <div style="background: #ffffff; width: 100%; max-width: 380px; padding: 24px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-        <h3 style="margin-top: 0; font-size: 18px; font-weight: 700; color: #1d1d1f;">Criar Lembrete</h3>
-        <div style="margin-bottom: 12px;">
-            <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 4px;">Anotação / Tarefa</label>
-            <input type="text" id="inLembreteTexto" placeholder="Ex: Aplicação de insulina" style="width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; box-sizing: border-box;">
-        </div>
-        <div style="margin-bottom: 14px;">
-            <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 4px;">Data e Horário</label>
-            <input type="datetime-local" id="inLembreteData" style="width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; box-sizing: border-box; font-family: inherit;">
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <button type="button" onclick="fecharModal('modalLembreteCuid')" style="flex: 1; background: #f3f4f6; color: #374151; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600;">Cancelar</button>
-            <button type="button" onclick="salvarLembreteCuid()" style="flex: 1; background: #c89368; color: #ffffff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600;">Salvar Lembrete</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-    
-    function salvarMedicaoCuid() {
-        const val = document.getElementById('inGlicemiaCuid').value;
-        if (val) {
-            document.getElementById('valGlicemiaCuid').innerText = val + ' mg/dL';
-            document.getElementById('metaGlicemiaCuid').innerText = 'Hoje, Agora';
-        }
-        fecharModal('modalRegistrarGlicemiaCuid');
-    }
-
-    function salvarLembreteCuid() {
-        const txt = document.getElementById('inLembreteTexto').value;
-        const dt = document.getElementById('inLembreteData').value;
-        if (txt) document.getElementById('lembreteTexto').innerText = txt;
-        if (dt) document.getElementById('lembreteData').innerText = dt.replace('T', ' às ');
-        fecharModal('modalLembreteCuid');
-    }
-</script>
 {% endblock %}

@@ -1,75 +1,58 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-<div class="dashboard-container" style="max-width: 1120px !important; margin: 40px auto !important; padding: 0 24px !important;">
+<style>
+    header, .top-bar, .navbar, .header-container, [class*="nav"], [class*="header"] { display: none !important; }
+</style>
+
+<div style="padding: 40px 60px !important; background: #ffffff !important; min-height: 100vh !important; box-sizing: border-box !important; max-width: 1200px !important; margin: 0 auto !important;">
     
-    <div class="dashboard-header-section" style="margin-bottom: 24px !important; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 35px !important;">
         <div>
-            <h2 style="font-size: 28px !important; font-weight: 700 !important; color: #1d1d1f !important; margin: 0 0 4px 0 !important;">Painel Médico</h2>
-            <p class="welcome-subtitle" style="font-size: 14px !important; color: #86868b !important; margin: 0 !important;">Dr. {{ session.get('nome_usuario') }}</p>
+            <h1 style="font-size: 26px !important; font-weight: 700 !important; color: #128c7e !important; margin-bottom: 4px !important;">
+                Dr. Carlos Silva (Painel Clínico)
+            </h1>
+            <p style="font-size: 13px !important; color: #6b7280 !important; font-weight: 600 !important; margin: 0 !important; text-transform: uppercase;">
+                Acompanhamento de Pacientes Vinculados
+            </p>
         </div>
-        <button onclick="abrirModal('modalNovoVinculoMedico')" style="background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 12px; border: none; cursor: pointer;">+ Vincular Paciente</button>
+        <a href="/logout" style="background: #f3f4f6 !important; color: #374151 !important; padding: 10px 18px !important; border-radius: 10px !important; font-size: 13px !important; font-weight: 600 !important; text-decoration: none !important;">Sair</a>
     </div>
 
-    <!-- SELETOR DINÂMICO DE PACIENTES DO MÉDICO -->
-    <div class="patient-selector-card" style="background: #ffffff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; padding: 20px 24px !important; margin-bottom: 24px !important;">
-        <label for="selectPaciente" style="display: block !important; font-size: 13px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 8px !important;">Selecione o Paciente em Acompanhamento:</label>
-        <select id="selectPaciente" style="width: 100% !important; padding: 11px 14px !important; border: 1px solid #d2d2d7 !important; border-radius: 12px !important; background-color: #f9fafb !important; font-size: 14px !important; color: #1d1d1f !important; outline: none !important;">
-            {% if pacientes %}
-                {% for pac in pacientes %}
-                    <option value="{{ pac.id }}">{{ pac.nome }} ({{ pac.email }})</option>
-                {% endfor %}
-            {% else %}
-                <option value="" disabled selected>Nenhum paciente vinculado ainda. Clique em "+ Vincular Paciente".</option>
-            {% endif %}
-        </select>
+    <!-- Tabela de Acompanhamento Médico -->
+    <div style="background: #ffffff; border: 1px solid #eaeaea; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+            <thead>
+                <tr style="background: #f9fafb; border-bottom: 1px solid #eaeaea; color: #374151;">
+                    <th style="padding: 16px;">Paciente</th>
+                    <th style="padding: 16px;">Condição</th>
+                    <th style="padding: 16px;">Última Glicemia</th>
+                    <th style="padding: 16px;">Cuidador Responsável</th>
+                    <th style="padding: 16px; text-align: center;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #f3f4f6;">
+                    <td style="padding: 16px; font-weight: 600; color: #111827;">João Silva</td>
+                    <td style="padding: 16px; color: #6b7280;">Diabetes Tipo 2</td>
+                    <td style="padding: 16px;"><span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px;">110 mg/dL (Estável)</span></td>
+                    <td style="padding: 16px; color: #6b7280;">Ana Paula</td>
+                    <td style="padding: 16px; text-align: center;">
+                        <button onclick="alert('Visualizando histórico clínico detalhado de João Silva')" style="background: #128c7e; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 12px;">Ver Relatório</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 16px; font-weight: 600; color: #111827;">Carlos Souza</td>
+                    <td style="padding: 16px; color: #6b7280;">Pré-diabetes</td>
+                    <td style="padding: 16px;"><span style="background: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px;">95 mg/dL (Normal)</span></td>
+                    <td style="padding: 16px; color: #6b7280;">Marcos Vinicius</td>
+                    <td style="padding: 16px; text-align: center;">
+                        <button onclick="alert('Visualizando histórico clínico detalhado de Carlos Souza')" style="background: #128c7e; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 12px;">Ver Relatório</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- CARDS DE MANEJO MÉDICO -->
-    <div class="cards-grid" style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 20px !important;">
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Medições & Análise</h3>
-            <span style="font-size: 28px; font-weight: 700; color: #c89368; display: block;">110 mg/dL</span>
-            <small style="font-size: 11px; color: #86868b;">Apenas leitura (Registrado pelo paciente/cuidador)</small>
-        </div>
-
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Alterar Prescrição</h3>
-            <span style="font-size: 18px; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 16px;">Insulina NPH (10 UI)</span>
-            <button onclick="abrirModal('modalPrescricao')" style="width: 100%; background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 12px; border: none; cursor: pointer;">Editar Prescrição</button>
-        </div>
-
-        <div class="dashboard-card" style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-            <h3 style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 12px;">Consultas & Exames</h3>
-            <span style="font-size: 18px; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 16px;">Retorno de Rotina</span>
-            <button onclick="abrirModal('modalConsulta')" style="width: 100%; background-color: #c89368; color: #ffffff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 12px; border: none; cursor: pointer;">Agendar Consulta</button>
-        </div>
-    </div>
 </div>
-
-<!-- MODAL VINCULAR PACIENTE -->
-<div id="modalNovoVinculoMedico" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 99999; align-items: center; justify-content: center;">
-    <div style="background: #ffffff; width: 100%; max-width: 420px; padding: 24px; border-radius: 18px;">
-        <h3 style="margin-top: 0; font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 16px;">Vincular Paciente Existente</h3>
-        <form action="/vincular-paciente-medico" method="POST">
-            <div style="margin-bottom: 16px;">
-                <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">Selecione o Paciente Cadastrado</label>
-                <select name="id_paciente" required style="width: 100%; padding: 11px; border: 1px solid #e5e7eb; border-radius: 10px; background: #f9fafb; font-size: 13px;">
-                    {% for p in todos_pacientes %}
-                        <option value="{{ p.id }}">{{ p.nome }} — {{ p.email }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button type="button" onclick="fecharModal('modalNovoVinculoMedico')" style="flex: 1; background: #f3f4f6; color: #374151; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Cancelar</button>
-                <button type="submit" style="flex: 1; background: #c89368; color: #ffffff; border: none; padding: 11px; border-radius: 10px; font-weight: 600; cursor: pointer;">Adicionar Paciente</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-</script>
 {% endblock %}

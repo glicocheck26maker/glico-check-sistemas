@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlicoCheck</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <meta name="theme-color" content="#faf8f5">
+    <meta name="description"
+          content="GlicoCheck — acompanhamento e monitoramento de glicemia.">
+
+    <title>{% block titulo %}GlicoCheck{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body style="margin: 0; padding-top: 70px; background-color: #f5f5f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
-    <!-- CABEÇALHO DA APLICAÇÃO -->
-    <header class="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 60px !important; background: rgba(255, 255, 255, 0.85) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; z-index: 99999 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 40px !important; box-sizing: border-box !important;">
-        <a href="/inicio" style="font-size: 20px !important; font-weight: 700 !important; color: #1d1d1f !important; text-decoration: none !important;">GlicoCheck</a>
-
-        <nav style="display: flex !important; align-items: center !important; gap: 28px !important;">
-            <a href="/inicio" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Início</a>
-            
-            {% if session.get('perfil') not in ['medico', 'paciente'] %}
-                <a href="/pacientes" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Pacientes</a>
+<body>
+    <header class="main-header navbar">
+        <a href="{{ url_for('landing') }}" class="brand-logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: #1d1d1f; font-size: 16px;">
+            <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="Logo Glicocheck" style="height: 32px; width: auto; display: block; filter: brightness(0) saturate(100%) invert(13%) sepia(85%) saturate(5414%) hue-rotate(354deg) brightness(70%) contrast(97%);">
+        
+        </a>
+    
+        <nav class="main-nav">
+            {% if session.get('usuario_logado') %}
+                <a href="{{ url_for('index') }}">Meu painel</a>
+                <a class="nav-logout" href="{{ url_for('logout') }}">Sair</a>
+            {% else %}
+                <a href="{{ url_for('landing') }}">Início</a>
+                <a href="#nossa-historia">Nossa história</a>
+                <a href="{{ url_for('login') }}">Entrar</a>
+                <a href="{{ url_for('cadastro') }}" class="nav-register">Começar</a>
             {% endif %}
-
-            {% if session.get('perfil') != 'medico' %}
-                <a href="/cuidadores" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Cuidadores</a>
-                <a href="/medicoes" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Medições</a>
-                <a href="/medicamentos" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Medicamentos</a>
-                <a href="/compromissos" style="font-size: 13px !important; font-weight: 500 !important; color: #515154 !important; text-decoration: none !important;">Compromissos</a>
-            {% endif %}
-            
-            <a href="{{ url_for('logout') }}" style="font-size: 13px !important; font-weight: 600 !important; color: #e53e3e !important; text-decoration: none !important;">Sair</a>
         </nav>
     </header>
 
-    <!-- CONTEÚDO DINÂMICO DOS DASHBOARDS -->
-    <main>
+    <main class="page-content">
         {% block conteudo %}{% endblock %}
     </main>
 
-    <footer style="text-align: center; padding: 30px 0; color: #86868b; font-size: 12px;">
-        © 2026 GlicoCheck Brasil Sistema de Monitoramento de Saúde Ltda.
+    <footer class="main-footer">
+        <p>© 2026 GlicoCheck · Cuidado e acompanhamento da glicemia.</p>
     </footer>
 </body>
 </html>
