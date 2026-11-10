@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titulo %}Minha conta · GlicoCheck{% endblock %}
+{% block conteudo %}
+<section class="simple-page">
+    <span class="section-kicker">CONFIGURAÇÕES</span>
+    <h1>Minha conta</h1>
+    <p class="muted-copy">Confira os dados associados ao seu acesso.</p>
+    <div class="content-card glass-panel">
+        <div class="account-line"><span>Nome</span><strong>{{ user.nome }}</strong></div>
+        <div class="account-line"><span>E-mail</span><strong>{{ user.email }}</strong></div>
+        <div class="account-line"><span>Perfil</span><strong>{{ perfil_label }}</strong></div>
+        {% if user.perfil == 'medico' %}
+        <div class="account-line"><span>Registro informado</span><strong>{{ user.medico_registro or 'Não informado' }}{% if user.medico_uf %}/{{ user.medico_uf }}{% endif %}</strong></div>
+        <div class="account-line"><span>Verificação profissional</span><strong>{{ 'Verificado' if user.medico_verificado else 'Pendente de validação' }}</strong></div>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="btn-primary" style="margin-top:18px">Voltar ao painel →</a>
+    </div>
+</section>
+{% endblock %}

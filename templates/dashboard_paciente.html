@@ -1,0 +1,138 @@
+{% extends "dashboard_base.html" %}
+{% block titulo %}Meu Dia · GlicoCheck{% endblock %}
+{% block dashboard_content %}
+<section class="welcome-row" id="overview">
+    <div>
+        <span class="section-kicker">SEU ESPAÇO DE CUIDADO</span>
+        <h1>Olá, {{ session.get('nome', 'tudo bem') }}.</h1>
+        <p>Veja sua rotina, registre informações e acompanhe sua jornada com tranquilidade.</p>
+    </div>
+    <a class="btn-primary" href="#measurements">Registrar glicemia <span>＋</span></a>
+</section>
+
+<div class="stats-grid">
+    <article class="stat-card glass-panel stat-featured">
+        <div class="stat-top"><span>Última medição</span><span class="stat-icon">◉</span></div>
+        {% if data.last_measurement %}
+            <strong>{{ '%.1f'|format(data.last_measurement.valor) }} <small>{{ data.last_measurement.unidade }}</small></strong>
+            <p>{{ data.last_measurement.medido_em.strftime('%d/%m/%Y às %H:%M') }}</p>
+        {% else %}
+            <strong>—</strong><p>Nenhuma medição registrada.</p>
+        {% endif %}
+    </article>
+    <article class="stat-card glass-panel">
+        <div class="stat-top"><span>Registros em 7 dias</span><span class="stat-icon">▤</span></div>
+        <strong>{{ data.weekly_total }}</strong><p>medições registradas</p>
+    </article>
+    <article class="stat-card glass-panel">
+        <div class="stat-top"><span>Tarefas pendentes</span><span class="stat-icon">✓</span></div>
+        <strong>{{ data.pending_tasks }}</strong><p>atividades na sua rotina</p>
+    </article>
+    <article class="stat-card glass-panel">
+        <div class="stat-top"><span>Rede de cuidado</span><span class="stat-icon">♡</span></div>
+        <strong>{{ data.network|length }}</strong><p>pessoas vinculadas</p>
+    </article>
+</div>
+
+<div class="dashboard-grid dashboard-grid-main">
+    <section class="content-card glass-panel" id="measurements">
+        <div class="card-heading">
+            <div><span class="section-kicker">ACOMPANHAMENTO</span><h2>Suas medições</h2></div>
+            <span class="quiet-tag">Registros recentes</span>
+        </div>
+        <div class="chart-wrap">
+            {% if data.chart_points %}
+            <div class="simple-chart" aria-label="Gráfico dos registros recentes de glicemia">
+                {% for point in data.chart_points %}
+                <div class="chart-column">
+                    <div class="chart-bar-track"><div class="chart-bar" style="height: {{ point.altura }}%"></div></div>
+                    <strong>{{ '%.0f'|format(point.valor) }}</strong>
+                    <small>{{ point.label }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            <p class="chart-note">Valores exibidos conforme foram registrados. O gráfico não classifica resultados nem substitui a avaliação profissional.</p>
+            {% else %}
+            <div class="empty-state"><span>◉</span><strong>Seu histórico começa aqui.</strong><p>Registre a primeira medição para acompanhar sua evolução ao longo do tempo.</p></div>
+            {% endif %}
+        </div>
+        <div class="subsection-heading"><h3>Últimos registros</h3><a href="{{ url_for('gerar_relatorio_pdf', patient_id=session.get('user_id')) }}">Exportar relatório ↗</a></div>
+        {% if data.measurements %}
+        <div class="data-list">
+            {% for item in data.measurements[:6] %}
+            <div class="measurement-row">
+                <div class="row-icon red-soft">◉</div>
+                <div class="row-main"><strong>{{ '%.1f'|format(item.valor) }} {{ item.unidade }}</strong><small>{{ item.contexto.replace('_',' ').title() }} · {{ item.medido_em.strftime('%d/%m/%Y %H:%M') }}</small></div>
+                <span class="row-meta">Registro #{{ item.id }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}<p class="muted-copy">Nenhuma medição disponível ainda.</p>{% endif %}
+    </section>
+
+    <section class="content-card glass-panel" id="routine">
+        <div class="card-heading"><div><span class="section-kicker">ORGANIZAÇÃO</span><h2>Minha rotina</h2></div><span class="stat-icon">✓</span></div>
+        <form action="{{ url_for('criar_tarefa') }}" method="POST" class="compact-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <label class="field-label" for="task_title">Nova atividade</label>
+            <input class="field-input" id="task_title" name="titulo" placeholder="Ex.: lembrar da consulta" maxlength="140" required>
+            <div class="field-grid">
+                <div><label class="field-label" for="task_type">Tipo</label><select class="field-input" id="task_type" name="tipo"><option value="autocuidado">Autocuidado</option><option value="medicao">Medição</option><option value="medicamento">Medicamento</option><option value="consulta">Consulta</option><option value="exame">Exame</option><option value="outro">Outro</option></select></div>
+                <div><label class="field-label" for="task_date">Data e hora</label><input class="field-input" type="datetime-local" id="task_date" name="data_hora" value="{{ now_local.strftime('%Y-%m-%dT%H:%M') }}" required></div>
+            </div>
+            <textarea class="field-input field-textarea" name="descricao" rows="2" placeholder="Observação (opcional)"></textarea>
+            <button class="btn-secondary btn-full" type="submit">Adicionar à rotina <span>＋</span></button>
+        </form>
+        <div class="task-list">
+            {% for task in data.tasks[:6] %}
+            <div class="task-row {% if task.status == 'concluida' %}task-done{% endif %}">
+                <div class="task-copy"><strong>{{ task.titulo }}</strong><small>{{ task.data_hora.strftime('%d/%m/%Y · %H:%M') }} · {{ task.tipo.title() }}</small></div>
+                {% if task.status == 'pendente' %}
+                <form action="{{ url_for('concluir_tarefa', task_id=task.id) }}" method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="icon-action" type="submit" title="Marcar como concluída">✓</button></form>
+                {% else %}<span class="done-label">Concluída</span>{% endif %}
+            </div>
+            {% else %}<p class="muted-copy">Você ainda não tem atividades cadastradas.</p>{% endfor %}
+        </div>
+    </section>
+</div>
+
+<div class="dashboard-grid dashboard-grid-lower">
+    <section class="content-card glass-panel" id="network">
+        <div class="card-heading"><div><span class="section-kicker">CUIDADO COMPARTILHADO</span><h2>Minha rede de cuidado</h2></div></div>
+        <p class="muted-copy">Gere um código para conectar uma pessoa de confiança ou um profissional. O código pode ser usado uma única vez e expira em 7 dias.</p>
+        <form action="{{ url_for('gerar_convite') }}" method="POST" class="inline-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <select class="field-input" name="perfil_destino" required><option value="cuidador">Convidar cuidador(a)</option><option value="medico">Convidar médico(a)</option></select>
+            <button class="btn-primary" type="submit">Gerar código</button>
+        </form>
+        <div class="network-list">
+            {% for person in data.network %}
+            <div class="network-person"><span class="avatar-circle small-avatar">{{ person.nome[:1]|upper }}</span><div><strong>{{ person.nome }}</strong><small>{{ 'Cuidador(a)' if person.perfil_vinculado == 'cuidador' else 'Médico(a)' }}</small></div><form action="{{ url_for('revogar_vinculo', link_id=person.id) }}" method="POST" onsubmit="return confirm('Revogar o acesso desta pessoa aos seus dados?')"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="text-danger-button" type="submit">Revogar</button></form></div>
+            {% else %}<p class="muted-copy">Você ainda não possui pessoas vinculadas.</p>{% endfor %}
+        </div>
+    </section>
+    <section class="content-card glass-panel" id="reports">
+        <div class="card-heading"><div><span class="section-kicker">PARA SUA CONSULTA</span><h2>Resumo e orientações</h2></div><span class="stat-icon">▤</span></div>
+        {% if data.plan %}
+            <h3 class="plan-title">{{ data.plan.titulo }}</h3>
+            <p class="plan-meta">Orientações registradas por {{ data.plan.medico_nome }} · Atualizado em {{ data.plan.atualizado_em.strftime('%d/%m/%Y') }}</p>
+            <p class="plan-text">{{ data.plan.orientacoes }}</p>
+            {% if data.plan.metas %}<div class="plan-goals"><strong>Metas e observações</strong><p>{{ data.plan.metas }}</p></div>{% endif %}
+        {% else %}<div class="empty-state compact-empty"><strong>Nenhum plano ativo</strong><p>Quando seu médico registrar um plano de cuidado, ele aparecerá aqui.</p></div>{% endif %}
+        <a class="btn-secondary btn-full report-link" href="{{ url_for('gerar_relatorio_pdf', patient_id=session.get('user_id')) }}">Gerar relatório para consulta <span>↓</span></a>
+        {% if data.appointments %}
+        <div class="subsection-heading"><h3>Próxima consulta</h3></div>
+        {% set appt = data.appointments[0] %}
+        <div class="appointment-mini"><strong>{{ appt.data_hora.strftime('%d/%m/%Y às %H:%M') }}</strong><small>{{ appt.medico_nome }}{% if appt.local %} · {{ appt.local }}{% endif %}</small></div>
+        {% endif %}
+    </section>
+</div>
+<section class="content-card glass-panel timeline-card" aria-label="Linha do cuidado compartilhada">
+    <div class="card-heading"><div><span class="section-kicker">HISTÓRICO COMPARTILHADO</span><h2>Linha do cuidado</h2></div><span class="quiet-tag">Atividades recentes</span></div>
+    <div class="timeline-list">
+        {% for event in data.timeline %}
+        <div class="timeline-item"><span class="timeline-dot timeline-{{ event.event_type }}"></span><div><strong>{{ event.event_detail }}</strong><small>{{ event.event_at.strftime('%d/%m/%Y às %H:%M') }} · por {{ event.actor }}</small></div><span class="timeline-type">{{ {'medicao':'Medição','atividade':'Rotina','consulta':'Agenda','plano':'Plano'}[event.event_type] }}</span></div>
+        {% else %}<p class="muted-copy">Quando houver medições, tarefas, consultas ou planos, os acontecimentos aparecerão nesta linha do tempo.</p>{% endfor %}
+    </div>
+</section>
+{% endblock %}

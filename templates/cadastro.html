@@ -1,0 +1,431 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}Criar conta · GlicoCheck{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block site_header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block main_class %}auth-main{% endblock %}
+
+{% block conteudo %}
+
+<section class="auth-layout auth-layout-register">
+
+    <!-- COLUNA ESQUERDA: FOTOGRAFIAS -->
+
+    <div class="auth-visual">
+
+        <div class="auth-slides" aria-label="Imagens do GlicoCheck">
+
+            <img class="gc-slide is-active"
+                 src="{{ url_for('static', filename='img/slide-1.png') }}"
+                 alt="Pessoas em um momento de cuidado">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-2.png') }}"
+                 alt="Acompanhamento e saúde">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-3.png') }}"
+                 alt="Apoio no cuidado diário">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-4.png') }}"
+                 alt="Conexão entre pessoas">
+
+        </div>
+
+        <div class="auth-visual-caption">
+
+            <span class="auth-eyebrow">
+                UM CUIDADO MAIS CONECTADO
+            </span>
+
+            <p>
+                Paciente, cuidador e profissional de saúde
+                no mesmo caminho.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- COLUNA DIREITA: FORMULÁRIO -->
+
+    <div class="auth-form-side register-form-side">
+
+        <a href="{{ url_for('landing') }}" class="auth-brand">
+
+            <img
+                src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}"
+                alt=""
+            >
+
+            <span>GlicoCheck</span>
+
+        </a>
+
+
+        <div class="auth-card glass-panel">
+
+            <span class="section-kicker">
+                COMECE POR AQUI
+            </span>
+
+            <h1>Crie sua conta.</h1>
+
+            <p class="auth-intro">
+                Vamos preparar seu espaço de acompanhamento.
+            </p>
+
+
+            <!-- FORMULÁRIO -->
+
+            <form
+                action="{{ url_for('cadastro') }}"
+                method="POST"
+                class="form-stack register-form"
+            >
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token }}"
+                >
+
+
+                <!-- NOME -->
+
+                <label class="field-label" for="nome">
+                    Nome completo
+                </label>
+
+                <input
+                    class="field-input"
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Como podemos chamar você?"
+                    autocomplete="name"
+                    required
+                >
+
+
+                <!-- NASCIMENTO E TELEFONE -->
+
+                <div class="field-grid">
+
+                    <div>
+
+                        <label class="field-label" for="data_nascimento">
+                            Data de nascimento
+                            <span>(opcional)</span>
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="date"
+                            id="data_nascimento"
+                            name="data_nascimento"
+                            autocomplete="bday"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="field-label" for="telefone">
+                            Telefone
+                            <span>(opcional)</span>
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(00) 00000-0000"
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <label class="field-label" for="email">
+                    E-mail
+                </label>
+
+                <input
+                    class="field-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="seuemail@exemplo.com"
+                    autocomplete="email"
+                    required
+                >
+
+
+                <!-- PERFIL -->
+
+                <label class="field-label" for="perfil">
+                    Como você utilizará o GlicoCheck?
+                </label>
+
+                <select
+                    class="field-input"
+                    id="perfil"
+                    name="perfil"
+                    required
+                >
+
+                    <option value="" disabled selected>
+                        Selecione seu perfil
+                    </option>
+
+                    <option value="paciente">
+                        Paciente
+                    </option>
+
+                    <option value="cuidador">
+                        Cuidador(a)
+                    </option>
+
+                    <option value="medico">
+                        Médico(a)
+                    </option>
+
+                </select>
+
+
+                <!-- DADOS PROFISSIONAIS -->
+
+                <div class="doctor-fields" id="doctorFields" hidden>
+
+                    <div class="field-grid">
+
+                        <div>
+
+                            <label class="field-label" for="medico_registro">
+                                Registro profissional
+                            </label>
+
+                            <input
+                                class="field-input"
+                                type="text"
+                                id="medico_registro"
+                                name="medico_registro"
+                                placeholder="CRM ou registro"
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label class="field-label" for="medico_uf">
+                                UF
+                            </label>
+
+                            <select
+                                class="field-input"
+                                id="medico_uf"
+                                name="medico_uf"
+                            >
+
+                                <option value="">UF</option>
+
+                                {% for uf in [
+                                    'AC','AL','AP','AM','BA','CE',
+                                    'DF','ES','GO','MA','MT','MS',
+                                    'MG','PA','PB','PR','PE','PI',
+                                    'RJ','RN','RS','RO','RR','SC',
+                                    'SP','SE','TO'
+                                ] %}
+
+                                <option value="{{ uf }}">
+                                    {{ uf }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <p class="field-hint">
+                        Os dados profissionais informados não representam
+                        verificação de registro. A validação deve ser
+                        realizada antes do uso clínico real.
+                    </p>
+
+                </div>
+
+
+                <!-- SENHAS -->
+
+                <div class="field-grid">
+
+                    <div>
+
+                        <label class="field-label" for="senha">
+                            Criar senha
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Mínimo 8 caracteres"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="field-label" for="confirma_senha">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="password"
+                            id="confirma_senha"
+                            name="confirma_senha"
+                            placeholder="Repita a senha"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    class="btn-primary btn-full"
+                    type="submit"
+                >
+
+                    Criar minha conta
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <p class="auth-switch">
+
+                Já possui uma conta?
+
+                <a href="{{ url_for('login') }}">
+                    Entrar
+                </a>
+
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('landing') }}" class="auth-back">
+            ← Voltar para o site
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+(() => {
+
+    const profile = document.getElementById('perfil');
+
+    const doctorFields = document.getElementById('doctorFields');
+
+    if (!profile || !doctorFields) return;
+
+
+    function updateDoctorFields() {
+
+        const isDoctor = profile.value === 'medico';
+
+        doctorFields.hidden = !isDoctor;
+
+    }
+
+
+    profile.addEventListener('change', updateDoctorFields);
+
+    updateDoctorFields();
+
+
+    // CONFIRMAÇÃO DAS SENHAS
+
+    const form = document.querySelector('.register-form');
+
+    const password = document.getElementById('senha');
+
+    const confirmPassword = document.getElementById('confirma_senha');
+
+
+    if (form && password && confirmPassword) {
+
+        form.addEventListener('submit', function(event) {
+
+            if (password.value !== confirmPassword.value) {
+
+                event.preventDefault();
+
+                confirmPassword.setCustomValidity(
+                    'As senhas não coincidem.'
+                );
+
+                confirmPassword.reportValidity();
+
+            } else {
+
+                confirmPassword.setCustomValidity('');
+
+            }
+
+        });
+
+        confirmPassword.addEventListener('input', function() {
+
+            confirmPassword.setCustomValidity('');
+
+        });
+
+    }
+
+})();
+
+</script>
+
+{% endblock %}
+```

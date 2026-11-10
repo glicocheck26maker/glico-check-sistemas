@@ -1,0 +1,3738 @@
+/* =========================================================
+   TIPOGRAFIA & RESET GLOBAL
+   ========================================================= */
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+   }
+   
+   body {
+       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+       background-color: #f5f5f7;
+       color: #1d1d1f;
+       line-height: 1.47059;
+       font-weight: 400;
+       letter-spacing: -0.022em;
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   html {
+    scroll-behavior: smooth;
+}
+  /* =========================================================
+   HEADER & BARRA DE NAVEGAÇÃO FLUTUANTE (ESTILO "THE SEED")
+   ========================================================= */
+.main-header, header, .navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1050px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 10000;
+
+    /* Efeito Glassmorphism de Pílula */
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.brand-logo, 
+header h1,
+.navbar .brand-logo {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-logo-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0);
+}
+
+.nav-links, 
+nav, 
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a, 
+nav a, 
+.main-nav a {
+    color: #414144;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover, 
+nav a:hover, 
+.main-nav a:hover {
+    color: #a10f06;
+}
+
+.nav-register,
+.navbar .btn-primary {
+    background-color: #a10f06 !important;
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(161, 15, 6, 0.2);
+    transition: all 0.2s ease;
+}
+
+.nav-register:hover,
+.navbar .btn-primary:hover {
+    background-color: #790b04 !important;
+    transform: translateY(-1px);
+}
+   
+   /* Logo e Monograma G */
+   .brand-logo, 
+   header h1,
+   .navbar .brand-logo {
+       font-size: 15px;
+       font-weight: 600;
+       color: #1d1d1f;
+       text-decoration: none;
+       letter-spacing: -0.01em;
+       display: flex;
+       align-items: center;
+       gap: 8px;
+   }
+   
+   .nav-logo-icon {
+       width: 20px;
+       height: 20px;
+       object-fit: contain;
+       filter: brightness(0);
+   }
+   
+   /* Links de Navegação */
+   .nav-links, 
+   nav, 
+   .main-nav {
+       display: flex;
+       align-items: center;
+       gap: 24px;
+   }
+   
+   .nav-links a, 
+   nav a, 
+   .main-nav a {
+       color: #414144;
+       text-decoration: none;
+       font-size: 13px;
+       font-weight: 500;
+       transition: color 0.2s ease;
+   }
+   
+   .nav-links a:hover, 
+   nav a:hover, 
+   .main-nav a:hover {
+       color: #a10f06;
+   }
+   
+   .btn-logout {
+       color: #e53e3e !important;
+       font-weight: 600 !important;
+   }
+   
+   /* Botão em destaque na Navbar (Começar) */
+   .nav-register,
+   .navbar .btn-primary,
+   .navbar .btn-submit-brown {
+       background-color: #a10f06 !important;
+       color: #ffffff !important;
+       padding: 8px 18px;
+       border-radius: 30px;
+       font-size: 12px;
+       font-weight: 600;
+       text-decoration: none;
+       box-shadow: 0 4px 12px rgba(161, 15, 6, 0.2);
+       transition: all 0.2s ease;
+   }
+   
+   .nav-register:hover,
+   .navbar .btn-primary:hover,
+   .navbar .btn-submit-brown:hover {
+       background-color: #790b04 !important;
+       transform: translateY(-1px);
+   }
+   
+   /* =========================================================
+      SINO DE NOTIFICAÇÕES VETORIAL DINÂMICO
+      ========================================================= */
+   .notification-wrapper {
+       position: relative;
+       display: flex;
+       align-items: center;
+   }
+   
+   .notification-bell-btn {
+       background: transparent;
+       border: none;
+       cursor: pointer;
+       padding: 6px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       position: relative;
+       color: #86868b;
+       transition: color 0.2s ease, transform 0.2s ease;
+   }
+   
+   .notification-bell-btn:hover {
+       color: #1d1d1f;
+       transform: scale(1.05);
+   }
+   
+   .notification-bell-btn .bell-icon {
+       width: 20px;
+       height: 20px;
+   }
+   
+   .notification-bell-btn.has-unread {
+       color: #a10f06;
+   }
+   
+   .notification-dot {
+       display: none;
+       position: absolute;
+       top: 5px;
+       right: 5px;
+       width: 7px;
+       height: 7px;
+       background-color: #a10f06;
+       border-radius: 50%;
+       border: 2px solid #ffffff;
+   }
+   
+   .notification-bell-btn.has-unread .notification-dot {
+       display: block;
+   }
+   
+   /* DROPDOWN DE NOTIFICAÇÕES */
+   .notification-dropdown {
+       display: none;
+       position: absolute;
+       right: 0;
+       top: 50px;
+       width: 320px;
+       background: #ffffff;
+       border-radius: 16px;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+       border: 1px solid rgba(0, 0, 0, 0.08);
+       overflow: hidden;
+       z-index: 10000;
+   }
+   
+   .notification-dropdown.active {
+       display: block;
+       animation: fadeIn 0.2s ease-out;
+   }
+   
+   @keyframes fadeIn {
+       from { opacity: 0; transform: translateY(-8px); }
+       to { opacity: 1; transform: translateY(0); }
+   }
+   
+   .notif-header {
+       padding: 14px 18px;
+       background: #fafafa;
+       border-bottom: 1px solid #f0f0f0;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+   }
+   
+   .notif-header h4 {
+       margin: 0;
+       font-size: 13px;
+       font-weight: 600;
+       color: #1d1d1f;
+   }
+   
+   .mark-as-read-btn {
+       background: transparent;
+       border: none;
+       font-size: 11px;
+       font-weight: 600;
+       color: #a10f06;
+       cursor: pointer;
+   }
+   
+   .notif-list {
+       max-height: 280px;
+       overflow-y: auto;
+   }
+   
+   .notif-item {
+       padding: 12px 18px;
+       border-bottom: 1px solid #f5f5f7;
+       display: flex;
+       align-items: flex-start;
+       gap: 12px;
+       transition: background 0.15s ease;
+   }
+   
+   .notif-item.unread {
+       background-color: rgba(161, 15, 6, 0.06);
+   }
+   
+   .notif-icon-wrapper {
+       margin-top: 2px;
+       flex-shrink: 0;
+   }
+   
+   .notif-title {
+       display: block;
+       font-size: 12px;
+       font-weight: 600;
+       color: #1d1d1f;
+       margin-bottom: 2px;
+   }
+   
+   .notif-desc {
+       font-size: 12px;
+       color: #6e6e73;
+       margin: 0 0 4px 0;
+       line-height: 1.4;
+   }
+   
+   .notif-time {
+       font-size: 10px;
+       color: #a1a1a6;
+   }
+   
+   /* =========================================================
+      CONTAINERS E CARDS DO DASHBOARD
+      ========================================================= */
+   .dashboard-container {
+       max-width: 1120px;
+       margin: 40px auto;
+       padding: 0 24px;
+   }
+   
+   .dashboard-header-section {
+       margin-bottom: 28px;
+   }
+   
+   .dashboard-header-section h2, h2 {
+       font-size: 32px;
+       font-weight: 700;
+       letter-spacing: -0.015em;
+       color: #1d1d1f;
+       margin-bottom: 6px;
+   }
+   
+   .welcome-subtitle {
+       font-size: 15px;
+       color: #86868b;
+       margin: 0;
+   }
+   
+   .cards-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       gap: 20px;
+       margin-top: 24px;
+   }
+   
+   .patient-selector-card,
+   .dashboard-card,
+   .card-item {
+       background: #ffffff;
+       border: 1px solid #e5e7eb;
+       border-radius: 18px;
+       padding: 24px;
+       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+       transition: transform 0.2s ease, box-shadow 0.2s ease;
+   }
+   
+   .patient-selector-card:hover,
+   .dashboard-card:hover,
+   .card-item:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+   }
+   
+   .card-title-header {
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       margin-bottom: 16px;
+   }
+   
+   .card-title-header h3 {
+       margin: 0;
+       font-size: 16px;
+       font-weight: 600;
+       color: #1d1d1f;
+   }
+   
+   .card-body-info {
+       margin-bottom: 20px;
+   }
+   
+   .highlight-val {
+       font-size: 28px;
+       font-weight: 700;
+       color: #a10f06;
+       display: block;
+   }
+   
+   .highlight-title {
+       font-size: 18px;
+       font-weight: 600;
+       color: #1d1d1f;
+       display: block;
+   }
+   
+   .meta-info {
+       font-size: 12px;
+       color: #86868b;
+       margin: 4px 0 0 0;
+   }
+   
+   /* =========================================================
+      FORMULÁRIOS & BOTÕES PADRONIZADOS (#a10f06)
+      ========================================================= */
+   .custom-select,
+   select,
+   input[type="text"],
+   input[type="email"],
+   input[type="password"],
+   input[type="date"],
+   input[type="tel"] {
+       width: 100%;
+       padding: 12px 16px;
+       border: 1px solid #d2d2d7;
+       border-radius: 12px;
+       font-size: 14px;
+       background-color: #f9fafb;
+       color: #1d1d1f;
+       outline: none;
+       transition: all 0.2s ease;
+   }
+   
+   .custom-select:focus,
+   input:focus {
+       border-color: #a10f06;
+       background-color: #ffffff;
+       box-shadow: 0 0 0 4px rgba(161, 15, 6, 0.15);
+   }
+   
+   .btn-submit-brown,
+   button {
+       width: 100%;
+       background-color: #a10f06;
+       color: #ffffff;
+       font-size: 13px;
+       font-weight: 600;
+       padding: 12px;
+       border-radius: 12px;
+       border: none;
+       cursor: pointer;
+       transition: background-color 0.2s ease, transform 0.1s ease;
+   }
+   
+   .btn-submit-brown:hover,
+   button:hover {
+       background-color: #880c05;
+   }
+   
+   .btn-submit-brown:active,
+   button:active {
+       transform: scale(0.99);
+   }
+   
+   /* =========================================================
+      RODAPÉ CLEAN
+      ========================================================= */
+      footer {
+        background-color: #a10f06; /* Mesmo fundo vermelho da seção anterior */
+        border-top: 1px solid rgba(255, 255, 255, 0.15); /* Linha sutil em cima */
+        padding: 40px 0 24px 0;
+        margin-top: 0; /* Cola direto na seção vermelha de cima */
+        font-size: 12px;
+        color: #ffffff; /* Texto 100% branco */
+        text-align: center;
+    }
+    
+    .footer-container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+        color: #ffffff;
+    }
+   
+   /* =========================================================
+      CHATS FLUTUANTES MINIMALISTAS
+      ========================================================= */
+   .read-only-badge {
+       display: inline-block;
+       font-size: 11px;
+       color: #86868b;
+       margin-top: 10px;
+       font-weight: 500;
+   }
+   
+   .chat-buttons-wrapper {
+       position: fixed;
+       bottom: 24px;
+       right: 24px;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       z-index: 9999;
+   }
+   
+   .chat-floating-btn {
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       padding: 10px 18px;
+       border-radius: 30px;
+       background-color: #a10f06;
+       color: #ffffff;
+       font-size: 13px;
+       font-weight: 600;
+       border: none;
+       cursor: pointer;
+       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+       transition: transform 0.2s ease, background-color 0.2s ease;
+   }
+   
+   .chat-floating-btn.btn-doctor {
+       background-color: #128c7e;
+   }
+   
+   .chat-floating-btn:hover {
+       transform: translateY(-2px);
+   }
+   
+   .chat-modal {
+       display: none;
+       position: fixed;
+       bottom: 90px;
+       right: 24px;
+       width: 320px;
+       height: 400px;
+       background: #ffffff;
+       border-radius: 18px;
+       flex-direction: column;
+       overflow: hidden;
+       z-index: 10000;
+       border: 1px solid #e5e7eb;
+       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+   }
+   
+   .chat-header {
+       background-color: #a10f06;
+       color: #ffffff;
+       padding: 12px 16px;
+       font-size: 13px;
+       font-weight: 600;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+   }
+   
+   .close-chat {
+       background: none;
+       border: none;
+       color: #ffffff;
+       font-size: 18px;
+       cursor: pointer;
+   }
+   
+   .chat-body {
+       flex: 1;
+       padding: 12px;
+       background-color: #f5f5f7;
+       overflow-y: auto;
+       display: flex;
+       flex-direction: column;
+       gap: 8px;
+   }
+   
+   .chat-msg {
+       max-width: 80%;
+       padding: 8px 12px;
+       border-radius: 12px;
+       font-size: 12px;
+       line-height: 1.4;
+   }
+   
+   .chat-msg.sent {
+       background-color: #a10f06;
+       color: #ffffff;
+       align-self: flex-end;
+   }
+   
+   .chat-msg.received {
+       background-color: #ffffff;
+       color: #1d1d1f;
+       align-self: flex-start;
+       border: 1px solid #e5e7eb;
+   }
+   
+   .chat-time {
+       font-size: 9px;
+       opacity: 0.8;
+       float: right;
+       margin-left: 6px;
+       margin-top: 2px;
+   }
+   
+   .chat-footer {
+       display: flex;
+       padding: 10px;
+       background: #ffffff;
+       border-top: 1px solid #e5e7eb;
+       gap: 6px;
+   }
+   
+   .chat-footer input {
+       flex: 1;
+       border: 1px solid #e5e7eb;
+       padding: 8px 12px;
+       border-radius: 10px;
+       font-size: 12px;
+       outline: none;
+   }
+   
+   .chat-footer button {
+       background: #a10f06;
+       color: #ffffff;
+       border: none;
+       padding: 8px 12px;
+       border-radius: 10px;
+       font-size: 12px;
+       font-weight: 600;
+       cursor: pointer;
+       width: auto;
+   }
+   
+   /* Padronização do seletor datetime-local */
+   input[type="datetime-local"] {
+       appearance: none;
+       -webkit-appearance: none;
+       color: #374151;
+       cursor: pointer;
+   }
+   
+   input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+       cursor: pointer;
+       filter: invert(0.5);
+       opacity: 0.7;
+       transition: opacity 0.2s ease;
+   }
+   
+   input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+       opacity: 1;
+   }
+   
+   input[type="datetime-local"]:focus {
+       border-color: #a10f06 !important;
+       background-color: #ffffff !important;
+       box-shadow: 0 0 0 3px rgba(161, 15, 6, 0.15) !important;
+   }
+   
+   /* =========================================
+      GLICOCHECK — LANDING PAGE
+   ========================================= */
+   
+   .gc-hero {
+       min-height: 100vh;
+       position: relative;
+       display: flex;
+       align-items: center;
+       padding: 120px 9% 80px 9%;
+       overflow: hidden;
+       background: #f8f7f4;
+   }
+   
+   .gc-hero-content {
+       width: 52%;
+       max-width: 590px;
+       position: relative;
+       z-index: 2;
+   }
+   
+   .gc-eyebrow {
+       color: #a10f06;
+       font-size: 11px;
+       font-weight: 700;
+       letter-spacing: 2px;
+       display: inline-block;
+       margin-bottom: 25px;
+   }
+   
+   .gc-hero h1 {
+       font-size: clamp(43px, 5vw, 68px);
+       line-height: 1.06;
+       letter-spacing: -2.5px;
+       font-weight: 500;
+       color: #242421;
+       margin-bottom: 25px;
+   }
+   
+   .gc-hero h1 span,
+   .gc-story h2 span,
+   .gc-purpose h2 span,
+   .gc-section-heading h2 span,
+   .gc-final h2 span {
+       color: #a10f06;
+   }
+   
+   .gc-hero-content > p {
+       color: #686762;
+       line-height: 1.8;
+       font-size: 15px;
+       max-width: 460px;
+   }
+   
+   .gc-hero-buttons,
+   .gc-final-buttons {
+       display: flex;
+       align-items: center;
+       flex-wrap: wrap;
+       gap: 25px;
+       margin-top: 35px;
+   }
+   
+   .gc-btn-primary,
+   .gc-btn-white {
+       background: #a10f06;
+       color: white;
+       text-decoration: none;
+       padding: 17px 25px;
+       border-radius: 40px;
+       display: inline-flex;
+       gap: 22px;
+       align-items: center;
+       font-size: 13px;
+       transition: .3s;
+   }
+   
+   .gc-btn-primary:hover {
+       background: #790b04;
+       transform: translateY(-3px);
+   }
+   
+   .gc-btn-link {
+       color: #282824;
+       font-size: 13px;
+       text-decoration: underline;
+       text-underline-offset: 5px;
+   }
+   
+   /* Imagem cobrindo a lateral inteira perfeitamente */
+   .gc-hero-image {
+       position: absolute;
+       right: 0;
+       top: 0;
+       width: 49%;
+       height: 100%;
+       background:
+           linear-gradient(90deg, rgba(248,247,244,.1), transparent),
+           url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=85")
+           center/cover;
+   }
+   
+   .gc-image-overlay {
+       position: absolute;
+       bottom: 45px;
+       right: 45px;
+       color: white;
+       text-align: right;
+   }
+   
+   .gc-image-overlay span {
+       font-size: 25px;
+       font-weight: 600;
+   }
+   
+   .gc-image-overlay p {
+       font-size: 13px;
+   }
+   
+   /* Removido o "G" gigante do meio da tela */
+   .gc-hero-decoration {
+       display: none !important;
+   }
+   
+  
+
+/* =========================================
+   GLICOCHECK — NOSSA HISTÓRIA
+========================================= */
+
+.gc-story-team-single {
+    width: 100%;
+    padding: 120px 8%;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.gc-story-container {
+    max-width: 1180px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: center;
+    gap: 90px;
+}
+
+/* FOTO À ESQUERDA */
+
+.gc-story-visual {
+    width: 100%;
+}
+
+.gc-story-image-wrapper {
+    width: 100%;
+    height: 510px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: #f5f5f7;
+}
+
+.gc-story-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+.gc-story-image-wrapper:hover img {
+    transform: scale(1.035);
+}
+
+/* LEGENDA DA FOTO */
+
+.gc-photo-caption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+
+    color: #86868b;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+}
+
+.gc-caption-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a10f06;
+    flex-shrink: 0;
+}
+
+/* TEXTO À DIREITA */
+
+.gc-story-text {
+    max-width: 510px;
+}
+
+.gc-story-label {
+    display: inline-block;
+    margin-bottom: 25px;
+
+    color: #a10f06;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.gc-story-text h2 {
+    font-size: clamp(36px, 4vw, 53px);
+    line-height: 1.13;
+    letter-spacing: -2px;
+    font-weight: 500;
+    color: #1d1d1f;
+
+    margin-bottom: 28px;
+}
+
+.gc-story-text h2 span {
+    display: block;
+    color: #a10f06;
+}
+
+.gc-story-text p {
+    color: #6e6e73;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 16px;
+}
+
+.gc-story-text .gc-story-intro {
+    color: #343437;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.gc-story-text strong {
+    color: #1d1d1f;
+}
+
+/* ASSINATURA */
+
+.gc-story-signature {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 32px;
+
+    color: #86868b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.gc-signature-line {
+    width: 35px;
+    height: 2px;
+    background: #a10f06;
+}
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+    .gc-story-team-single {
+        padding: 85px 7%;
+    }
+
+    .gc-story-container {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .gc-story-image-wrapper {
+        height: 480px;
+    }
+
+    .gc-story-text {
+        max-width: 650px;
+    }
+}
+
+/* CELULARES */
+
+@media (max-width: 480px) {
+    .gc-story-team-single {
+        padding: 65px 6%;
+    }
+
+    .gc-story-image-wrapper {
+        height: 330px;
+        border-radius: 16px;
+    }
+
+    .gc-story-text h2 {
+        font-size: 37px;
+        letter-spacing: -1.5px;
+    }
+
+    .gc-story-text p {
+        font-size: 14px;
+    }
+}
+
+/* CONTEÚDO */
+
+.gc-story-text {
+    max-width: 520px;
+}
+
+.gc-story-label {
+    display: block;
+    margin-bottom: 24px;
+
+    color: #a10f06;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.gc-story-text h2 {
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+
+    font-weight: 500;
+    color: #1d1d1f;
+
+    margin-bottom: 28px;
+}
+
+.gc-story-text h2 span {
+    color: #a10f06;
+}
+
+.gc-story-text p {
+    font-size: 15px;
+    line-height: 1.9;
+
+    color: #6e6e73;
+
+    margin-bottom: 18px;
+}
+
+.gc-story-text strong {
+    color: #1d1d1f;
+    font-weight: 600;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .gc-story-team-single {
+        padding: 80px 7%;
+    }
+
+    .gc-story-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .gc-story-image-wrapper img {
+        height: 400px;
+    }
+
+    .gc-story-text {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .gc-story-team-single {
+        padding: 65px 6%;
+    }
+
+    .gc-story-image-wrapper img {
+        height: 300px;
+    }
+
+    .gc-story-text h2 {
+        font-size: 37px;
+    }
+
+    .gc-story-text p {
+        font-size: 14px;
+    }
+}
+
+
+/* Responsividade para telemóveis / tablets */
+@media (max-width: 900px) {
+    .gc-story-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+   
+   /* PROPÓSITO */
+   .gc-purpose {
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       min-height: 530px;
+       background: #f5f3ef;
+   }
+   
+   .gc-purpose-image {
+       background:
+           url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85")
+           center/cover;
+       min-height: 450px;
+   }
+   
+   .gc-purpose-content {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       padding: 80px 13%;
+   }
+   
+   .gc-purpose-content p {
+       color: #77746f;
+       font-size: 15px;
+       line-height: 1.9;
+       margin-bottom: 17px;
+   }
+   
+   /* COMO FUNCIONA */
+   .gc-how {
+       padding: 120px 9%;
+       background: #fff;
+   }
+   
+   .gc-section-heading {
+       max-width: 650px;
+       margin: 0 auto 65px;
+       text-align: center;
+   }
+   
+   .gc-section-heading > p {
+       color: #77746f;
+       line-height: 1.8;
+       font-size: 15px;
+   }
+   
+   .gc-roles {
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 22px;
+   }
+   
+   .gc-role-card {
+       background: #f8f7f4;
+       padding: 35px 30px;
+       min-height: 270px;
+       border-radius: 5px;
+       transition: .3s;
+   }
+   
+   .gc-role-card:hover {
+       transform: translateY(-7px);
+       box-shadow: 0 15px 35px rgba(0,0,0,.06);
+   }
+   
+   .gc-role-number {
+       color: #a10f06;
+       font-size: 12px;
+       font-weight: 700;
+   }
+   
+   .gc-role-icon {
+       font-size: 32px;
+       color: #a10f06;
+       margin: 25px 0 15px;
+   }
+   
+   .gc-role-card h3 {
+       font-size: 22px;
+       font-weight: 500;
+       margin-bottom: 13px;
+       color: #292824;
+   }
+   
+   .gc-role-card p {
+       color: #77746f;
+       line-height: 1.8;
+       font-size: 13px;
+   }
+   
+ /* ENCERRAMENTO */
+ .gc-final {
+    padding: 115px 20px;
+    background: #a10f06; /* Garante o fundo vermelho */
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.gc-final .gc-eyebrow {
+    color: #f2c9c5;
+}
+
+.gc-final h2 {
+    font-size: clamp(35px, 5vw, 55px);
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -1.5px;
+    margin-bottom: 22px;
+}
+
+.gc-final h2 span {
+    color: #f4c9c4;
+    display: block;
+}
+
+.gc-final > p {
+    color: #f3d9d6;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.gc-final-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.gc-btn-white {
+    background: white;
+    color: #a10f06;
+    text-decoration: none;
+    padding: 17px 25px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.gc-btn-white:hover {
+    background: #f5e7e5;
+}
+
+.gc-btn-outline {
+    color: white;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 40px;
+    text-decoration: none;
+    padding: 16px 24px;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.gc-btn-outline:hover {
+    background: white;
+    color: #a10f06;
+}
+
+/* --- ANIMAÇÃO DE PALAVRAS --- */
+
+/* Deixa todos os textos da seção final brancos e prontos */
+.gc-final .animate-words {
+    color: #ffffff !important;
+}
+
+/* Esconde e prepara a palavra individual para a animação */
+.animate-words .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: pre;
+}
+
+/* Estado animado ao scrollar */
+.animate-words.visible .word {
+    opacity: 1;
+    transform: translateY(0);
+}
+   /* RESPONSIVIDADE */
+   @media (max-width: 900px) {
+       .gc-story-container {
+           grid-template-columns: 1fr;
+           gap: 40px;
+       }
+   }
+   
+   @media (max-width: 800px) {
+       .main-header, header, .navbar {
+           width: 94%;
+           padding: 0 16px;
+       }
+   
+       .gc-hero {
+           padding: 100px 7% 60px 7%;
+           min-height: auto;
+           display: block;
+       }
+   
+       .gc-hero-content {
+           width: 100%;
+       }
+   
+       .gc-hero-image {
+           position: relative;
+           width: 100%;
+           height: 350px;
+           margin-top: 40px;
+       }
+   
+       .gc-purpose {
+           grid-template-columns: 1fr;
+       }
+   
+       .gc-purpose-content {
+           padding: 65px 8%;
+       }
+   
+       .gc-roles {
+           grid-template-columns: 1fr;
+       }
+   
+       .gc-how {
+           padding: 80px 7%;
+       }
+   }
+   
+   @media (max-width: 480px) {
+       .gc-hero h1 {
+           font-size: 43px;
+       }
+   
+       .gc-hero-buttons {
+           align-items: flex-start;
+           flex-direction: column;
+       }
+   
+       .gc-final-buttons {
+           flex-direction: column;
+       }
+   }
+
+
+/* =========================================
+   GLICOCHECK - PAINEL DO CUIDADOR
+   ========================================= */
+
+.cuidador-dashboard {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 42px 32px 80px;
+    box-sizing: border-box;
+}
+
+/* SAUDAÇÃO */
+
+.cuidador-welcome {
+    margin-bottom: 42px;
+}
+
+.cuidador-welcome h1 {
+    margin: 0 0 8px;
+    color: #a10f06;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -1.1px;
+    line-height: 1.3;
+}
+
+.cuidador-welcome h1 span {
+    font-weight: 400;
+}
+
+.cuidador-subtitle {
+    margin: 0;
+    color: #747782;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* CARDS */
+
+.cuidador-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+    align-items: stretch;
+}
+
+.cuidador-card {
+    min-height: 250px;
+    padding: 28px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: #ffffff;
+    border: 1px solid #eeeeef;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.045);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.cuidador-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(161, 15, 6, 0.18);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.075);
+}
+
+/* ÍCONES */
+
+.cuidador-card .card-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff1f0;
+    color: #a10f06;
+
+    border-radius: 14px;
+    font-size: 19px;
+    margin-bottom: 22px;
+}
+
+/* CONTEÚDO */
+
+.card-content h2 {
+    margin: 0 0 10px;
+    color: #1d1d1f;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+}
+
+.card-content p {
+    margin: 0;
+    max-width: 360px;
+    color: #86868b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* BOTÕES */
+
+.cuidador-button {
+    width: 100%;
+    min-height: 44px;
+    margin-top: auto;
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    box-sizing: border-box;
+
+    background: #a10f06;
+    color: #ffffff;
+
+    border-radius: 30px;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cuidador-button:hover {
+    background: #880c05;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.cuidador-button i {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.cuidador-button:hover i {
+    transform: translateX(4px);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 700px) {
+
+    .cuidador-dashboard {
+        padding: 32px 20px 60px;
+    }
+
+    .cuidador-welcome h1 {
+        font-size: 26px;
+    }
+
+    .cuidador-shortcuts {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .cuidador-card {
+        min-height: 235px;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .cuidador-dashboard {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .cuidador-welcome h1 {
+        font-size: 23px;
+    }
+}
+
+/* Garante que os campos médicos fiquem ocultos */
+.doctor-fields[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   GLICOCHECK — NOVA ESTRUTURA DOS PAINÉIS
+   Correção da sidebar, cabeçalho, conteúdo e rodapé
+   ========================================================== */
+
+   .app-body {
+    background: #f5f5f7 !important;
+    color: #1d1d1f;
+    min-height: 100vh;
+}
+
+.app-body .app-main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.app-body .app-layout {
+    width: min(1500px, calc(100% - 64px));
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 238px minmax(0, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* PAINEL DE VIDRO */
+
+.app-body .glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 38px rgba(29, 29, 31, 0.045);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+.app-body .app-sidebar {
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 48px);
+    min-height: 620px;
+    padding: 24px 16px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.app-body .app-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 8px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    color: #1d1d1f;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.app-body .app-brand img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.app-body .sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 13px 10px;
+    margin-bottom: 27px;
+    border-radius: 15px;
+    background: #faf9f8;
+    min-width: 0;
+}
+
+.app-body .avatar-circle {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #a10f06;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.app-body .sidebar-profile div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .sidebar-profile strong {
+    color: #29292d;
+    font-size: 12px;
+    font-weight: 650;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-body .sidebar-profile small {
+    color: #96969c;
+    font-size: 10px;
+}
+
+.app-body .sidebar-label {
+    display: block;
+    padding: 0 8px;
+    margin-bottom: 12px;
+    color: #a0a0a5;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+}
+
+/* CORREÇÃO PRINCIPAL:
+   o menu lateral precisa ser vertical, não horizontal */
+
+.app-body .app-sidebar nav.sidebar-nav {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.app-body .sidebar-nav a {
+    min-height: 42px;
+    width: 100%;
+    padding: 0 11px;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    border-radius: 11px;
+    color: #65656c !important;
+    text-decoration: none;
+    font-size: 11px !important;
+    font-weight: 550 !important;
+    transition: background .2s ease, color .2s ease;
+}
+
+.app-body .sidebar-nav a span {
+    width: 17px;
+    flex-shrink: 0;
+    text-align: center;
+    color: #a0a0a6;
+    font-size: 15px;
+}
+
+.app-body .sidebar-nav a:hover {
+    background: #f7f1f0;
+    color: #a10f06 !important;
+}
+
+.app-body .sidebar-nav a:hover span {
+    color: #a10f06;
+}
+
+/* ÁREA INFERIOR DO MENU */
+
+.app-body .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid #eeeeef;
+}
+
+.app-body .sidebar-bottom a {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 10px;
+    color: #77777e;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 550;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+
+.app-body .sidebar-bottom a span {
+    width: 17px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.app-body .sidebar-bottom a:hover {
+    background: #f7f1f0;
+    color: #a10f06;
+}
+
+.app-body .sidebar-bottom .sidebar-logout {
+    color: #a10f06;
+}
+
+.app-body .sidebar-mark {
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+    opacity: .045;
+    pointer-events: none;
+}
+
+.app-body .sidebar-mark img {
+    width: 47px;
+    height: 47px;
+}
+
+/* ==========================================================
+   COLUNA PRINCIPAL E CABEÇALHO SUPERIOR
+   ========================================================== */
+
+.app-body .app-main-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Evita que a regra global header position: fixed
+   interfira nos cabeçalhos internos do dashboard */
+
+.app-body header,
+.app-body .app-topbar {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.app-body .app-topbar {
+    min-height: 66px;
+    padding: 13px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.app-body .topbar-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #a10f06;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+}
+
+.app-body .topbar-caption {
+    display: block;
+    color: #96969c;
+    font-size: 10px;
+    letter-spacing: 0;
+}
+
+.app-body .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.app-body .topbar-date {
+    color: #88888f;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.app-body .topbar-user {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f7e9e8;
+    color: #a10f06;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.app-body .dashboard-content {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    padding: 12px 12px 30px;
+}
+
+/* RODAPÉ: remove o fundo vermelho global */
+
+.app-body footer.app-footer {
+    position: static !important;
+    width: 100%;
+    margin-top: auto !important;
+    padding: 15px 10px !important;
+    background: transparent !important;
+    border-top: 1px solid #e9e9eb !important;
+    color: #99999f !important;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* ==========================================================
+   ELEMENTOS COMPARTILHADOS DO DASHBOARD
+   ========================================================== */
+
+.app-body .section-kicker {
+    display: block;
+    margin-bottom: 9px;
+    color: #a10f06;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.app-body .field-label {
+    display: block;
+    margin: 13px 0 7px;
+    color: #55555c;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.app-body .field-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    border: 1px solid #e4e4e7;
+    border-radius: 11px;
+    background: #fafafa;
+    color: #29292d;
+    font: inherit;
+    font-size: 12px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.app-body textarea.field-input {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.app-body .field-input:focus {
+    border-color: #a10f06;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(161, 15, 6, .09);
+}
+
+.app-body .btn-primary,
+.app-body .btn-secondary {
+    min-height: 43px;
+    width: auto;
+    padding: 0 19px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 11px;
+    font-size: 11px;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.app-body .btn-primary {
+    border: 1px solid #a10f06;
+    background: #a10f06;
+    color: #fff;
+}
+
+.app-body .btn-primary:hover {
+    background: #880c05;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.app-body .btn-secondary {
+    border: 1px solid #e7e2e1;
+    background: #fff;
+    color: #55555c;
+}
+
+.app-body .btn-secondary:hover {
+    border-color: #a10f06;
+    color: #a10f06;
+}
+
+.app-body .btn-full {
+    width: 100%;
+}
+
+.app-body .quiet-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 30px;
+    background: #f5f5f6;
+    color: #85858b;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* ==========================================================
+   PAINEL MÉDICO — CABEÇALHO
+   ========================================================== */
+
+.app-body .doctor-dashboard {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.app-body .doctor-welcome {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 100px;
+    padding: 13px 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.app-body .doctor-welcome h1 {
+    margin: 0 0 7px;
+    color: #252529;
+    font-size: clamp(27px, 3vw, 35px);
+    line-height: 1.15;
+    font-weight: 650;
+    letter-spacing: -1.5px;
+}
+
+.app-body .doctor-welcome p {
+    max-width: 600px;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-welcome-date {
+    min-width: 115px;
+    padding: 13px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid #ecebed;
+    border-radius: 13px;
+    background: rgba(255,255,255,.65);
+}
+
+.app-body .doctor-welcome-date span {
+    color: #a10f06;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.app-body .doctor-welcome-date small {
+    color: #96969c;
+    font-size: 9px;
+}
+
+/* AVISO PROFISSIONAL */
+
+.app-body .doctor-verification-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 15px 17px;
+    border: 1px solid #eadfc9;
+    border-radius: 13px;
+    background: #fbf7ef;
+}
+
+.app-body .notice-symbol {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f2e9d8;
+    color: #98733d;
+    font-size: 13px;
+}
+
+.app-body .doctor-verification-notice strong {
+    color: #765b32;
+    font-size: 11px;
+}
+
+.app-body .doctor-verification-notice p {
+    margin-top: 4px;
+    color: #8b7657;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* ==========================================================
+   ESTADO VAZIO — SEM PACIENTES
+   ========================================================== */
+
+.app-body .doctor-empty-state {
+    width: 100%;
+    min-height: 340px;
+    padding: 38px;
+    display: grid;
+    grid-template-columns: 1fr .9fr;
+    align-items: center;
+    gap: 45px;
+    border: 1px solid #ecebed;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 12px 35px rgba(29,29,31,.035);
+}
+
+.app-body .empty-state-visual {
+    max-width: 440px;
+}
+
+.app-body .empty-state-icon {
+    width: 53px;
+    height: 53px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.app-body .empty-state-visual h2 {
+    margin: 0 0 13px;
+    color: #252529;
+    font-size: clamp(25px, 3vw, 33px);
+    line-height: 1.2;
+    letter-spacing: -1.1px;
+    font-weight: 650;
+}
+
+.app-body .empty-state-visual p {
+    max-width: 400px;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.app-body .empty-state-action {
+    padding: 24px;
+    border: 1px solid #efedef;
+    border-radius: 16px;
+    background: #fcfbfb;
+}
+
+.app-body .empty-action-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.app-body .empty-action-number {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.app-body .empty-action-heading div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .empty-action-heading strong {
+    color: #303035;
+    font-size: 12px;
+}
+
+.app-body .empty-action-heading small {
+    color: #96969c;
+    font-size: 10px;
+}
+
+.app-body .doctor-invite-form .btn-primary {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.app-body .empty-state-help {
+    display: flex;
+    gap: 9px;
+    margin-top: 17px;
+    padding-top: 14px;
+    border-top: 1px solid #ecebed;
+}
+
+.app-body .empty-state-help span {
+    color: #a10f06;
+    font-size: 12px;
+}
+
+.app-body .empty-state-help p {
+    color: #96969c;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+/* ==========================================================
+   INDICADORES
+   ========================================================== */
+
+.app-body .doctor-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.app-body .doctor-stat-card {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #ecebed;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(29,29,31,.025);
+}
+
+.app-body .doctor-stat-primary {
+    border-color: rgba(161,15,6,.13);
+    background: linear-gradient(145deg, #fff, #fff9f8);
+}
+
+.app-body .doctor-stat-label {
+    display: block;
+    color: #85858c;
+    font-size: 10px;
+    font-weight: 550;
+}
+
+.app-body .doctor-stat-value {
+    min-height: 43px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #252529;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.app-body .doctor-stat-primary .doctor-stat-value {
+    color: #a10f06;
+}
+
+.app-body .doctor-stat-name {
+    font-size: 20px;
+}
+
+.app-body .doctor-stat-icon {
+    color: #c7a4a1;
+    font-size: 19px;
+}
+
+.app-body .doctor-stat-card small {
+    display: block;
+    color: #a0a0a5;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   SELETOR DE PACIENTE E RESUMO
+   ========================================================== */
+
+.app-body .doctor-patient-selector {
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border: 1px solid #ecebed;
+    border-radius: 17px;
+    background: #fff;
+}
+
+.app-body .doctor-patient-selector h2 {
+    margin: 0 0 5px;
+    color: #303035;
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -.5px;
+}
+
+.app-body .doctor-patient-selector p {
+    color: #93939a;
+    font-size: 10px;
+}
+
+.app-body .doctor-picker-form {
+    width: min(300px, 42%);
+}
+
+.app-body .doctor-picker-form .field-label {
+    margin-top: 0;
+}
+
+.app-body .doctor-patient-overview {
+    padding: 23px;
+    border: 1px solid #ecebed;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.app-body .doctor-section-heading,
+.app-body .doctor-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.app-body .doctor-section-heading {
+    margin-bottom: 20px;
+}
+
+.app-body .doctor-section-heading h2,
+.app-body .doctor-card-heading h2 {
+    margin: 0;
+    color: #29292e;
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -.6px;
+}
+
+.app-body .doctor-patient-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid #efedef;
+    border-radius: 13px;
+    background: #fcfbfb;
+}
+
+.app-body .doctor-patient-summary article {
+    min-width: 0;
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.app-body .doctor-patient-summary article + article {
+    border-left: 1px solid #efedef;
+}
+
+.app-body .doctor-patient-summary small {
+    color: #898990;
+    font-size: 10px;
+}
+
+.app-body .doctor-patient-summary strong {
+    color: #29292e;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.app-body .doctor-patient-summary span {
+    color: #a0a0a5;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   GRADE PRINCIPAL
+   ========================================================== */
+
+.app-body .doctor-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    align-items: start;
+}
+
+.app-body .doctor-panel-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid #ecebed;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(29,29,31,.025);
+}
+
+.app-body .doctor-card-heading {
+    margin-bottom: 20px;
+}
+
+.app-body .doctor-card-heading .section-kicker {
+    margin-bottom: 6px;
+}
+
+.app-body .doctor-card-heading p {
+    margin-top: 5px;
+    color: #93939a;
+    font-size: 10px;
+}
+
+.app-body .doctor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.app-body .doctor-form .btn-primary,
+.app-body .doctor-form .btn-secondary {
+    width: 100%;
+    margin-top: 17px;
+}
+
+/* MEDIÇÕES */
+
+.app-body .doctor-measurement-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body .doctor-measurement-row {
+    min-width: 0;
+    padding: 13px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f0eff0;
+}
+
+.app-body .measurement-indicator {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 15px;
+}
+
+.app-body .measurement-information {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .measurement-information strong {
+    color: #303035;
+    font-size: 13px;
+}
+
+.app-body .measurement-information small {
+    color: #929299;
+    font-size: 9px;
+}
+
+.app-body .measurement-reference {
+    color: #b0b0b5;
+    font-size: 9px;
+}
+
+.app-body .doctor-disclaimer {
+    margin-top: 15px;
+    color: #99999f;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-empty-message {
+    padding: 20px 10px;
+    text-align: center;
+    color: #99999f;
+    font-size: 11px;
+}
+
+.app-body .doctor-empty-message span {
+    display: block;
+    margin-bottom: 8px;
+    color: #c4b9b8;
+    font-size: 23px;
+}
+
+/* PLANO DE CUIDADO */
+
+.app-body .doctor-active-plan {
+    padding: 15px;
+    border-radius: 12px;
+    background: #faf8f7;
+}
+
+.app-body .doctor-active-plan > strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333338;
+    font-size: 12px;
+}
+
+.app-body .doctor-active-plan > small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+.app-body .doctor-active-plan > p {
+    margin-top: 13px;
+    color: #707078;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-plan-goals {
+    margin-top: 13px;
+    padding-top: 12px;
+    border-top: 1px solid #eae6e5;
+}
+
+.app-body .doctor-plan-goals strong {
+    color: #a10f06;
+    font-size: 10px;
+}
+
+.app-body .doctor-plan-goals p {
+    margin-top: 5px;
+    color: #77777e;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.app-body .doctor-form-divider {
+    height: 1px;
+    margin: 22px 0;
+    background: #efedef;
+}
+
+.app-body .doctor-subheading {
+    margin-bottom: 13px;
+}
+
+.app-body .doctor-subheading h3 {
+    color: #333338;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.app-body .doctor-subheading p {
+    margin-top: 4px;
+    color: #99999f;
+    font-size: 9px;
+}
+
+/* AGENDA */
+
+.app-body .doctor-appointments {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.app-body .doctor-appointment-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-body .appointment-date {
+    width: 42px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f9eae9;
+    color: #a10f06;
+}
+
+.app-body .appointment-date strong {
+    font-size: 15px;
+    line-height: 1.1;
+}
+
+.app-body .appointment-date small {
+    font-size: 9px;
+}
+
+.app-body .doctor-appointment-row > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.app-body .doctor-appointment-row > div:last-child strong {
+    color: #37373c;
+    font-size: 11px;
+}
+
+.app-body .doctor-appointment-row > div:last-child small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+/* RELATÓRIOS */
+
+.app-body .doctor-report-icon {
+    color: #a10f06;
+    font-size: 22px;
+}
+
+.app-body .doctor-muted-text {
+    color: #898990;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-report-highlight {
+    margin: 22px 0 17px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 12px;
+    background: #faf6f5;
+}
+
+.app-body .doctor-report-highlight strong {
+    color: #a10f06;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.app-body .doctor-report-highlight span {
+    color: #85858c;
+    font-size: 10px;
+}
+
+/* LINHA DO CUIDADO */
+
+.app-body .doctor-timeline {
+    width: 100%;
+}
+
+.app-body .doctor-timeline-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body .doctor-timeline-item {
+    min-width: 0;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border-bottom: 1px solid #f0eff0;
+}
+
+.app-body .timeline-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #a10f06;
+    box-shadow: 0 0 0 4px #f9eae9;
+}
+
+.app-body .timeline-information {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.app-body .timeline-information strong {
+    color: #424248;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.app-body .timeline-information small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+.app-body .timeline-type {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #f5f5f6;
+    color: #88888f;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 1100px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 36px);
+        grid-template-columns: 205px minmax(0, 1fr);
+        gap: 17px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .app-body .doctor-empty-state {
+        gap: 25px;
+        padding: 27px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr;
+        padding: 14px 0;
+    }
+
+    .app-body .app-sidebar {
+        position: relative;
+        top: auto;
+        height: auto;
+        min-height: auto;
+        padding: 17px;
+        border-radius: 18px;
+    }
+
+    .app-body .app-brand {
+        margin-bottom: 14px;
+    }
+
+    .app-body .sidebar-profile {
+        margin-bottom: 15px;
+    }
+
+    .app-body .sidebar-nav {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .app-body .sidebar-bottom {
+        margin-top: 14px;
+    }
+
+    .app-body .sidebar-mark {
+        display: none;
+    }
+
+    .app-body .app-main-column {
+        gap: 14px;
+    }
+
+    .app-body .dashboard-content {
+        padding: 8px 2px 20px;
+    }
+
+    .app-body .doctor-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-empty-state {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 22px);
+    }
+
+    .app-body .app-topbar {
+        padding: 12px 14px;
+    }
+
+    .app-body .topbar-caption {
+        max-width: 180px;
+    }
+
+    .app-body .doctor-welcome {
+        align-items: flex-start;
+    }
+
+    .app-body .doctor-welcome-date {
+        display: none;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .app-body .doctor-stat-card {
+        padding: 14px;
+    }
+
+    .app-body .doctor-stat-value {
+        font-size: 23px;
+    }
+
+    .app-body .doctor-patient-selector {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .app-body .doctor-picker-form {
+        width: 100%;
+    }
+
+    .app-body .doctor-patient-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-patient-summary article + article {
+        border-left: 0;
+        border-top: 1px solid #efedef;
+    }
+
+    .app-body .doctor-empty-state {
+        padding: 20px;
+    }
+
+    .app-body .empty-state-action {
+        padding: 17px;
+    }
+
+    .app-body .doctor-panel-card {
+        padding: 17px;
+    }
+
+    .app-body .doctor-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .app-body .doctor-timeline-item {
+        align-items: flex-start;
+    }
+
+    .app-body .timeline-type {
+        display: none;
+    }
+
+    .app-body .sidebar-nav {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   GLICOCHECK — PAINEL MÉDICO
+   Layout amplo, legível e acessível
+   ===================================================== */
+
+   .app-body .app-layout {
+    width: min(1720px, calc(100% - 56px));
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 28px;
+    padding: 26px 0;
+}
+
+.app-body .app-sidebar {
+    padding: 30px 20px;
+    border-radius: 25px;
+}
+
+.app-body .app-main-column {
+    gap: 24px;
+}
+
+.app-body .dashboard-content {
+    padding: 18px 22px 38px;
+}
+
+.app-body .app-topbar {
+    min-height: 82px;
+    padding: 18px 28px;
+    border-radius: 20px;
+}
+
+/* Sidebar mais confortável */
+
+.app-body .app-brand {
+    font-size: 17px;
+    margin-bottom: 34px;
+}
+
+.app-body .app-brand img {
+    width: 30px;
+    height: 30px;
+}
+
+.app-body .sidebar-profile {
+    padding: 16px 12px;
+    margin-bottom: 32px;
+}
+
+.app-body .avatar-circle {
+    width: 46px;
+    height: 46px;
+    font-size: 16px;
+}
+
+.app-body .sidebar-profile strong {
+    font-size: 14px;
+}
+
+.app-body .sidebar-profile small {
+    font-size: 12px;
+}
+
+.app-body .sidebar-label {
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.app-body .sidebar-nav a {
+    min-height: 49px;
+    font-size: 13px !important;
+    gap: 13px;
+}
+
+.app-body .sidebar-nav a span {
+    font-size: 18px;
+}
+
+.app-body .sidebar-bottom a {
+    min-height: 46px;
+    font-size: 13px;
+}
+
+/* Conteúdo médico */
+
+.app-body .doctor-dashboard {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.app-body .doctor-welcome {
+    min-height: 125px;
+    padding: 15px 0 10px;
+}
+
+.app-body .doctor-welcome h1 {
+    font-size: clamp(34px, 3vw, 43px);
+    letter-spacing: -1.8px;
+    margin-bottom: 10px;
+}
+
+.app-body .doctor-welcome p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.app-body .section-kicker {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 11px;
+}
+
+/* Aviso */
+
+.app-body .doctor-verification-notice {
+    padding: 20px 22px;
+    border-radius: 15px;
+}
+
+.app-body .doctor-verification-notice strong {
+    font-size: 13px;
+}
+
+.app-body .doctor-verification-notice p {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Indicadores */
+
+.app-body .doctor-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.app-body .doctor-stat-card {
+    min-height: 145px;
+    padding: 23px;
+    border-radius: 19px;
+}
+
+.app-body .doctor-stat-label {
+    font-size: 12px;
+}
+
+.app-body .doctor-stat-value {
+    min-height: 50px;
+    font-size: 34px;
+}
+
+.app-body .doctor-stat-name {
+    font-size: 24px;
+}
+
+.app-body .doctor-stat-card small {
+    font-size: 11px;
+}
+
+/* Seletor */
+
+.app-body .doctor-patient-selector {
+    padding: 25px 28px;
+    border-radius: 19px;
+    gap: 30px;
+}
+
+.app-body .doctor-patient-selector h2 {
+    font-size: 22px;
+}
+
+.app-body .doctor-patient-selector p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.app-body .doctor-picker-form {
+    width: min(390px, 45%);
+}
+
+/* Resumo */
+
+.app-body .doctor-patient-overview {
+    padding: 29px;
+    border-radius: 20px;
+}
+
+.app-body .doctor-section-heading h2,
+.app-body .doctor-card-heading h2 {
+    font-size: 23px;
+}
+
+.app-body .doctor-patient-summary {
+    border-radius: 15px;
+}
+
+.app-body .doctor-patient-summary article {
+    padding: 23px;
+    gap: 8px;
+}
+
+.app-body .doctor-patient-summary small {
+    font-size: 12px;
+}
+
+.app-body .doctor-patient-summary strong {
+    font-size: 29px;
+}
+
+.app-body .doctor-patient-summary span {
+    font-size: 11px;
+}
+
+/* Grade */
+
+.app-body .doctor-content-grid {
+    gap: 22px;
+    align-items: stretch;
+}
+
+.app-body .doctor-panel-card {
+    padding: 29px;
+    border-radius: 20px;
+}
+
+.app-body .doctor-card-heading {
+    margin-bottom: 25px;
+}
+
+.app-body .doctor-card-heading p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Campos maiores */
+
+.app-body .field-label {
+    font-size: 13px;
+    margin: 16px 0 9px;
+}
+
+.app-body .field-input {
+    min-height: 51px;
+    padding: 13px 15px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.app-body textarea.field-input {
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.app-body .btn-primary,
+.app-body .btn-secondary {
+    min-height: 51px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.app-body .quiet-tag {
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+/* Medições */
+
+.app-body .doctor-measurement-row {
+    padding: 18px 0;
+    gap: 15px;
+}
+
+.app-body .measurement-indicator {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    font-size: 18px;
+}
+
+.app-body .measurement-information strong {
+    font-size: 16px;
+}
+
+.app-body .measurement-information small {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.app-body .measurement-reference {
+    font-size: 11px;
+}
+
+.app-body .doctor-disclaimer {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Plano */
+
+.app-body .doctor-active-plan {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.app-body .doctor-active-plan > strong {
+    font-size: 15px;
+}
+
+.app-body .doctor-active-plan > small {
+    font-size: 11px;
+}
+
+.app-body .doctor-active-plan > p,
+.app-body .doctor-plan-goals p {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-plan-goals strong {
+    font-size: 12px;
+}
+
+.app-body .doctor-subheading h3 {
+    font-size: 16px;
+}
+
+.app-body .doctor-subheading p {
+    font-size: 11px;
+}
+
+/* Agenda */
+
+.app-body .doctor-appointments {
+    gap: 17px;
+}
+
+.app-body .appointment-date {
+    width: 51px;
+    height: 55px;
+}
+
+.app-body .appointment-date strong {
+    font-size: 19px;
+}
+
+.app-body .appointment-date small {
+    font-size: 11px;
+}
+
+.app-body .doctor-appointment-row > div:last-child strong {
+    font-size: 13px;
+}
+
+.app-body .doctor-appointment-row > div:last-child small {
+    font-size: 11px;
+}
+
+/* Relatórios */
+
+.app-body .doctor-muted-text {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-report-highlight {
+    padding: 20px;
+}
+
+.app-body .doctor-report-highlight strong {
+    font-size: 35px;
+}
+
+.app-body .doctor-report-highlight span {
+    font-size: 12px;
+}
+
+.app-body .doctor-report-button {
+    width: 100%;
+}
+
+/* Linha do cuidado */
+
+.app-body .doctor-timeline {
+    width: 100%;
+}
+
+.app-body .doctor-timeline-item {
+    padding: 19px 0;
+    gap: 17px;
+}
+
+.app-body .timeline-information strong {
+    font-size: 13px;
+}
+
+.app-body .timeline-information small {
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.app-body .timeline-type {
+    font-size: 11px;
+    padding: 7px 11px;
+}
+
+.app-body .doctor-empty-message {
+    padding: 28px 15px;
+    font-size: 13px;
+}
+
+.app-body .doctor-empty-message span {
+    font-size: 29px;
+}
+
+/* Estado vazio */
+
+.app-body .doctor-empty-state {
+    min-height: 410px;
+    padding: 45px;
+    gap: 55px;
+    border-radius: 23px;
+}
+
+.app-body .empty-state-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 31px;
+    border-radius: 19px;
+}
+
+.app-body .empty-state-visual h2 {
+    font-size: 38px;
+}
+
+.app-body .empty-state-visual p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.app-body .empty-state-action {
+    padding: 30px;
+    border-radius: 19px;
+}
+
+.app-body .empty-action-heading strong {
+    font-size: 15px;
+}
+
+.app-body .empty-action-heading small {
+    font-size: 12px;
+}
+
+.app-body .empty-state-help p {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Foco acessível para teclado */
+
+.app-body a:focus-visible,
+.app-body button:focus-visible,
+.app-body input:focus-visible,
+.app-body select:focus-visible,
+.app-body textarea:focus-visible {
+    outline: 3px solid #a10f06 !important;
+    outline-offset: 3px;
+}
+
+.app-body button,
+.app-body a,
+.app-body input,
+.app-body select,
+.app-body textarea {
+    font-family: inherit;
+}
+
+/* Evita animações excessivas para quem prefere movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+    .app-body *,
+    .app-body *::before,
+    .app-body *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Telas menores */
+
+@media (max-width: 1150px) {
+    .app-body .app-layout {
+        width: calc(100% - 36px);
+        grid-template-columns: 235px minmax(0, 1fr);
+        gap: 19px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .app-body .app-layout {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-empty-state {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-picker-form {
+        width: 100%;
+    }
+
+    .app-body .doctor-patient-selector {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .app-body .dashboard-content {
+        padding: 10px 3px 25px;
+    }
+
+    .app-body .doctor-welcome h1 {
+        font-size: 31px;
+    }
+
+    .app-body .doctor-welcome p {
+        font-size: 13px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .app-body .doctor-stat-card {
+        padding: 16px;
+        min-height: 125px;
+    }
+
+    .app-body .doctor-stat-value {
+        font-size: 27px;
+    }
+
+    .app-body .doctor-patient-overview,
+    .app-body .doctor-panel-card {
+        padding: 20px;
+    }
+
+    .app-body .doctor-patient-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-patient-summary article + article {
+        border-left: 0;
+        border-top: 1px solid #efedef;
+    }
+
+    .app-body .doctor-empty-state {
+        padding: 22px;
+    }
+
+    .app-body .empty-state-visual h2 {
+        font-size: 30px;
+    }
+
+    .app-body .empty-state-action {
+        padding: 20px;
+    }
+
+    .app-body .timeline-type {
+        display: none;
+    }
+}
+
+
+/* =====================================================
+   GLICOCHECK — OCUPAR TODA A TELA
+   Correção de largura e proporções do painel
+   ===================================================== */
+
+   html,
+   body {
+       width: 100%;
+       min-height: 100%;
+   }
+   
+   .app-body {
+       overflow-x: hidden;
+   }
+   
+   /* Layout principal: expansão real até as bordas */
+   
+   .app-body .app-layout {
+       position: relative;
+       left: 50%;
+       transform: translateX(-50%);
+   
+       width: calc(100vw - 64px) !important;
+       max-width: none !important;
+   
+       margin: 24px 0 !important;
+       padding: 0 !important;
+   
+       display: grid !important;
+       grid-template-columns: 300px minmax(0, 1fr) !important;
+       gap: 28px !important;
+   
+       align-items: stretch;
+   }
+   
+   /* Lateral */
+   
+   .app-body .app-sidebar {
+       width: 100%;
+       min-width: 0;
+       min-height: calc(100vh - 48px);
+       padding: 30px 22px;
+   }
+   
+   /* Coluna principal */
+   
+   .app-body .app-main-column {
+       width: 100%;
+       min-width: 0;
+       max-width: none !important;
+       gap: 22px;
+   }
+   
+   /* Barra superior */
+   
+   .app-body .app-topbar {
+       width: 100%;
+       min-height: 82px;
+       padding: 20px 32px;
+   }
+   
+   /* Área de conteúdo */
+   
+   .app-body .dashboard-content {
+       width: 100%;
+       max-width: none !important;
+       padding: 22px 30px 45px;
+   }
+   
+   /* Painel médico */
+   
+   .app-body .doctor-dashboard {
+       width: 100% !important;
+       max-width: none !important;
+       margin: 0;
+   }
+   
+   /* Cartões com mais espaço */
+   
+   .app-body .doctor-stats-grid {
+       width: 100%;
+       grid-template-columns: repeat(4, minmax(0, 1fr));
+       gap: 22px;
+   }
+   
+   .app-body .doctor-stat-card {
+       min-height: 165px;
+       padding: 28px;
+   }
+   
+   .app-body .doctor-content-grid {
+       width: 100%;
+       grid-template-columns: repeat(2, minmax(0, 1fr));
+       gap: 24px;
+   }
+   
+   .app-body .doctor-panel-card {
+       width: 100%;
+       min-width: 0;
+       padding: 32px;
+   }
+   
+   .app-body .doctor-patient-overview,
+   .app-body .doctor-patient-selector,
+   .app-body .doctor-timeline {
+       width: 100%;
+   }
+   
+   .app-body .doctor-patient-summary {
+       width: 100%;
+   }
+   
+   /* Formulários ocupam o espaço disponível */
+   
+   .app-body .doctor-form,
+   .app-body .doctor-invite-form {
+       width: 100%;
+   }
+   
+   .app-body .doctor-form .field-input,
+   .app-body .doctor-invite-form .field-input {
+       width: 100%;
+   }
+   
+   /* Rodapé */
+   
+   .app-body .app-footer {
+       width: 100%;
+       margin-top: 12px;
+       text-align: center;
+   }
+   
+   /* Monitores médios */
+   
+   @media (max-width: 1100px) {
+       .app-body .app-layout {
+           width: calc(100vw - 36px) !important;
+           grid-template-columns: 245px minmax(0, 1fr) !important;
+           gap: 18px !important;
+       }
+   
+       .app-body .dashboard-content {
+           padding: 18px 12px 35px;
+       }
+   
+       .app-body .doctor-stats-grid {
+           grid-template-columns: repeat(2, minmax(0, 1fr));
+       }
+   }
+   
+   /* Tablets e celulares */
+   
+   @media (max-width: 800px) {
+       .app-body .app-layout {
+           width: calc(100vw - 28px) !important;
+           grid-template-columns: minmax(0, 1fr) !important;
+           gap: 16px !important;
+       }
+   
+       .app-body .app-sidebar {
+           min-height: auto;
+       }
+   
+       .app-body .doctor-content-grid {
+           grid-template-columns: minmax(0, 1fr);
+       }
+   
+       .app-body .doctor-stats-grid {
+           grid-template-columns: repeat(2, minmax(0, 1fr));
+       }
+   
+       .app-body .doctor-patient-selector {
+           flex-direction: column;
+       }
+   
+       .app-body .doctor-picker-form {
+           width: 100%;
+       }
+   }
+   
+   @media (max-width: 480px) {
+       .app-body .doctor-stats-grid {
+           grid-template-columns: 1fr;
+       }
+   
+       .app-body .doctor-panel-card {
+           padding: 20px;
+       }
+   
+       .app-body .doctor-welcome h1 {
+           font-size: 30px;
+       }
+   }
+   
+
+/* Avatar do perfil — círculo perfeito */
+
+.app-body .avatar-circle,
+.app-body .topbar-user {
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+
+    flex: 0 0 46px !important;
+    aspect-ratio: 1 / 1;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+    border-radius: 50% !important;
+    box-sizing: border-box;
+
+    line-height: 1;
+    text-align: center;
+}
+
+/* Letra centralizada */
+
+.app-body .avatar-circle {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.app-body .topbar-user {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CABEÇALHO SUPERIOR — GLICOCHECK
+   ========================================= */
+
+/* Área de identificação */
+
+.app-body .app-topbar {
+    min-height: 100px !important;
+    padding: 22px 32px !important;
+}
+
+/* GLICOCHECK / MÉDICO(A) */
+
+.app-body .topbar-kicker {
+    display: block;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0px !important;
+    line-height: 1;
+    margin-bottom: 7px;
+}
+
+/* Frase abaixo */
+
+.app-body .topbar-caption {
+    display: block;
+    font-size: 14px !important;
+    line-height: 1.6;
+    color: #68686e !important;
+}
+
+/* Data */
+
+.app-body .topbar-date {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: #55555b !important;
+    white-space: nowrap;
+    margin-right: 8px;
+}
+
+/* Foto / inicial do perfil */
+
+.app-body .topbar-user {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    flex: 0 0 48px !important;
+
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    border-radius: 50% !important;
+}
+
+/* Espaçamento entre data e perfil */
+
+.app-body .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Ajuste para celulares */
+
+@media (max-width: 560px) {
+    .app-body .app-topbar {
+        padding: 17px !important;
+        min-height: 85px !important;
+    }
+
+    .app-body .topbar-kicker {
+        font-size: 11px !important;
+    }
+
+    .app-body .topbar-caption {
+        font-size: 12px !important;
+    }
+
+    .app-body .topbar-date {
+        font-size: 11px !important;
+    }
+
+    .app-body .topbar-user {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+        min-height: 42px !important;
+        flex-basis: 42px !important;
+    }
+}

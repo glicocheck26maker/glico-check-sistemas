@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar · GlicoCheck{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block site_header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block main_class %}auth-main{% endblock %}
+{% block conteudo %}
+<section class="auth-layout">
+    <div class="auth-visual">
+        <div class="auth-slides" aria-label="Imagens do GlicoCheck">
+            <img class="gc-slide is-active" src="{{ url_for('static', filename='img/slide-1.png') }}" alt="Pessoas em um momento de cuidado">
+            <img class="gc-slide" src="{{ url_for('static', filename='img/slide-2.png') }}" alt="Acompanhamento e saúde">
+            <img class="gc-slide" src="{{ url_for('static', filename='img/slide-3.png') }}" alt="Apoio no cuidado diário">
+            <img class="gc-slide" src="{{ url_for('static', filename='img/slide-4.png') }}" alt="Conexão entre pessoas">
+        </div>
+        <div class="auth-visual-caption">
+            <span class="auth-eyebrow">CUIDADO QUE CONECTA</span>
+            <p>Mais organização para o cuidado. Mais espaço para viver.</p>
+        </div>
+    </div>
+
+    <div class="auth-form-side">
+        <a href="{{ url_for('landing') }}" class="auth-brand">
+            <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="">
+            <span>GlicoCheck</span>
+        </a>
+        <div class="auth-card glass-panel">
+            <span class="section-kicker">BEM-VINDO DE VOLTA</span>
+            <h1>Entre na sua conta.</h1>
+            <p class="auth-intro">Acesse seu espaço de cuidado e continue de onde parou.</p>
+
+            <form action="{{ url_for('login') }}" method="POST" class="form-stack">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <label class="field-label" for="email">E-mail</label>
+                <input class="field-input" type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required autofocus>
+
+                <label class="field-label" for="senha">Senha</label>
+                <div class="password-field">
+                    <input class="field-input" type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+                    <button class="password-toggle" type="button" data-toggle-password="senha" aria-label="Mostrar senha">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+
+                <button class="btn-primary btn-full" type="submit">Entrar na plataforma <span>→</span></button>
+            </form>
+            <p class="auth-switch">Ainda não tem uma conta? <a href="{{ url_for('cadastro') }}">Criar cadastro</a></p>
+            <p class="auth-privacy">Seu perfil é identificado pela conta. Não é necessário escolher um tipo de usuário ao entrar.</p>
+        </div>
+        <a href="{{ url_for('landing') }}" class="auth-back">← Voltar para o site</a>
+    </div>
+</section>
+{% endblock %}

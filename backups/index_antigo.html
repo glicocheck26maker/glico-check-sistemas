@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlicoCheck | Cuidado que aproxima</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v=2) }}">
+</head>
+<body>
+
+    <header class="main-header navbar">
+        <a href="#inicio" class="brand-logo">
+            GlicoCheck 
+            <img src="{{ url_for('static', filename='logo-g.svg') }}" alt="Logo G" class="nav-logo-icon">
+        </a>
+        <nav class="main-nav">
+            <a href="#inicio">Início</a>
+            <a href="#historia">Nossa história</a>
+            <a href="#proposito">Nosso propósito</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="/entrar" class="nav-register">Entrar</a>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO HERO (INÍCIO) -->
+    <section class="gc-hero" id="inicio">
+        <div class="gc-hero-content">
+            <span class="gc-eyebrow">CUIDADO, SAÚDE E CONEXÃO</span>
+            <h1>Cuidar da saúde pode ser mais <span>simples.</span></h1>
+            <p>Acompanhar a glicose é apenas o começo. O GlicoCheck nasceu para aproximar pessoas, facilitar o cuidado e transformar informações em mais qualidade de vida.</p>
+            <div class="gc-hero-buttons">
+                <a href="/cadastrar" class="gc-btn-primary">Conheça o GlicoCheck &rarr;</a>
+                <a href="#historia" class="gc-btn-link">Descubra nossa história</a>
+            </div>
+        </div>
+        <div class="gc-hero-image">
+            <div class="gc-image-overlay">
+                <span>GlicoCheck</span>
+                <p>Cuidado que aproxima.</p>
+            </div>
+        </div>
+    </section>
+
+   <!-- NOSSA HISTÓRIA -->
+<section class="gc-story-team-single" id="historia">
+
+    <div class="gc-story-container">
+
+        <!-- FOTO À ESQUERDA -->
+        <div class="gc-story-visual">
+
+            <div class="gc-story-image-wrapper">
+                <img
+                    src="{{ url_for('static', filename='img/equipe-glicocheck.png') }}"
+                    alt="Equipe criadora do GlicoCheck"
+                >
+            </div>
+
+            <span class="gc-photo-caption">
+                <span class="gc-caption-dot"></span>
+                Uma ideia construída para cuidar de pessoas.
+            </span>
+
+        </div>
+
+        <!-- TEXTO À DIREITA -->
+        <div class="gc-story-text">
+
+            <span class="gc-story-label">
+                NOSSA HISTÓRIA
+            </span>
+
+            <h2>
+                A tecnologia aproxima.
+                <span>O cuidado transforma.</span>
+            </h2>
+
+            <p class="gc-story-intro">
+                O GlicoCheck nasceu de uma ideia simples:
+                tornar o acompanhamento da glicose mais
+                acessível, organizado e próximo das pessoas.
+            </p>
+
+            <p>
+                Sabemos que conviver com a diabetes envolve
+                atenção diária, acompanhamento e muitas
+                informações. E acreditamos que ninguém
+                precisa enfrentar essa rotina sozinho.
+            </p>
+
+            <p>
+                Por isso, desenvolvemos uma plataforma que
+                conecta pacientes, cuidadores e profissionais
+                da saúde, facilitando o registro e o acompanhamento
+                da glicemia.
+            </p>
+
+            <div class="gc-story-signature">
+                <span class="gc-signature-line"></span>
+                <span>GlicoCheck — cuidado que aproxima.</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>&copy; 2026 GlicoCheck. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block body_class %}app-body{% endblock %}
+{% block site_header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block main_class %}app-main{% endblock %}
+{% block conteudo %}
+<div class="app-layout">
+    <aside class="app-sidebar glass-panel">
+        <a href="{{ url_for('index') }}" class="app-brand">
+            <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="">
+            <span>GlicoCheck</span>
+        </a>
+        <div class="sidebar-profile">
+            <span class="avatar-circle">{{ session.get('nome', 'U')[:1]|upper }}</span>
+            <div>
+                <strong>{{ session.get('nome', 'Usuário') }}</strong>
+                <small>{{ perfil_label }}</small>
+            </div>
+        </div>
+        <span class="sidebar-label">ESPAÇO DE CUIDADO</span>
+        <nav class="sidebar-nav" aria-label="Menu do sistema">
+            {% if session.get('perfil') == 'paciente' %}
+                <a href="#overview"><span>⌂</span> Visão geral</a>
+                <a href="#measurements"><span>◉</span> Minhas glicemias</a>
+                <a href="#routine"><span>✓</span> Minha rotina</a>
+                <a href="#network"><span>♡</span> Rede de cuidado</a>
+                <a href="#reports"><span>▤</span> Relatórios</a>
+            {% elif session.get('perfil') == 'cuidador' %}
+                <a href="#overview"><span>⌂</span> Painel principal</a>
+                <a href="#measurements"><span>◉</span> Registrar glicemia</a>
+                <a href="#routine"><span>✓</span> Rotina e lembretes</a>
+                <a href="#agenda"><span>▦</span> Agenda</a>
+                <a href="#reports"><span>▤</span> Relatórios</a>
+            {% else %}
+                <a href="#overview"><span>⌂</span> Painel médico</a>
+                <a href="#patients"><span>♧</span> Meus pacientes</a>
+                <a href="#careplan"><span>✚</span> Planos de cuidado</a>
+                <a href="#agenda"><span>▦</span> Agenda</a>
+                <a href="#reports"><span>▤</span> Relatórios</a>
+            {% endif %}
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="{{ url_for('minha_conta') }}"><span>⚙</span> Minha conta</a>
+            <a href="{{ url_for('logout') }}" class="sidebar-logout"><span>↗</span> Sair da conta</a>
+        </div>
+        <div class="sidebar-mark"><img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt=""></div>
+    </aside>
+
+    <section class="app-main-column">
+        <div class="app-topbar glass-panel">
+            <div>
+                <span class="topbar-kicker">GLICOCHECK / {{ perfil_label|upper }}</span>
+                <span class="topbar-caption">Seu cuidado, organizado em um só lugar.</span>
+            </div>
+            <div class="topbar-actions">
+                <span class="topbar-date">{{ now_local.strftime('%d/%m/%Y') }}</span>
+                <a href="{{ url_for('minha_conta') }}" class="topbar-user" title="Minha conta">{{ session.get('nome', 'U')[:1]|upper }}</a>
+            </div>
+        </div>
+        <main class="dashboard-content">
+            {% block dashboard_content %}{% endblock %}
+        </main>
+        <footer class="app-footer">GlicoCheck · Tecnologia que conecta o cuidado.</footer>
+    </section>
+</div>
+{% endblock %}
