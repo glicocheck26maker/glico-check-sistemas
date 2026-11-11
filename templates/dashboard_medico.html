@@ -1,58 +1,491 @@
-{% extends "base.html" %}
 
-{% block conteudo %}
-<style>
-    header, .top-bar, .navbar, .header-container, [class*="nav"], [class*="header"] { display: none !important; }
-</style>
+{% extends "dashboard_base.html" %}
 
-<div style="padding: 40px 60px !important; background: #ffffff !important; min-height: 100vh !important; box-sizing: border-box !important; max-width: 1200px !important; margin: 0 auto !important;">
-    
-    <div style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 35px !important;">
+{% block titulo %}Painel Médico · GlicoCheck{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="doctor-dashboard" id="overview">
+
+    <!-- CABEÇALHO -->
+    <section class="doctor-welcome">
         <div>
-            <h1 style="font-size: 26px !important; font-weight: 700 !important; color: #128c7e !important; margin-bottom: 4px !important;">
-                Dr. Carlos Silva (Painel Clínico)
-            </h1>
-            <p style="font-size: 13px !important; color: #6b7280 !important; font-weight: 600 !important; margin: 0 !important; text-transform: uppercase;">
-                Acompanhamento de Pacientes Vinculados
-            </p>
+            <span class="section-kicker">ESPAÇO PROFISSIONAL</span>
+            <h1>Olá, {{ session.get('nome', 'Doutor(a)') }}.</h1>
+            <p>Gerencie seus pacientes, acompanhe informações compartilhadas e organize seus atendimentos.</p>
         </div>
-        <a href="/logout" style="background: #f3f4f6 !important; color: #374151 !important; padding: 10px 18px !important; border-radius: 10px !important; font-size: 13px !important; font-weight: 600 !important; text-decoration: none !important;">Sair</a>
+    </section>
+
+    <!-- AVISO DE VERIFICAÇÃO -->
+    {% if doctor and not doctor.medico_verificado %}
+    <div class="doctor-verification-notice" role="status">
+        <span class="notice-symbol" aria-hidden="true">ⓘ</span>
+        <div>
+            <strong>Seu perfil profissional ainda não foi verificado.</strong>
+            <p>O cadastro de CRM/registro é autodeclarado. Antes de utilizar informações clínicas reais, a instituição responsável deve validar sua identidade e habilitação profissional.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- SEM PACIENTES -->
+    {% if not patients %}
+
+    <section class="doctor-empty-state">
+        <div class="empty-state-visual">
+            <span class="section-kicker">SUA CARTEIRA PROFISSIONAL</span>
+            <div class="empty-state-icon" aria-hidden="true">＋</div>
+            <h2>Seu acompanhamento começa aqui.</h2>
+            <p>Vincule seus pacientes para visualizar os registros compartilhados, organizar planos de cuidado e preparar consultas em um só lugar.</p>
+        </div>
+
+        <div class="empty-state-action">
+            <div class="empty-action-heading">
+                <span class="empty-action-number">01</span>
+                <div>
+                    <strong>Vincular paciente</strong>
+                    <small>Informe o código de convite recebido.</small>
+                </div>
+            </div>
+
+            <form action="{{ url_for('aceitar_convite') }}"
+                  method="POST"
+                  class="doctor-invite-form">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <label class="field-label" for="doctor_invite_code">
+                    Código de convite
+                </label>
+
+                <input
+                    class="field-input"
+                    id="doctor_invite_code"
+                    name="codigo"
+                    placeholder="GC-XXXXXXXX"
+                    autocomplete="off"
+                    required
+                >
+
+                <button class="btn-primary" type="submit">
+                    Vincular paciente <span aria-hidden="true">→</span>
+                </button>
+            </form>
+
+            <div class="empty-state-help">
+                <span aria-hidden="true">ⓘ</span>
+                <p>Solicite ao paciente um código de convite destinado especificamente ao perfil médico.</p>
+            </div>
+        </div>
+    </section>
+
+    {% else %}
+
+    <!-- INDICADORES -->
+    <section class="doctor-stats-grid" aria-label="Resumo da carteira">
+
+        <article class="doctor-stat-card doctor-stat-primary">
+            <span class="doctor-stat-label">Pacientes vinculados</span>
+            <div class="doctor-stat-value">
+                {{ patients|length }}
+                <span class="doctor-stat-icon" aria-hidden="true">♧</span>
+            </div>
+            <small>Vínculos ativos</small>
+        </article>
+
+        <article class="doctor-stat-card">
+            <span class="doctor-stat-label">Paciente selecionado</span>
+            <div class="doctor-stat-value doctor-stat-name">
+                {{ selected.nome.split(' ')[0] if selected else '—' }}
+            </div>
+            <small>Prontuário compartilhado</small>
+        </article>
+
+        <article class="doctor-stat-card">
+            <span class="doctor-stat-label">Registros recentes</span>
+            <div class="doctor-stat-value">
+                {{ data.measurements|length if data else 0 }}
+                <span class="doctor-stat-icon" aria-hidden="true">▤</span>
+            </div>
+            <small>Medições carregadas</small>
+        </article>
+
+        <article class="doctor-stat-card">
+            <span class="doctor-stat-label">Tarefas pendentes</span>
+            <div class="doctor-stat-value">
+                {{ data.pending_tasks if data else 0 }}
+                <span class="doctor-stat-icon" aria-hidden="true">✓</span>
+            </div>
+            <small>Na rotina do paciente</small>
+        </article>
+
+    </section>
+
+    <!-- SELETOR DE PACIENTES -->
+    <section class="doctor-patient-selector" id="patients">
+
+        <div>
+            <span class="section-kicker">CARTEIRA DE PACIENTES</span>
+            <h2>Seus pacientes</h2>
+            <p>Selecione um paciente para consultar as informações compartilhadas.</p>
+        </div>
+
+        <form method="GET"
+              action="{{ url_for('inicio_medico') }}"
+              class="doctor-picker-form">
+
+            <label class="field-label" for="doctor_patient">
+                Paciente
+            </label>
+
+            <select
+                class="field-input"
+                id="doctor_patient"
+                name="paciente_id"
+                onchange="this.form.submit()">
+
+                {% for patient in patients %}
+                <option value="{{ patient.id }}"
+                    {% if selected and selected.id == patient.id %}selected{% endif %}>
+                    {{ patient.nome }}
+                </option>
+                {% endfor %}
+
+            </select>
+        </form>
+    </section>
+
+    {% if data %}
+
+    <!-- RESUMO DO PACIENTE -->
+    <section class="doctor-patient-overview">
+
+        <div class="doctor-section-heading">
+            <div>
+                <span class="section-kicker">VISÃO DO PACIENTE</span>
+                <h2>{{ selected.nome }}</h2>
+            </div>
+
+            <a class="btn-secondary"
+               href="{{ url_for('gerar_relatorio_pdf', patient_id=selected.id) }}">
+                Exportar PDF ↓
+            </a>
+        </div>
+
+        <div class="doctor-patient-summary">
+
+            <article>
+                <small>Última medição</small>
+                <strong>
+                    {% if data.last_measurement %}
+                        {{ '%.1f'|format(data.last_measurement.valor) }}
+                        {{ data.last_measurement.unidade }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </strong>
+                <span>
+                    {% if data.last_measurement %}
+                        {{ data.last_measurement.medido_em.strftime('%d/%m/%Y às %H:%M') }}
+                    {% else %}
+                        Nenhum registro disponível
+                    {% endif %}
+                </span>
+            </article>
+
+            <article>
+                <small>Registros nos últimos 7 dias</small>
+                <strong>{{ data.weekly_total }}</strong>
+                <span>Entradas registradas</span>
+            </article>
+
+            <article>
+                <small>Rede de cuidado</small>
+                <strong>{{ data.network|selectattr('perfil_vinculado','equalto','cuidador')|list|length }}</strong>
+                <span>Cuidadores vinculados</span>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- GRADE DE CONTEÚDO -->
+    <div class="doctor-content-grid">
+
+        <!-- HISTÓRICO -->
+        <section class="doctor-panel-card" id="measurements">
+
+            <div class="doctor-card-heading">
+                <div>
+                    <span class="section-kicker">DADOS COMPARTILHADOS</span>
+                    <h2>Histórico de medições</h2>
+                    <p>Registros enviados pelo paciente.</p>
+                </div>
+                <span class="quiet-tag">Somente leitura</span>
+            </div>
+
+            <div class="doctor-measurement-list">
+
+                {% for item in data.measurements %}
+
+                <article class="doctor-measurement-row">
+                    <span class="measurement-indicator" aria-hidden="true">◉</span>
+
+                    <div class="measurement-information">
+                        <strong>
+                            {{ '%.1f'|format(item.valor) }} {{ item.unidade }}
+                        </strong>
+                        <small>
+                            {{ item.contexto.replace('_',' ').title() }}
+                            ·
+                            {{ item.medido_em.strftime('%d/%m/%Y às %H:%M') }}
+                        </small>
+                    </div>
+
+                    <span class="measurement-reference">#{{ item.id }}</span>
+                </article>
+
+                {% else %}
+
+                <div class="doctor-empty-message">
+                    <span aria-hidden="true">◉</span>
+                    O paciente ainda não registrou medições.
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <p class="doctor-disclaimer">
+                Os registros são apresentados sem classificação automática.
+                A interpretação clínica é responsabilidade do profissional habilitado.
+            </p>
+        </section>
+
+        <!-- PLANO DE CUIDADO -->
+        <section class="doctor-panel-card" id="careplan">
+
+            <div class="doctor-card-heading">
+                <div>
+                    <span class="section-kicker">ACOMPANHAMENTO</span>
+                    <h2>Plano de cuidado</h2>
+                    <p>Orientações profissionais do paciente.</p>
+                </div>
+            </div>
+
+            {% if data.plan %}
+
+            <div class="doctor-active-plan">
+                <strong>{{ data.plan.titulo }}</strong>
+
+                <small>
+                    Atualizado em
+                    {{ data.plan.atualizado_em.strftime('%d/%m/%Y') }}
+                </small>
+
+                <p>{{ data.plan.orientacoes }}</p>
+
+                {% if data.plan.metas %}
+                <div class="doctor-plan-goals">
+                    <strong>Metas e parâmetros registrados</strong>
+                    <p>{{ data.plan.metas }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            {% else %}
+
+            <div class="doctor-empty-message">
+                Nenhum plano ativo para este paciente.
+            </div>
+
+            {% endif %}
+
+            <div class="doctor-form-divider"></div>
+
+            <div class="doctor-subheading">
+                <h3>Atualizar plano</h3>
+                <p>Registre as orientações definidas em consulta.</p>
+            </div>
+
+            <form action="{{ url_for('criar_plano') }}"
+                  method="POST"
+                  class="doctor-form">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <input type="hidden" name="paciente_id" value="{{ selected.id }}">
+
+                <label class="field-label" for="plan_title">Título do plano</label>
+                <input class="field-input" id="plan_title" name="titulo"
+                       placeholder="Ex.: Plano de acompanhamento" required>
+
+                <label class="field-label" for="plan_text">Orientações profissionais</label>
+                <textarea class="field-input field-textarea"
+                          id="plan_text"
+                          name="orientacoes"
+                          rows="4"
+                          placeholder="Registre as orientações definidas em consulta"
+                          required></textarea>
+
+                <label class="field-label" for="plan_goals">Metas e observações (opcional)</label>
+                <textarea class="field-input field-textarea"
+                          id="plan_goals"
+                          name="metas"
+                          rows="3"></textarea>
+
+                <button class="btn-primary" type="submit">
+                    Salvar plano de cuidado
+                </button>
+
+            </form>
+        </section>
+
+        <!-- AGENDA -->
+        <section class="doctor-panel-card" id="agenda">
+
+            <div class="doctor-card-heading">
+                <div>
+                    <span class="section-kicker">ORGANIZAÇÃO</span>
+                    <h2>Agenda de consultas</h2>
+                    <p>Organize os próximos atendimentos.</p>
+                </div>
+            </div>
+
+            <form action="{{ url_for('criar_consulta') }}"
+                  method="POST"
+                  class="doctor-form">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <input type="hidden" name="paciente_id" value="{{ selected.id }}">
+
+                <label class="field-label" for="appointment_date">Data e horário</label>
+                <input class="field-input" type="datetime-local"
+                       id="appointment_date" name="data_hora" required>
+
+                <label class="field-label" for="appointment_reason">Motivo da consulta</label>
+                <input class="field-input" id="appointment_reason"
+                       name="motivo" placeholder="Ex.: Retorno de acompanhamento">
+
+                <label class="field-label" for="appointment_place">Local (opcional)</label>
+                <input class="field-input" id="appointment_place"
+                       name="local" placeholder="Clínica ou teleconsulta">
+
+                <button class="btn-primary" type="submit">
+                    Agendar consulta ＋
+                </button>
+            </form>
+
+            <div class="doctor-form-divider"></div>
+
+            <div class="doctor-subheading">
+                <h3>Próximas consultas</h3>
+            </div>
+
+            <div class="doctor-appointments">
+
+                {% for appt in data.appointments %}
+
+                <article class="doctor-appointment-row">
+                    <div class="appointment-date">
+                        <strong>{{ appt.data_hora.strftime('%d') }}</strong>
+                        <small>{{ appt.data_hora.strftime('%b') }}</small>
+                    </div>
+
+                    <div>
+                        <strong>{{ appt.motivo or 'Consulta' }}</strong>
+                        <small>
+                            {{ appt.data_hora.strftime('%H:%M') }}
+                            {% if appt.local %} · {{ appt.local }}{% endif %}
+                        </small>
+                    </div>
+                </article>
+
+                {% else %}
+
+                <p class="doctor-muted-text">
+                    Nenhuma consulta futura cadastrada.
+                </p>
+
+                {% endfor %}
+
+            </div>
+        </section>
+
+        <!-- RELATÓRIOS -->
+        <section class="doctor-panel-card" id="reports">
+
+            <div class="doctor-card-heading">
+                <div>
+                    <span class="section-kicker">PREPARAÇÃO CLÍNICA</span>
+                    <h2>Relatórios</h2>
+                    <p>Informações para preparar suas consultas.</p>
+                </div>
+                <span class="doctor-report-icon" aria-hidden="true">▤</span>
+            </div>
+
+            <p class="doctor-muted-text">
+                Gere um documento com os registros disponíveis dos últimos
+                90 dias, incluindo histórico e plano ativo. O relatório
+                apresenta estatísticas descritivas, não diagnóstico ou prescrição.
+            </p>
+
+            <div class="doctor-report-highlight">
+                <strong>{{ data.measurements|length }}</strong>
+                <span>medições carregadas no painel</span>
+            </div>
+
+            <a class="btn-primary doctor-report-button"
+               href="{{ url_for('gerar_relatorio_pdf', patient_id=selected.id) }}">
+                Gerar relatório PDF ↓
+            </a>
+        </section>
+
     </div>
 
-    <!-- Tabela de Acompanhamento Médico -->
-    <div style="background: #ffffff; border: 1px solid #eaeaea; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
-            <thead>
-                <tr style="background: #f9fafb; border-bottom: 1px solid #eaeaea; color: #374151;">
-                    <th style="padding: 16px;">Paciente</th>
-                    <th style="padding: 16px;">Condição</th>
-                    <th style="padding: 16px;">Última Glicemia</th>
-                    <th style="padding: 16px;">Cuidador Responsável</th>
-                    <th style="padding: 16px; text-align: center;">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-bottom: 1px solid #f3f4f6;">
-                    <td style="padding: 16px; font-weight: 600; color: #111827;">João Silva</td>
-                    <td style="padding: 16px; color: #6b7280;">Diabetes Tipo 2</td>
-                    <td style="padding: 16px;"><span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px;">110 mg/dL (Estável)</span></td>
-                    <td style="padding: 16px; color: #6b7280;">Ana Paula</td>
-                    <td style="padding: 16px; text-align: center;">
-                        <button onclick="alert('Visualizando histórico clínico detalhado de João Silva')" style="background: #128c7e; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 12px;">Ver Relatório</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 16px; font-weight: 600; color: #111827;">Carlos Souza</td>
-                    <td style="padding: 16px; color: #6b7280;">Pré-diabetes</td>
-                    <td style="padding: 16px;"><span style="background: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px;">95 mg/dL (Normal)</span></td>
-                    <td style="padding: 16px; color: #6b7280;">Marcos Vinicius</td>
-                    <td style="padding: 16px; text-align: center;">
-                        <button onclick="alert('Visualizando histórico clínico detalhado de Carlos Souza')" style="background: #128c7e; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 12px;">Ver Relatório</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- LINHA DO CUIDADO -->
+    <section class="doctor-panel-card doctor-timeline" aria-label="Linha do cuidado compartilhada">
+
+        <div class="doctor-card-heading">
+            <div>
+                <span class="section-kicker">HISTÓRICO COMPARTILHADO</span>
+                <h2>Linha do cuidado</h2>
+                <p>Atividades recentes de {{ selected.nome }}.</p>
+            </div>
+            <span class="quiet-tag">Histórico</span>
+        </div>
+
+        <div class="doctor-timeline-list">
+
+            {% for event in data.timeline %}
+
+            <article class="doctor-timeline-item">
+                <span class="timeline-dot" aria-hidden="true"></span>
+
+                <div class="timeline-information">
+                    <strong>{{ event.event_detail }}</strong>
+                    <small>
+                        {{ event.event_at.strftime('%d/%m/%Y às %H:%M') }}
+                        · por {{ event.actor }}
+                    </small>
+                </div>
+
+                <span class="timeline-type">
+                    {{ {'medicao':'Medição','atividade':'Rotina','consulta':'Agenda','plano':'Plano'}[event.event_type] }}
+                </span>
+            </article>
+
+            {% else %}
+
+            <p class="doctor-muted-text">
+                Ainda não há acontecimentos na linha do cuidado.
+            </p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+    {% endif %}
+    {% endif %}
 
 </div>
+
 {% endblock %}

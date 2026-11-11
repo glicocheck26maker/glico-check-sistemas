@@ -1,4 +1,4 @@
-#!/tmp/guest-jg9lku/Downloads/glicocheck/glico-check-sistemas/venv/bin/python3
+#!/home/visionsystem/consolari/glico-check-sistemas/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

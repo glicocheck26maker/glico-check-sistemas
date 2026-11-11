@@ -3,43 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#faf8f5">
-    <meta name="description"
-          content="GlicoCheck — acompanhamento e monitoramento de glicemia.">
-
+    <meta name="description" content="GlicoCheck — acompanhamento e monitoramento de glicemia.">
     <title>{% block titulo %}GlicoCheck{% endblock %}</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    {% block extra_head %}{% endblock %}
 </head>
-
-<body>
-    <header class="main-header navbar">
-        <a href="{{ url_for('landing') }}" class="brand-logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: #1d1d1f; font-size: 16px;">
-            <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="Logo Glicocheck" style="height: 32px; width: auto; display: block; filter: brightness(0) saturate(100%) invert(13%) sepia(85%) saturate(5414%) hue-rotate(354deg) brightness(70%) contrast(97%);">
-        
+<body class="{% block body_class %}public-body{% endblock %}">
+    {% block site_header %}
+    <header class="main-header navbar public-header">
+        <a href="{{ url_for('landing') }}" class="brand-logo" aria-label="GlicoCheck — início">
+            <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="" class="brand-symbol">
         </a>
-    
-        <nav class="main-nav">
-            {% if session.get('usuario_logado') %}
+        <nav class="main-nav" aria-label="Navegação principal">
+            {% if session.get('user_id') %}
                 <a href="{{ url_for('index') }}">Meu painel</a>
-                <a class="nav-logout" href="{{ url_for('logout') }}">Sair</a>
+                <a href="{{ url_for('minha_conta') }}">Minha conta</a>
+                <a class="nav-register" href="{{ url_for('logout') }}">Sair</a>
             {% else %}
                 <a href="{{ url_for('landing') }}">Início</a>
-                <a href="#nossa-historia">Nossa história</a>
+                <a href="{{ url_for('landing') }}#nossa-historia">Nossa história</a>
                 <a href="{{ url_for('login') }}">Entrar</a>
-                <a href="{{ url_for('cadastro') }}" class="nav-register">Começar</a>
+                <a class="nav-register" href="{{ url_for('cadastro') }}">Começar</a>
             {% endif %}
         </nav>
     </header>
+    {% endblock %}
 
-    <main class="page-content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack" role="status" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+              <span>{{ message }}</span>
+              <button type="button" class="flash-close" aria-label="Fechar aviso" onclick="this.parentElement.remove()">×</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="{% block main_class %}page-content{% endblock %}">
         {% block conteudo %}{% endblock %}
     </main>
 
+    {% block footer %}
     <footer class="main-footer">
-        <p>© 2026 GlicoCheck · Cuidado e acompanhamento da glicemia.</p>
+        <p>© {{ ano_atual }} GlicoCheck · Cuidado e acompanhamento da glicemia.</p>
     </footer>
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

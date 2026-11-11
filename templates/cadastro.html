@@ -1,124 +1,431 @@
+
 {% extends "base.html" %}
 
+{% block titulo %}Criar conta · GlicoCheck{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block site_header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block main_class %}auth-main{% endblock %}
+
 {% block conteudo %}
-<div style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: #ffffff !important; z-index: 999999 !important; display: flex !important; align-items: center !important; justify-content: center !important; overflow-y: auto !important;">
-    
-    <div style="width: 100vw !important; min-height: 100vh !important; display: grid !important; grid-template-columns: 1fr 1.1fr !important; gap: 40px !important; padding: 40px 60px !important; box-sizing: border-box !important; background: #ffffff !important; align-items: center !important;">
-        
-        <!-- Coluna Esquerda: Slider Automático com as Cores Originais e Logo Gigante Vazando na Margem -->
-        <div style="position: relative !important; width: 100% !important; height: 85vh !important; border-radius: 28px !important; overflow: visible !important; box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important; background: #000;">
-            
-            <!-- Slides Automáticos (4 Imagens Locais com Cores Originais e sem escurecer) -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 28px; overflow: hidden;">
-                <div class="gc-slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 1s ease-in-out;">
-                    <img src="{{ url_for('static', filename='img/slide-1.png') }}" alt="Slide 1" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="gc-slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
-                    <img src="{{ url_for('static', filename='img/slide-2.png') }}" alt="Slide 2" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="gc-slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
-                    <img src="{{ url_for('static', filename='img/slide-3.png') }}" alt="Slide 3" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="gc-slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out;">
-                    <img src="{{ url_for('static', filename='img/slide-4.png') }}" alt="Slide 4" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
 
-            <!-- Monograma "G" Gigante, Branco, sem fundo, ultrapassando a margem inferior esquerda -->
-            <div style="position: absolute !important; bottom: -45px !important; left: -45px !important; z-index: 10 !important; pointer-events: none !important; width: 440px !important;">
-                <img src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}" alt="Monograma G Gigante" style="width: 100% !important; height: auto !important; object-fit: contain !important; display: block !important; filter: brightness(0) invert(1) drop-shadow(0 15px 35px rgba(0,0,0,0.5)) !important;">
-            </div>
+<section class="auth-layout auth-layout-register">
+
+    <!-- COLUNA ESQUERDA: FOTOGRAFIAS -->
+
+    <div class="auth-visual">
+
+        <div class="auth-slides" aria-label="Imagens do GlicoCheck">
+
+            <img class="gc-slide is-active"
+                 src="{{ url_for('static', filename='img/slide-1.png') }}"
+                 alt="Pessoas em um momento de cuidado">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-2.png') }}"
+                 alt="Acompanhamento e saúde">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-3.png') }}"
+                 alt="Apoio no cuidado diário">
+
+            <img class="gc-slide"
+                 src="{{ url_for('static', filename='img/slide-4.png') }}"
+                 alt="Conexão entre pessoas">
+
         </div>
 
-        <!-- Coluna Direita: Formulário de Cadastro Completo -->
-        <div style="display: flex !important; flex-direction: column !important; justify-content: center !important; width: 100% !important; max-width: 460px !important; margin: 0 auto !important; background: transparent !important;">
-            
-            <h2 style="font-size: 24px !important; font-weight: 700 !important; color: #111827 !important; margin-bottom: 18px !important; line-height: 1.2 !important;">Criar sua conta no GlicoCheck</h2>
+        <div class="auth-visual-caption">
 
-            {% if erro %}
-                <div style="background-color: #fee2e2 !important; color: #dc2626 !important; padding: 10px 14px !important; border-radius: 10px !important; font-size: 13px !important; margin-bottom: 16px !important; border: 1px solid #fca5a5 !important;">
-                    {{ erro }}
-                </div>
-            {% endif %}
+            <span class="auth-eyebrow">
+                UM CUIDADO MAIS CONECTADO
+            </span>
 
-            <form action="/cadastro" method="POST" style="width: 100% !important;">
-                
-                <!-- Nome completo -->
-                <div style="margin-bottom: 12px !important;">
-                    <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Nome completo</label>
-                    <input type="text" name="nome" placeholder="Seu nome completo" required autofocus style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important;">
-                </div>
+            <p>
+                Paciente, cuidador e profissional de saúde
+                no mesmo caminho.
+            </p>
 
-                <!-- Data de nascimento e Telefone -->
-                <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; margin-bottom: 12px !important;">
-                    <div>
-                        <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Data nascimento</label>
-                        <input type="date" name="data_nascimento" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important; color: #374151 !important;">
-                    </div>
-                    <div>
-                        <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Telefone</label>
-                        <input type="text" name="telefone" placeholder="(00) 00000-0000" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important;">
-                    </div>
-                </div>
-
-                <!-- E-mail -->
-                <div style="margin-bottom: 12px !important;">
-                    <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">E-mail</label>
-                    <input type="email" name="email" placeholder="Ex: glicocheck26@gmail.com" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important;">
-                </div>
-
-                <!-- Perfil (Select Ajustado) -->
-                <div style="margin-bottom: 12px !important;">
-                    <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Como você deseja utilizar o GlicoCheck?</label>
-                    <div style="position: relative !important; width: 100% !important;">
-                        <select name="tipo" required style="width: 100% !important; padding: 10px 36px 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important; color: #374151 !important; appearance: none !important; -webkit-appearance: none !important; -moz-appearance: none !important; cursor: pointer !important;">
-                            <option value="" disabled selected>Selecione seu perfil</option>
-                            <option value="paciente">Paciente</option>
-                            <option value="medico">Médico</option>
-                            <option value="cuidador">Cuidador</option>
-                        </select>
-                        <!-- Ícone de Seta Personalizado Perfeitamente Centralizado -->
-                        <div style="position: absolute !important; right: 14px !important; top: 50% !important; transform: translateY(-50%) !important; pointer-events: none !important; color: #6b7280 !important; display: flex !important; align-items: center !important;">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Criar Senha e Valide a Senha -->
-                <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; margin-bottom: 18px !important;">
-                    <div>
-                        <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Criar Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Mínimo 6 dígitos" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important;">
-                    </div>
-                    <div>
-                        <label style="display: block !important; font-size: 11px !important; font-weight: 600 !important; color: #374151 !important; margin-bottom: 4px !important;">Valide a Senha</label>
-                        <input type="password" id="confirma_senha" name="confirma_senha" placeholder="Valide a senha" required style="width: 100% !important; padding: 10px 14px !important; border: 1px solid #e5e7eb !important; border-radius: 10px !important; background: #f9fafb !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important;">
-                    </div>
-                </div>
-
-                <!-- Botão de Cadastro Vermelho Oficial -->
-                <button type="submit" style="width: 100% !important; background-color: #a10f06 !important; color: #ffffff !important; font-size: 14px !important; font-weight: 600 !important; padding: 12px !important; border-radius: 10px !important; border: none !important; cursor: pointer !important; transition: background 0.3s;">Cadastrar na plataforma</button>
-
-                <!-- Rodapé -->
-                <p style="text-align: center !important; font-size: 12px !important; color: #6b7280 !important; margin-top: 14px !important;">Já tem uma conta? <a href="/login" style="color: #a10f06 !important; text-decoration: none !important; font-weight: 600 !important;">Entrar</a></p>
-            </form>
         </div>
+
     </div>
-</div>
+
+
+    <!-- COLUNA DIREITA: FORMULÁRIO -->
+
+    <div class="auth-form-side register-form-side">
+
+        <a href="{{ url_for('landing') }}" class="auth-brand">
+
+            <img
+                src="{{ url_for('static', filename='img/glicocheck-monograma-g.svg') }}"
+                alt=""
+            >
+
+            <span>GlicoCheck</span>
+
+        </a>
+
+
+        <div class="auth-card glass-panel">
+
+            <span class="section-kicker">
+                COMECE POR AQUI
+            </span>
+
+            <h1>Crie sua conta.</h1>
+
+            <p class="auth-intro">
+                Vamos preparar seu espaço de acompanhamento.
+            </p>
+
+
+            <!-- FORMULÁRIO -->
+
+            <form
+                action="{{ url_for('cadastro') }}"
+                method="POST"
+                class="form-stack register-form"
+            >
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token }}"
+                >
+
+
+                <!-- NOME -->
+
+                <label class="field-label" for="nome">
+                    Nome completo
+                </label>
+
+                <input
+                    class="field-input"
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Como podemos chamar você?"
+                    autocomplete="name"
+                    required
+                >
+
+
+                <!-- NASCIMENTO E TELEFONE -->
+
+                <div class="field-grid">
+
+                    <div>
+
+                        <label class="field-label" for="data_nascimento">
+                            Data de nascimento
+                            <span>(opcional)</span>
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="date"
+                            id="data_nascimento"
+                            name="data_nascimento"
+                            autocomplete="bday"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="field-label" for="telefone">
+                            Telefone
+                            <span>(opcional)</span>
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(00) 00000-0000"
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <label class="field-label" for="email">
+                    E-mail
+                </label>
+
+                <input
+                    class="field-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="seuemail@exemplo.com"
+                    autocomplete="email"
+                    required
+                >
+
+
+                <!-- PERFIL -->
+
+                <label class="field-label" for="perfil">
+                    Como você utilizará o GlicoCheck?
+                </label>
+
+                <select
+                    class="field-input"
+                    id="perfil"
+                    name="perfil"
+                    required
+                >
+
+                    <option value="" disabled selected>
+                        Selecione seu perfil
+                    </option>
+
+                    <option value="paciente">
+                        Paciente
+                    </option>
+
+                    <option value="cuidador">
+                        Cuidador(a)
+                    </option>
+
+                    <option value="medico">
+                        Médico(a)
+                    </option>
+
+                </select>
+
+
+                <!-- DADOS PROFISSIONAIS -->
+
+                <div class="doctor-fields" id="doctorFields" hidden>
+
+                    <div class="field-grid">
+
+                        <div>
+
+                            <label class="field-label" for="medico_registro">
+                                Registro profissional
+                            </label>
+
+                            <input
+                                class="field-input"
+                                type="text"
+                                id="medico_registro"
+                                name="medico_registro"
+                                placeholder="CRM ou registro"
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label class="field-label" for="medico_uf">
+                                UF
+                            </label>
+
+                            <select
+                                class="field-input"
+                                id="medico_uf"
+                                name="medico_uf"
+                            >
+
+                                <option value="">UF</option>
+
+                                {% for uf in [
+                                    'AC','AL','AP','AM','BA','CE',
+                                    'DF','ES','GO','MA','MT','MS',
+                                    'MG','PA','PB','PR','PE','PI',
+                                    'RJ','RN','RS','RO','RR','SC',
+                                    'SP','SE','TO'
+                                ] %}
+
+                                <option value="{{ uf }}">
+                                    {{ uf }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <p class="field-hint">
+                        Os dados profissionais informados não representam
+                        verificação de registro. A validação deve ser
+                        realizada antes do uso clínico real.
+                    </p>
+
+                </div>
+
+
+                <!-- SENHAS -->
+
+                <div class="field-grid">
+
+                    <div>
+
+                        <label class="field-label" for="senha">
+                            Criar senha
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Mínimo 8 caracteres"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="field-label" for="confirma_senha">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            class="field-input"
+                            type="password"
+                            id="confirma_senha"
+                            name="confirma_senha"
+                            placeholder="Repita a senha"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    class="btn-primary btn-full"
+                    type="submit"
+                >
+
+                    Criar minha conta
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <p class="auth-switch">
+
+                Já possui uma conta?
+
+                <a href="{{ url_for('login') }}">
+                    Entrar
+                </a>
+
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('landing') }}" class="auth-back">
+            ← Voltar para o site
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
 
 <script>
-    // Carrossel Automático para os 4 slides locais
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.gc-slide');
-    function nextSlide() {
-        if (slides.length > 0) {
-            slides[currentSlide].style.opacity = 0;
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].style.opacity = 1;
-        }
+
+(() => {
+
+    const profile = document.getElementById('perfil');
+
+    const doctorFields = document.getElementById('doctorFields');
+
+    if (!profile || !doctorFields) return;
+
+
+    function updateDoctorFields() {
+
+        const isDoctor = profile.value === 'medico';
+
+        doctorFields.hidden = !isDoctor;
+
     }
-    setInterval(nextSlide, 4000);
+
+
+    profile.addEventListener('change', updateDoctorFields);
+
+    updateDoctorFields();
+
+
+    // CONFIRMAÇÃO DAS SENHAS
+
+    const form = document.querySelector('.register-form');
+
+    const password = document.getElementById('senha');
+
+    const confirmPassword = document.getElementById('confirma_senha');
+
+
+    if (form && password && confirmPassword) {
+
+        form.addEventListener('submit', function(event) {
+
+            if (password.value !== confirmPassword.value) {
+
+                event.preventDefault();
+
+                confirmPassword.setCustomValidity(
+                    'As senhas não coincidem.'
+                );
+
+                confirmPassword.reportValidity();
+
+            } else {
+
+                confirmPassword.setCustomValidity('');
+
+            }
+
+        });
+
+        confirmPassword.addEventListener('input', function() {
+
+            confirmPassword.setCustomValidity('');
+
+        });
+
+    }
+
+})();
+
 </script>
+
 {% endblock %}
+```

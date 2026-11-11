@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath /tmp/guest-jg9lku/Downloads/glicocheck/glico-check-sistemas/venv)
+    export VIRTUAL_ENV=$(cygpath /home/visionsystem/consolari/glico-check-sistemas/venv)
 else
     # use the path as-is
-    export VIRTUAL_ENV=/tmp/guest-jg9lku/Downloads/glicocheck/glico-check-sistemas/venv
+    export VIRTUAL_ENV=/home/visionsystem/consolari/glico-check-sistemas/venv
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"

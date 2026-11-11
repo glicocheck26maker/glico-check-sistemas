@@ -1509,3 +1509,3691 @@ nav a:hover,
         font-size: 23px;
     }
 }
+
+/* Garante que os campos médicos fiquem ocultos */
+.doctor-fields[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   GLICOCHECK — NOVA ESTRUTURA DOS PAINÉIS
+   Correção da sidebar, cabeçalho, conteúdo e rodapé
+   ========================================================== */
+
+   .app-body {
+    background: #f5f5f7 !important;
+    color: #1d1d1f;
+    min-height: 100vh;
+}
+
+.app-body .app-main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.app-body .app-layout {
+    width: min(1500px, calc(100% - 64px));
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 238px minmax(0, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* PAINEL DE VIDRO */
+
+.app-body .glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 38px rgba(29, 29, 31, 0.045);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+.app-body .app-sidebar {
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 48px);
+    min-height: 620px;
+    padding: 24px 16px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.app-body .app-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 8px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    color: #1d1d1f;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.app-body .app-brand img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.app-body .sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 13px 10px;
+    margin-bottom: 27px;
+    border-radius: 15px;
+    background: #faf9f8;
+    min-width: 0;
+}
+
+.app-body .avatar-circle {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #a10f06;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.app-body .sidebar-profile div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .sidebar-profile strong {
+    color: #29292d;
+    font-size: 12px;
+    font-weight: 650;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-body .sidebar-profile small {
+    color: #96969c;
+    font-size: 10px;
+}
+
+.app-body .sidebar-label {
+    display: block;
+    padding: 0 8px;
+    margin-bottom: 12px;
+    color: #a0a0a5;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+}
+
+/* CORREÇÃO PRINCIPAL:
+   o menu lateral precisa ser vertical, não horizontal */
+
+.app-body .app-sidebar nav.sidebar-nav {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.app-body .sidebar-nav a {
+    min-height: 42px;
+    width: 100%;
+    padding: 0 11px;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    border-radius: 11px;
+    color: #65656c !important;
+    text-decoration: none;
+    font-size: 11px !important;
+    font-weight: 550 !important;
+    transition: background .2s ease, color .2s ease;
+}
+
+.app-body .sidebar-nav a span {
+    width: 17px;
+    flex-shrink: 0;
+    text-align: center;
+    color: #a0a0a6;
+    font-size: 15px;
+}
+
+.app-body .sidebar-nav a:hover {
+    background: #f7f1f0;
+    color: #a10f06 !important;
+}
+
+.app-body .sidebar-nav a:hover span {
+    color: #a10f06;
+}
+
+/* ÁREA INFERIOR DO MENU */
+
+.app-body .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid #eeeeef;
+}
+
+.app-body .sidebar-bottom a {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 10px;
+    color: #77777e;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 550;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+
+.app-body .sidebar-bottom a span {
+    width: 17px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.app-body .sidebar-bottom a:hover {
+    background: #f7f1f0;
+    color: #a10f06;
+}
+
+.app-body .sidebar-bottom .sidebar-logout {
+    color: #a10f06;
+}
+
+.app-body .sidebar-mark {
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+    opacity: .045;
+    pointer-events: none;
+}
+
+.app-body .sidebar-mark img {
+    width: 47px;
+    height: 47px;
+}
+
+/* ==========================================================
+   COLUNA PRINCIPAL E CABEÇALHO SUPERIOR
+   ========================================================== */
+
+.app-body .app-main-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Evita que a regra global header position: fixed
+   interfira nos cabeçalhos internos do dashboard */
+
+.app-body header,
+.app-body .app-topbar {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.app-body .app-topbar {
+    min-height: 66px;
+    padding: 13px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.app-body .topbar-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #a10f06;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+}
+
+.app-body .topbar-caption {
+    display: block;
+    color: #96969c;
+    font-size: 10px;
+    letter-spacing: 0;
+}
+
+.app-body .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.app-body .topbar-date {
+    color: #88888f;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.app-body .topbar-user {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f7e9e8;
+    color: #a10f06;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.app-body .dashboard-content {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    padding: 12px 12px 30px;
+}
+
+/* RODAPÉ: remove o fundo vermelho global */
+
+.app-body footer.app-footer {
+    position: static !important;
+    width: 100%;
+    margin-top: auto !important;
+    padding: 15px 10px !important;
+    background: transparent !important;
+    border-top: 1px solid #e9e9eb !important;
+    color: #99999f !important;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* ==========================================================
+   ELEMENTOS COMPARTILHADOS DO DASHBOARD
+   ========================================================== */
+
+.app-body .section-kicker {
+    display: block;
+    margin-bottom: 9px;
+    color: #a10f06;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.app-body .field-label {
+    display: block;
+    margin: 13px 0 7px;
+    color: #55555c;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.app-body .field-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    border: 1px solid #e4e4e7;
+    border-radius: 11px;
+    background: #fafafa;
+    color: #29292d;
+    font: inherit;
+    font-size: 12px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.app-body textarea.field-input {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.app-body .field-input:focus {
+    border-color: #a10f06;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(161, 15, 6, .09);
+}
+
+.app-body .btn-primary,
+.app-body .btn-secondary {
+    min-height: 43px;
+    width: auto;
+    padding: 0 19px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 11px;
+    font-size: 11px;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.app-body .btn-primary {
+    border: 1px solid #a10f06;
+    background: #a10f06;
+    color: #fff;
+}
+
+.app-body .btn-primary:hover {
+    background: #880c05;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.app-body .btn-secondary {
+    border: 1px solid #e7e2e1;
+    background: #fff;
+    color: #55555c;
+}
+
+.app-body .btn-secondary:hover {
+    border-color: #a10f06;
+    color: #a10f06;
+}
+
+.app-body .btn-full {
+    width: 100%;
+}
+
+.app-body .quiet-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 30px;
+    background: #f5f5f6;
+    color: #85858b;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* ==========================================================
+   PAINEL MÉDICO — CABEÇALHO
+   ========================================================== */
+
+.app-body .doctor-dashboard {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.app-body .doctor-welcome {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 100px;
+    padding: 13px 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.app-body .doctor-welcome h1 {
+    margin: 0 0 7px;
+    color: #252529;
+    font-size: clamp(27px, 3vw, 35px);
+    line-height: 1.15;
+    font-weight: 650;
+    letter-spacing: -1.5px;
+}
+
+.app-body .doctor-welcome p {
+    max-width: 600px;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-welcome-date {
+    min-width: 115px;
+    padding: 13px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid #ecebed;
+    border-radius: 13px;
+    background: rgba(255,255,255,.65);
+}
+
+.app-body .doctor-welcome-date span {
+    color: #a10f06;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.app-body .doctor-welcome-date small {
+    color: #96969c;
+    font-size: 9px;
+}
+
+/* AVISO PROFISSIONAL */
+
+.app-body .doctor-verification-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 15px 17px;
+    border: 1px solid #eadfc9;
+    border-radius: 13px;
+    background: #fbf7ef;
+}
+
+.app-body .notice-symbol {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f2e9d8;
+    color: #98733d;
+    font-size: 13px;
+}
+
+.app-body .doctor-verification-notice strong {
+    color: #765b32;
+    font-size: 11px;
+}
+
+.app-body .doctor-verification-notice p {
+    margin-top: 4px;
+    color: #8b7657;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* ==========================================================
+   ESTADO VAZIO — SEM PACIENTES
+   ========================================================== */
+
+.app-body .doctor-empty-state {
+    width: 100%;
+    min-height: 340px;
+    padding: 38px;
+    display: grid;
+    grid-template-columns: 1fr .9fr;
+    align-items: center;
+    gap: 45px;
+    border: 1px solid #ecebed;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 12px 35px rgba(29,29,31,.035);
+}
+
+.app-body .empty-state-visual {
+    max-width: 440px;
+}
+
+.app-body .empty-state-icon {
+    width: 53px;
+    height: 53px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.app-body .empty-state-visual h2 {
+    margin: 0 0 13px;
+    color: #252529;
+    font-size: clamp(25px, 3vw, 33px);
+    line-height: 1.2;
+    letter-spacing: -1.1px;
+    font-weight: 650;
+}
+
+.app-body .empty-state-visual p {
+    max-width: 400px;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.app-body .empty-state-action {
+    padding: 24px;
+    border: 1px solid #efedef;
+    border-radius: 16px;
+    background: #fcfbfb;
+}
+
+.app-body .empty-action-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.app-body .empty-action-number {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.app-body .empty-action-heading div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .empty-action-heading strong {
+    color: #303035;
+    font-size: 12px;
+}
+
+.app-body .empty-action-heading small {
+    color: #96969c;
+    font-size: 10px;
+}
+
+.app-body .doctor-invite-form .btn-primary {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.app-body .empty-state-help {
+    display: flex;
+    gap: 9px;
+    margin-top: 17px;
+    padding-top: 14px;
+    border-top: 1px solid #ecebed;
+}
+
+.app-body .empty-state-help span {
+    color: #a10f06;
+    font-size: 12px;
+}
+
+.app-body .empty-state-help p {
+    color: #96969c;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+/* ==========================================================
+   INDICADORES
+   ========================================================== */
+
+.app-body .doctor-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.app-body .doctor-stat-card {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #ecebed;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(29,29,31,.025);
+}
+
+.app-body .doctor-stat-primary {
+    border-color: rgba(161,15,6,.13);
+    background: linear-gradient(145deg, #fff, #fff9f8);
+}
+
+.app-body .doctor-stat-label {
+    display: block;
+    color: #85858c;
+    font-size: 10px;
+    font-weight: 550;
+}
+
+.app-body .doctor-stat-value {
+    min-height: 43px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #252529;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.app-body .doctor-stat-primary .doctor-stat-value {
+    color: #a10f06;
+}
+
+.app-body .doctor-stat-name {
+    font-size: 20px;
+}
+
+.app-body .doctor-stat-icon {
+    color: #c7a4a1;
+    font-size: 19px;
+}
+
+.app-body .doctor-stat-card small {
+    display: block;
+    color: #a0a0a5;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   SELETOR DE PACIENTE E RESUMO
+   ========================================================== */
+
+.app-body .doctor-patient-selector {
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border: 1px solid #ecebed;
+    border-radius: 17px;
+    background: #fff;
+}
+
+.app-body .doctor-patient-selector h2 {
+    margin: 0 0 5px;
+    color: #303035;
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -.5px;
+}
+
+.app-body .doctor-patient-selector p {
+    color: #93939a;
+    font-size: 10px;
+}
+
+.app-body .doctor-picker-form {
+    width: min(300px, 42%);
+}
+
+.app-body .doctor-picker-form .field-label {
+    margin-top: 0;
+}
+
+.app-body .doctor-patient-overview {
+    padding: 23px;
+    border: 1px solid #ecebed;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.app-body .doctor-section-heading,
+.app-body .doctor-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.app-body .doctor-section-heading {
+    margin-bottom: 20px;
+}
+
+.app-body .doctor-section-heading h2,
+.app-body .doctor-card-heading h2 {
+    margin: 0;
+    color: #29292e;
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -.6px;
+}
+
+.app-body .doctor-patient-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid #efedef;
+    border-radius: 13px;
+    background: #fcfbfb;
+}
+
+.app-body .doctor-patient-summary article {
+    min-width: 0;
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.app-body .doctor-patient-summary article + article {
+    border-left: 1px solid #efedef;
+}
+
+.app-body .doctor-patient-summary small {
+    color: #898990;
+    font-size: 10px;
+}
+
+.app-body .doctor-patient-summary strong {
+    color: #29292e;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.app-body .doctor-patient-summary span {
+    color: #a0a0a5;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   GRADE PRINCIPAL
+   ========================================================== */
+
+.app-body .doctor-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    align-items: start;
+}
+
+.app-body .doctor-panel-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid #ecebed;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(29,29,31,.025);
+}
+
+.app-body .doctor-card-heading {
+    margin-bottom: 20px;
+}
+
+.app-body .doctor-card-heading .section-kicker {
+    margin-bottom: 6px;
+}
+
+.app-body .doctor-card-heading p {
+    margin-top: 5px;
+    color: #93939a;
+    font-size: 10px;
+}
+
+.app-body .doctor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.app-body .doctor-form .btn-primary,
+.app-body .doctor-form .btn-secondary {
+    width: 100%;
+    margin-top: 17px;
+}
+
+/* MEDIÇÕES */
+
+.app-body .doctor-measurement-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body .doctor-measurement-row {
+    min-width: 0;
+    padding: 13px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f0eff0;
+}
+
+.app-body .measurement-indicator {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #f9eae9;
+    color: #a10f06;
+    font-size: 15px;
+}
+
+.app-body .measurement-information {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-body .measurement-information strong {
+    color: #303035;
+    font-size: 13px;
+}
+
+.app-body .measurement-information small {
+    color: #929299;
+    font-size: 9px;
+}
+
+.app-body .measurement-reference {
+    color: #b0b0b5;
+    font-size: 9px;
+}
+
+.app-body .doctor-disclaimer {
+    margin-top: 15px;
+    color: #99999f;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-empty-message {
+    padding: 20px 10px;
+    text-align: center;
+    color: #99999f;
+    font-size: 11px;
+}
+
+.app-body .doctor-empty-message span {
+    display: block;
+    margin-bottom: 8px;
+    color: #c4b9b8;
+    font-size: 23px;
+}
+
+/* PLANO DE CUIDADO */
+
+.app-body .doctor-active-plan {
+    padding: 15px;
+    border-radius: 12px;
+    background: #faf8f7;
+}
+
+.app-body .doctor-active-plan > strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333338;
+    font-size: 12px;
+}
+
+.app-body .doctor-active-plan > small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+.app-body .doctor-active-plan > p {
+    margin-top: 13px;
+    color: #707078;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.app-body .doctor-plan-goals {
+    margin-top: 13px;
+    padding-top: 12px;
+    border-top: 1px solid #eae6e5;
+}
+
+.app-body .doctor-plan-goals strong {
+    color: #a10f06;
+    font-size: 10px;
+}
+
+.app-body .doctor-plan-goals p {
+    margin-top: 5px;
+    color: #77777e;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.app-body .doctor-form-divider {
+    height: 1px;
+    margin: 22px 0;
+    background: #efedef;
+}
+
+.app-body .doctor-subheading {
+    margin-bottom: 13px;
+}
+
+.app-body .doctor-subheading h3 {
+    color: #333338;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.app-body .doctor-subheading p {
+    margin-top: 4px;
+    color: #99999f;
+    font-size: 9px;
+}
+
+/* AGENDA */
+
+.app-body .doctor-appointments {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.app-body .doctor-appointment-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-body .appointment-date {
+    width: 42px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f9eae9;
+    color: #a10f06;
+}
+
+.app-body .appointment-date strong {
+    font-size: 15px;
+    line-height: 1.1;
+}
+
+.app-body .appointment-date small {
+    font-size: 9px;
+}
+
+.app-body .doctor-appointment-row > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.app-body .doctor-appointment-row > div:last-child strong {
+    color: #37373c;
+    font-size: 11px;
+}
+
+.app-body .doctor-appointment-row > div:last-child small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+/* RELATÓRIOS */
+
+.app-body .doctor-report-icon {
+    color: #a10f06;
+    font-size: 22px;
+}
+
+.app-body .doctor-muted-text {
+    color: #898990;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-report-highlight {
+    margin: 22px 0 17px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 12px;
+    background: #faf6f5;
+}
+
+.app-body .doctor-report-highlight strong {
+    color: #a10f06;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.app-body .doctor-report-highlight span {
+    color: #85858c;
+    font-size: 10px;
+}
+
+/* LINHA DO CUIDADO */
+
+.app-body .doctor-timeline {
+    width: 100%;
+}
+
+.app-body .doctor-timeline-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body .doctor-timeline-item {
+    min-width: 0;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border-bottom: 1px solid #f0eff0;
+}
+
+.app-body .timeline-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #a10f06;
+    box-shadow: 0 0 0 4px #f9eae9;
+}
+
+.app-body .timeline-information {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.app-body .timeline-information strong {
+    color: #424248;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.app-body .timeline-information small {
+    color: #99999f;
+    font-size: 9px;
+}
+
+.app-body .timeline-type {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #f5f5f6;
+    color: #88888f;
+    font-size: 9px;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 1100px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 36px);
+        grid-template-columns: 205px minmax(0, 1fr);
+        gap: 17px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .app-body .doctor-empty-state {
+        gap: 25px;
+        padding: 27px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr;
+        padding: 14px 0;
+    }
+
+    .app-body .app-sidebar {
+        position: relative;
+        top: auto;
+        height: auto;
+        min-height: auto;
+        padding: 17px;
+        border-radius: 18px;
+    }
+
+    .app-body .app-brand {
+        margin-bottom: 14px;
+    }
+
+    .app-body .sidebar-profile {
+        margin-bottom: 15px;
+    }
+
+    .app-body .sidebar-nav {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .app-body .sidebar-bottom {
+        margin-top: 14px;
+    }
+
+    .app-body .sidebar-mark {
+        display: none;
+    }
+
+    .app-body .app-main-column {
+        gap: 14px;
+    }
+
+    .app-body .dashboard-content {
+        padding: 8px 2px 20px;
+    }
+
+    .app-body .doctor-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-empty-state {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .app-body .app-layout {
+        width: calc(100% - 22px);
+    }
+
+    .app-body .app-topbar {
+        padding: 12px 14px;
+    }
+
+    .app-body .topbar-caption {
+        max-width: 180px;
+    }
+
+    .app-body .doctor-welcome {
+        align-items: flex-start;
+    }
+
+    .app-body .doctor-welcome-date {
+        display: none;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .app-body .doctor-stat-card {
+        padding: 14px;
+    }
+
+    .app-body .doctor-stat-value {
+        font-size: 23px;
+    }
+
+    .app-body .doctor-patient-selector {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .app-body .doctor-picker-form {
+        width: 100%;
+    }
+
+    .app-body .doctor-patient-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-patient-summary article + article {
+        border-left: 0;
+        border-top: 1px solid #efedef;
+    }
+
+    .app-body .doctor-empty-state {
+        padding: 20px;
+    }
+
+    .app-body .empty-state-action {
+        padding: 17px;
+    }
+
+    .app-body .doctor-panel-card {
+        padding: 17px;
+    }
+
+    .app-body .doctor-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .app-body .doctor-timeline-item {
+        align-items: flex-start;
+    }
+
+    .app-body .timeline-type {
+        display: none;
+    }
+
+    .app-body .sidebar-nav {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   GLICOCHECK — PAINEL MÉDICO
+   Layout amplo, legível e acessível
+   ===================================================== */
+
+   .app-body .app-layout {
+    width: min(1720px, calc(100% - 56px));
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 28px;
+    padding: 26px 0;
+}
+
+.app-body .app-sidebar {
+    padding: 30px 20px;
+    border-radius: 25px;
+}
+
+.app-body .app-main-column {
+    gap: 24px;
+}
+
+.app-body .dashboard-content {
+    padding: 18px 22px 38px;
+}
+
+.app-body .app-topbar {
+    min-height: 82px;
+    padding: 18px 28px;
+    border-radius: 20px;
+}
+
+/* Sidebar mais confortável */
+
+.app-body .app-brand {
+    font-size: 17px;
+    margin-bottom: 34px;
+}
+
+.app-body .app-brand img {
+    width: 30px;
+    height: 30px;
+}
+
+.app-body .sidebar-profile {
+    padding: 16px 12px;
+    margin-bottom: 32px;
+}
+
+.app-body .avatar-circle {
+    width: 46px;
+    height: 46px;
+    font-size: 16px;
+}
+
+.app-body .sidebar-profile strong {
+    font-size: 14px;
+}
+
+.app-body .sidebar-profile small {
+    font-size: 12px;
+}
+
+.app-body .sidebar-label {
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.app-body .sidebar-nav a {
+    min-height: 49px;
+    font-size: 13px !important;
+    gap: 13px;
+}
+
+.app-body .sidebar-nav a span {
+    font-size: 18px;
+}
+
+.app-body .sidebar-bottom a {
+    min-height: 46px;
+    font-size: 13px;
+}
+
+/* Conteúdo médico */
+
+.app-body .doctor-dashboard {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.app-body .doctor-welcome {
+    min-height: 125px;
+    padding: 15px 0 10px;
+}
+
+.app-body .doctor-welcome h1 {
+    font-size: clamp(34px, 3vw, 43px);
+    letter-spacing: -1.8px;
+    margin-bottom: 10px;
+}
+
+.app-body .doctor-welcome p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.app-body .section-kicker {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 11px;
+}
+
+/* Aviso */
+
+.app-body .doctor-verification-notice {
+    padding: 20px 22px;
+    border-radius: 15px;
+}
+
+.app-body .doctor-verification-notice strong {
+    font-size: 13px;
+}
+
+.app-body .doctor-verification-notice p {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Indicadores */
+
+.app-body .doctor-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.app-body .doctor-stat-card {
+    min-height: 145px;
+    padding: 23px;
+    border-radius: 19px;
+}
+
+.app-body .doctor-stat-label {
+    font-size: 12px;
+}
+
+.app-body .doctor-stat-value {
+    min-height: 50px;
+    font-size: 34px;
+}
+
+.app-body .doctor-stat-name {
+    font-size: 24px;
+}
+
+.app-body .doctor-stat-card small {
+    font-size: 11px;
+}
+
+/* Seletor */
+
+.app-body .doctor-patient-selector {
+    padding: 25px 28px;
+    border-radius: 19px;
+    gap: 30px;
+}
+
+.app-body .doctor-patient-selector h2 {
+    font-size: 22px;
+}
+
+.app-body .doctor-patient-selector p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.app-body .doctor-picker-form {
+    width: min(390px, 45%);
+}
+
+/* Resumo */
+
+.app-body .doctor-patient-overview {
+    padding: 29px;
+    border-radius: 20px;
+}
+
+.app-body .doctor-section-heading h2,
+.app-body .doctor-card-heading h2 {
+    font-size: 23px;
+}
+
+.app-body .doctor-patient-summary {
+    border-radius: 15px;
+}
+
+.app-body .doctor-patient-summary article {
+    padding: 23px;
+    gap: 8px;
+}
+
+.app-body .doctor-patient-summary small {
+    font-size: 12px;
+}
+
+.app-body .doctor-patient-summary strong {
+    font-size: 29px;
+}
+
+.app-body .doctor-patient-summary span {
+    font-size: 11px;
+}
+
+/* Grade */
+
+.app-body .doctor-content-grid {
+    gap: 22px;
+    align-items: stretch;
+}
+
+.app-body .doctor-panel-card {
+    padding: 29px;
+    border-radius: 20px;
+}
+
+.app-body .doctor-card-heading {
+    margin-bottom: 25px;
+}
+
+.app-body .doctor-card-heading p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Campos maiores */
+
+.app-body .field-label {
+    font-size: 13px;
+    margin: 16px 0 9px;
+}
+
+.app-body .field-input {
+    min-height: 51px;
+    padding: 13px 15px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.app-body textarea.field-input {
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.app-body .btn-primary,
+.app-body .btn-secondary {
+    min-height: 51px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.app-body .quiet-tag {
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+/* Medições */
+
+.app-body .doctor-measurement-row {
+    padding: 18px 0;
+    gap: 15px;
+}
+
+.app-body .measurement-indicator {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    font-size: 18px;
+}
+
+.app-body .measurement-information strong {
+    font-size: 16px;
+}
+
+.app-body .measurement-information small {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.app-body .measurement-reference {
+    font-size: 11px;
+}
+
+.app-body .doctor-disclaimer {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Plano */
+
+.app-body .doctor-active-plan {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.app-body .doctor-active-plan > strong {
+    font-size: 15px;
+}
+
+.app-body .doctor-active-plan > small {
+    font-size: 11px;
+}
+
+.app-body .doctor-active-plan > p,
+.app-body .doctor-plan-goals p {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-plan-goals strong {
+    font-size: 12px;
+}
+
+.app-body .doctor-subheading h3 {
+    font-size: 16px;
+}
+
+.app-body .doctor-subheading p {
+    font-size: 11px;
+}
+
+/* Agenda */
+
+.app-body .doctor-appointments {
+    gap: 17px;
+}
+
+.app-body .appointment-date {
+    width: 51px;
+    height: 55px;
+}
+
+.app-body .appointment-date strong {
+    font-size: 19px;
+}
+
+.app-body .appointment-date small {
+    font-size: 11px;
+}
+
+.app-body .doctor-appointment-row > div:last-child strong {
+    font-size: 13px;
+}
+
+.app-body .doctor-appointment-row > div:last-child small {
+    font-size: 11px;
+}
+
+/* Relatórios */
+
+.app-body .doctor-muted-text {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.app-body .doctor-report-highlight {
+    padding: 20px;
+}
+
+.app-body .doctor-report-highlight strong {
+    font-size: 35px;
+}
+
+.app-body .doctor-report-highlight span {
+    font-size: 12px;
+}
+
+.app-body .doctor-report-button {
+    width: 100%;
+}
+
+/* Linha do cuidado */
+
+.app-body .doctor-timeline {
+    width: 100%;
+}
+
+.app-body .doctor-timeline-item {
+    padding: 19px 0;
+    gap: 17px;
+}
+
+.app-body .timeline-information strong {
+    font-size: 13px;
+}
+
+.app-body .timeline-information small {
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.app-body .timeline-type {
+    font-size: 11px;
+    padding: 7px 11px;
+}
+
+.app-body .doctor-empty-message {
+    padding: 28px 15px;
+    font-size: 13px;
+}
+
+.app-body .doctor-empty-message span {
+    font-size: 29px;
+}
+
+/* Estado vazio */
+
+.app-body .doctor-empty-state {
+    min-height: 410px;
+    padding: 45px;
+    gap: 55px;
+    border-radius: 23px;
+}
+
+.app-body .empty-state-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 31px;
+    border-radius: 19px;
+}
+
+.app-body .empty-state-visual h2 {
+    font-size: 38px;
+}
+
+.app-body .empty-state-visual p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.app-body .empty-state-action {
+    padding: 30px;
+    border-radius: 19px;
+}
+
+.app-body .empty-action-heading strong {
+    font-size: 15px;
+}
+
+.app-body .empty-action-heading small {
+    font-size: 12px;
+}
+
+.app-body .empty-state-help p {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Foco acessível para teclado */
+
+.app-body a:focus-visible,
+.app-body button:focus-visible,
+.app-body input:focus-visible,
+.app-body select:focus-visible,
+.app-body textarea:focus-visible {
+    outline: 3px solid #a10f06 !important;
+    outline-offset: 3px;
+}
+
+.app-body button,
+.app-body a,
+.app-body input,
+.app-body select,
+.app-body textarea {
+    font-family: inherit;
+}
+
+/* Evita animações excessivas para quem prefere movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+    .app-body *,
+    .app-body *::before,
+    .app-body *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Telas menores */
+
+@media (max-width: 1150px) {
+    .app-body .app-layout {
+        width: calc(100% - 36px);
+        grid-template-columns: 235px minmax(0, 1fr);
+        gap: 19px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .app-body .app-layout {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-empty-state {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-picker-form {
+        width: 100%;
+    }
+
+    .app-body .doctor-patient-selector {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .app-body .dashboard-content {
+        padding: 10px 3px 25px;
+    }
+
+    .app-body .doctor-welcome h1 {
+        font-size: 31px;
+    }
+
+    .app-body .doctor-welcome p {
+        font-size: 13px;
+    }
+
+    .app-body .doctor-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .app-body .doctor-stat-card {
+        padding: 16px;
+        min-height: 125px;
+    }
+
+    .app-body .doctor-stat-value {
+        font-size: 27px;
+    }
+
+    .app-body .doctor-patient-overview,
+    .app-body .doctor-panel-card {
+        padding: 20px;
+    }
+
+    .app-body .doctor-patient-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .app-body .doctor-patient-summary article + article {
+        border-left: 0;
+        border-top: 1px solid #efedef;
+    }
+
+    .app-body .doctor-empty-state {
+        padding: 22px;
+    }
+
+    .app-body .empty-state-visual h2 {
+        font-size: 30px;
+    }
+
+    .app-body .empty-state-action {
+        padding: 20px;
+    }
+
+    .app-body .timeline-type {
+        display: none;
+    }
+}
+
+
+/* =====================================================
+   GLICOCHECK — OCUPAR TODA A TELA
+   Correção de largura e proporções do painel
+   ===================================================== */
+
+   html,
+   body {
+       width: 100%;
+       min-height: 100%;
+   }
+   
+   .app-body {
+       overflow-x: hidden;
+   }
+   
+   /* Layout principal: expansão real até as bordas */
+   
+   .app-body .app-layout {
+       position: relative;
+       left: 50%;
+       transform: translateX(-50%);
+   
+       width: calc(100vw - 64px) !important;
+       max-width: none !important;
+   
+       margin: 24px 0 !important;
+       padding: 0 !important;
+   
+       display: grid !important;
+       grid-template-columns: 300px minmax(0, 1fr) !important;
+       gap: 28px !important;
+   
+       align-items: stretch;
+   }
+   
+   /* Lateral */
+   
+   .app-body .app-sidebar {
+       width: 100%;
+       min-width: 0;
+       min-height: calc(100vh - 48px);
+       padding: 30px 22px;
+   }
+   
+   /* Coluna principal */
+   
+   .app-body .app-main-column {
+       width: 100%;
+       min-width: 0;
+       max-width: none !important;
+       gap: 22px;
+   }
+   
+   /* Barra superior */
+   
+   .app-body .app-topbar {
+       width: 100%;
+       min-height: 82px;
+       padding: 20px 32px;
+   }
+   
+   /* Área de conteúdo */
+   
+   .app-body .dashboard-content {
+       width: 100%;
+       max-width: none !important;
+       padding: 22px 30px 45px;
+   }
+   
+   /* Painel médico */
+   
+   .app-body .doctor-dashboard {
+       width: 100% !important;
+       max-width: none !important;
+       margin: 0;
+   }
+   
+   /* Cartões com mais espaço */
+   
+   .app-body .doctor-stats-grid {
+       width: 100%;
+       grid-template-columns: repeat(4, minmax(0, 1fr));
+       gap: 22px;
+   }
+   
+   .app-body .doctor-stat-card {
+       min-height: 165px;
+       padding: 28px;
+   }
+   
+   .app-body .doctor-content-grid {
+       width: 100%;
+       grid-template-columns: repeat(2, minmax(0, 1fr));
+       gap: 24px;
+   }
+   
+   .app-body .doctor-panel-card {
+       width: 100%;
+       min-width: 0;
+       padding: 32px;
+   }
+   
+   .app-body .doctor-patient-overview,
+   .app-body .doctor-patient-selector,
+   .app-body .doctor-timeline {
+       width: 100%;
+   }
+   
+   .app-body .doctor-patient-summary {
+       width: 100%;
+   }
+   
+   /* Formulários ocupam o espaço disponível */
+   
+   .app-body .doctor-form,
+   .app-body .doctor-invite-form {
+       width: 100%;
+   }
+   
+   .app-body .doctor-form .field-input,
+   .app-body .doctor-invite-form .field-input {
+       width: 100%;
+   }
+   
+   /* Rodapé */
+   
+   .app-body .app-footer {
+       width: 100%;
+       margin-top: 12px;
+       text-align: center;
+   }
+   
+   /* Monitores médios */
+   
+   @media (max-width: 1100px) {
+       .app-body .app-layout {
+           width: calc(100vw - 36px) !important;
+           grid-template-columns: 245px minmax(0, 1fr) !important;
+           gap: 18px !important;
+       }
+   
+       .app-body .dashboard-content {
+           padding: 18px 12px 35px;
+       }
+   
+       .app-body .doctor-stats-grid {
+           grid-template-columns: repeat(2, minmax(0, 1fr));
+       }
+   }
+   
+   /* Tablets e celulares */
+   
+   @media (max-width: 800px) {
+       .app-body .app-layout {
+           width: calc(100vw - 28px) !important;
+           grid-template-columns: minmax(0, 1fr) !important;
+           gap: 16px !important;
+       }
+   
+       .app-body .app-sidebar {
+           min-height: auto;
+       }
+   
+       .app-body .doctor-content-grid {
+           grid-template-columns: minmax(0, 1fr);
+       }
+   
+       .app-body .doctor-stats-grid {
+           grid-template-columns: repeat(2, minmax(0, 1fr));
+       }
+   
+       .app-body .doctor-patient-selector {
+           flex-direction: column;
+       }
+   
+       .app-body .doctor-picker-form {
+           width: 100%;
+       }
+   }
+   
+   @media (max-width: 480px) {
+       .app-body .doctor-stats-grid {
+           grid-template-columns: 1fr;
+       }
+   
+       .app-body .doctor-panel-card {
+           padding: 20px;
+       }
+   
+       .app-body .doctor-welcome h1 {
+           font-size: 30px;
+       }
+   }
+   
+
+/* Avatar do perfil — círculo perfeito */
+
+.app-body .avatar-circle,
+.app-body .topbar-user {
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+
+    flex: 0 0 46px !important;
+    aspect-ratio: 1 / 1;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+    border-radius: 50% !important;
+    box-sizing: border-box;
+
+    line-height: 1;
+    text-align: center;
+}
+
+/* Letra centralizada */
+
+.app-body .avatar-circle {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.app-body .topbar-user {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CABEÇALHO SUPERIOR — GLICOCHECK
+   ========================================= */
+
+/* Área de identificação */
+
+.app-body .app-topbar {
+    min-height: 100px !important;
+    padding: 22px 32px !important;
+}
+
+/* GLICOCHECK / MÉDICO(A) */
+
+.app-body .topbar-kicker {
+    display: block;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0px !important;
+    line-height: 1;
+    margin-bottom: 7px;
+}
+
+/* Frase abaixo */
+
+.app-body .topbar-caption {
+    display: block;
+    font-size: 14px !important;
+    line-height: 1.6;
+    color: #68686e !important;
+}
+
+/* Data */
+
+.app-body .topbar-date {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: #55555b !important;
+    white-space: nowrap;
+    margin-right: 8px;
+}
+
+/* Foto / inicial do perfil */
+
+.app-body .topbar-user {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    flex: 0 0 48px !important;
+
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    border-radius: 50% !important;
+}
+
+/* Espaçamento entre data e perfil */
+
+.app-body .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Ajuste para celulares */
+
+@media (max-width: 560px) {
+    .app-body .app-topbar {
+        padding: 17px !important;
+        min-height: 85px !important;
+    }
+
+    .app-body .topbar-kicker {
+        font-size: 11px !important;
+    }
+
+    .app-body .topbar-caption {
+        font-size: 12px !important;
+    }
+
+    .app-body .topbar-date {
+        font-size: 11px !important;
+    }
+
+    .app-body .topbar-user {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+        min-height: 42px !important;
+        flex-basis: 42px !important;
+    }
+}
+
+
+/* =====================================================
+   GLICOCHECK — PAINEL DO CUIDADOR
+   Visual amplo, acessível e responsivo
+   ===================================================== */
+
+   .caregiver-dashboard {
+    width: 100%;
+    max-width: none;
+    color: #1d1d1f;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* BOAS-VINDAS */
+
+.caregiver-welcome {
+    position: relative;
+    overflow: hidden;
+    min-height: 190px;
+    padding: 38px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.045);
+    border-radius: 24px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.035);
+}
+
+.caregiver-welcome > div:first-child {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+}
+
+.caregiver-welcome h1 {
+    margin: 13px 0 8px;
+    font-size: clamp(32px, 3vw, 46px);
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -1.8px;
+}
+
+.caregiver-welcome-subtitle {
+    margin: 0 0 8px;
+    color: #a10f06;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.caregiver-welcome-description {
+    max-width: 650px;
+    margin: 0;
+    color: #77777e;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.caregiver-welcome-symbol {
+    position: absolute;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: Georgia, serif;
+    font-size: 190px;
+    line-height: 1;
+    font-weight: bold;
+    color: rgba(161,15,6,.045);
+    pointer-events: none;
+}
+
+/* SELEÇÃO DO PACIENTE */
+
+.caregiver-patient-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 26px 32px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.045);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.025);
+}
+
+.caregiver-selector-info h2 {
+    margin: 7px 0 5px;
+    font-size: 23px;
+    letter-spacing: -.5px;
+}
+
+.caregiver-selector-info p {
+    margin: 0;
+    color: #77777e;
+    font-size: 15px;
+}
+
+.caregiver-picker-form {
+    width: min(390px, 42%);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.caregiver-picker-form label,
+.caregiver-form label {
+    display: block;
+    margin: 0 0 9px;
+    color: #36363c;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.caregiver-picker-form .field-input,
+.caregiver-form .field-input {
+    width: 100%;
+    min-height: 52px;
+    padding: 13px 15px;
+    border: 1px solid #dedee2;
+    border-radius: 12px;
+    background: #fff;
+    color: #29292e;
+    font: inherit;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.caregiver-form .field-input:focus,
+.caregiver-picker-form .field-input:focus {
+    outline: none;
+    border-color: #a10f06;
+    box-shadow: 0 0 0 4px rgba(161,15,6,.10);
+}
+
+.caregiver-form textarea.field-input {
+    min-height: 95px;
+    resize: vertical;
+}
+
+/* INDICADORES */
+
+.caregiver-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.caregiver-stat-card {
+    min-width: 0;
+    min-height: 165px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.035);
+}
+
+.caregiver-stat-featured {
+    background: #fffafa;
+    border-color: rgba(161,15,6,.13);
+}
+
+.caregiver-stat-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #77777e;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.caregiver-stat-icon,
+.caregiver-heading-icon {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #faeaea;
+    color: #a10f06;
+    font-size: 21px;
+}
+
+.caregiver-stat-value {
+    display: block;
+    margin: 14px 0 5px;
+    font-size: clamp(28px, 2.5vw, 37px);
+    font-weight: 750;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.caregiver-stat-value small {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.caregiver-stat-patient {
+    display: block;
+    margin: 14px 0 5px;
+    font-size: clamp(22px, 2vw, 30px);
+    letter-spacing: -.7px;
+    overflow-wrap: anywhere;
+}
+
+.caregiver-stat-card p {
+    margin: 0;
+    color: #888890;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* GRADE PRINCIPAL */
+
+.caregiver-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    align-items: start;
+    gap: 24px;
+}
+
+.caregiver-content-grid-lower {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+}
+
+.caregiver-panel-card {
+    min-width: 0;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 22px;
+    box-shadow: 0 9px 30px rgba(0,0,0,.035);
+}
+
+.caregiver-card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 27px;
+}
+
+.caregiver-card-heading h2 {
+    margin: 8px 0 7px;
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: -.7px;
+}
+
+.caregiver-card-heading p {
+    margin: 0;
+    color: #85858c;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* FORMULÁRIOS */
+
+.caregiver-form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+}
+
+.caregiver-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.caregiver-field-grid > div {
+    min-width: 0;
+}
+
+.caregiver-form .btn-primary,
+.caregiver-form .btn-secondary {
+    min-height: 54px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.caregiver-form-note {
+    margin: -5px 0 0;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* HISTÓRICO DE MEDIÇÕES */
+
+.caregiver-measurement-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.caregiver-measurement-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 17px 0;
+    border-bottom: 1px solid #eeeeef;
+}
+
+.caregiver-measurement-item:first-child {
+    padding-top: 0;
+}
+
+.caregiver-measurement-item:last-child {
+    border-bottom: 0;
+}
+
+.caregiver-measurement-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: #faeaea;
+    color: #a10f06;
+    font-size: 21px;
+}
+
+.caregiver-measurement-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.caregiver-measurement-info strong {
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.caregiver-measurement-info small {
+    color: #85858c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.caregiver-report-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: #fff7f7;
+    color: #a10f06;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s;
+}
+
+.caregiver-report-link:hover {
+    background: #faeaea;
+}
+
+/* ROTINA E TAREFAS */
+
+.caregiver-subheading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 13px;
+}
+
+.caregiver-subheading h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.caregiver-count {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background: #faeaea;
+    color: #a10f06;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.caregiver-task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.caregiver-task-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px 0;
+    border-bottom: 1px solid #eeeeef;
+}
+
+.caregiver-task-item:last-child {
+    border-bottom: 0;
+}
+
+.caregiver-task-indicator {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+    border-radius: 50%;
+    background: #a10f06;
+}
+
+.caregiver-task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+.caregiver-task-info strong {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.caregiver-task-info small {
+    color: #85858c;
+    font-size: 13px;
+}
+
+.caregiver-task-item.task-done .caregiver-task-indicator {
+    background: #29966b;
+}
+
+.caregiver-task-item.task-done .caregiver-task-info strong {
+    color: #77777e;
+}
+
+.caregiver-complete-button {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e6e6e9;
+    border-radius: 12px;
+    background: #fff;
+    color: #29966b;
+    font-size: 19px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.caregiver-complete-button:hover {
+    background: #eaf7f0;
+    border-color: #29966b;
+}
+
+.caregiver-done-label {
+    padding: 7px 11px;
+    border-radius: 20px;
+    background: #eaf7f0;
+    color: #238358;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* AGENDA */
+
+.caregiver-appointment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.caregiver-appointment-item {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 17px 0;
+    border-bottom: 1px solid #eeeeef;
+}
+
+.caregiver-calendar-date {
+    width: 58px;
+    height: 65px;
+    flex: 0 0 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #faeaea;
+    color: #a10f06;
+}
+
+.caregiver-calendar-date strong {
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.caregiver-calendar-date small {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.caregiver-appointment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.caregiver-appointment-info strong {
+    font-size: 16px;
+}
+
+.caregiver-appointment-info small {
+    color: #85858c;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* PLANO DE CUIDADO */
+
+.caregiver-plan-preview {
+    margin-top: 25px;
+    padding: 22px;
+    border: 1px solid #eee5e4;
+    border-radius: 16px;
+    background: #fffafa;
+}
+
+.caregiver-plan-preview h3 {
+    margin: 9px 0;
+    font-size: 18px;
+}
+
+.caregiver-plan-preview p {
+    margin: 0 0 12px;
+    color: #66666d;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.caregiver-plan-preview small {
+    color: #85858c;
+    font-size: 12px;
+}
+
+/* RELATÓRIO */
+
+.caregiver-report-box {
+    margin-top: 25px;
+    padding: 22px;
+    border: 1px solid #eeeeef;
+    border-radius: 16px;
+    background: #fafafa;
+}
+
+.caregiver-report-box h3 {
+    margin: 9px 0 7px;
+    font-size: 18px;
+}
+
+.caregiver-report-box p {
+    margin: 0 0 18px;
+    color: #77777e;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* LINHA DO CUIDADO */
+
+.caregiver-timeline {
+    width: 100%;
+}
+
+.caregiver-timeline-badge {
+    padding: 9px 13px;
+    border-radius: 30px;
+    background: #f5f5f5;
+    color: #66666d;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.caregiver-timeline-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.caregiver-timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 19px 0;
+    border-bottom: 1px solid #eeeeef;
+}
+
+.caregiver-timeline-item:last-child {
+    border-bottom: 0;
+}
+
+.caregiver-timeline-dot {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 13px;
+    border-radius: 50%;
+    background: #a10f06;
+    box-shadow: 0 0 0 5px #faeaea;
+}
+
+.caregiver-timeline-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.caregiver-timeline-info strong {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.caregiver-timeline-info small {
+    color: #85858c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.caregiver-timeline-type {
+    padding: 7px 11px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    color: #66666d;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ESTADOS VAZIOS */
+
+.caregiver-empty-state {
+    min-height: 180px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px dashed #dedee2;
+    border-radius: 15px;
+    background: #fcfcfc;
+}
+
+.caregiver-empty-state > span {
+    margin-bottom: 13px;
+    color: #a10f06;
+    font-size: 28px;
+}
+
+.caregiver-empty-state strong {
+    font-size: 15px;
+}
+
+.caregiver-empty-state p {
+    margin: 7px 0 0;
+    color: #85858c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.caregiver-muted {
+    color: #85858c;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* PRIMEIRO ACESSO */
+
+.caregiver-onboarding {
+    width: 100%;
+    min-height: 390px;
+    padding: 45px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, .85fr);
+    align-items: center;
+    gap: 55px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 24px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.035);
+}
+
+.caregiver-onboarding-content {
+    max-width: 560px;
+}
+
+.caregiver-onboarding-icon {
+    width: 64px;
+    height: 64px;
+    margin: 23px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #faeaea;
+    color: #a10f06;
+    font-size: 32px;
+}
+
+.caregiver-onboarding-content h2 {
+    max-width: 500px;
+    margin: 0 0 15px;
+    font-size: clamp(28px, 3vw, 39px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.caregiver-onboarding-content p {
+    color: #77777e;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.caregiver-invite-card {
+    padding: 30px;
+    border: 1px solid #eeeeef;
+    border-radius: 20px;
+    background: #fdfcfc;
+}
+
+.caregiver-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.caregiver-step > span {
+    width: 43px;
+    height: 43px;
+    flex: 0 0 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #faeaea;
+    color: #a10f06;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.caregiver-step div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.caregiver-step strong {
+    font-size: 16px;
+}
+
+.caregiver-step small {
+    color: #85858c;
+    font-size: 13px;
+}
+
+.caregiver-invite-note {
+    display: flex;
+    gap: 9px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #eeeeef;
+    color: #85858c;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.caregiver-invite-note span {
+    color: #a10f06;
+}
+
+/* ACESSIBILIDADE */
+
+.caregiver-dashboard button:focus-visible,
+.caregiver-dashboard a:focus-visible,
+.caregiver-dashboard select:focus-visible,
+.caregiver-dashboard input:focus-visible,
+.caregiver-dashboard textarea:focus-visible {
+    outline: 3px solid rgba(161,15,6,.55);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .caregiver-dashboard *,
+    .caregiver-dashboard *::before,
+    .caregiver-dashboard *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1200px) {
+    .caregiver-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .caregiver-content-grid,
+    .caregiver-content-grid-lower {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .caregiver-onboarding {
+        gap: 30px;
+        padding: 32px;
+    }
+}
+
+@media (max-width: 850px) {
+    .caregiver-content-grid,
+    .caregiver-content-grid-lower,
+    .caregiver-onboarding {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .caregiver-patient-selector {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .caregiver-picker-form {
+        width: 100%;
+    }
+
+    .caregiver-welcome {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 560px) {
+    .caregiver-dashboard {
+        gap: 18px;
+    }
+
+    .caregiver-welcome {
+        min-height: auto;
+        padding: 25px 21px;
+    }
+
+    .caregiver-welcome h1 {
+        font-size: 30px;
+        letter-spacing: -1px;
+        overflow-wrap: anywhere;
+    }
+
+    .caregiver-welcome-description {
+        font-size: 14px;
+    }
+
+    .caregiver-welcome-symbol {
+        right: 10px;
+        font-size: 110px;
+    }
+
+    .caregiver-stats {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .caregiver-stat-card {
+        min-height: 140px;
+        padding: 21px;
+    }
+
+    .caregiver-panel-card,
+    .caregiver-onboarding,
+    .caregiver-invite-card {
+        padding: 21px;
+    }
+
+    .caregiver-card-heading h2 {
+        font-size: 22px;
+    }
+
+    .caregiver-field-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .caregiver-timeline-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .caregiver-timeline-type {
+        margin-left: 29px;
+    }
+
+    .caregiver-timeline-badge {
+        display: none;
+    }
+}
+
+
+/* ==========================================
+   GLICOCHECK — ACESSIBILIDADE DO PACIENTE
+   Tipografia ampliada e leitura confortável
+========================================== */
+
+.patient-dashboard {
+    font-size: 17px;
+    line-height: 1.65;
+    color: #1d1d1f;
+}
+
+/* Título principal */
+.patient-dashboard .welcome-row h1 {
+    font-size: clamp(30px, 3vw, 38px);
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+}
+
+/* Textos de apresentação */
+.patient-dashboard .welcome-row p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* Identificação das seções */
+.patient-dashboard .section-kicker {
+    font-size: 14px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+}
+
+/* Títulos das seções e cartões */
+.patient-dashboard h2 {
+    font-size: 25px;
+    line-height: 1.35;
+    font-weight: 750;
+}
+
+.patient-dashboard h3 {
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+/* Textos comuns */
+.patient-dashboard p,
+.patient-dashboard label,
+.patient-dashboard li {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* Informações secundárias */
+.patient-dashboard small,
+.patient-dashboard .muted,
+.patient-dashboard .card-description {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Valores dos indicadores */
+.patient-dashboard .stat-value,
+.patient-dashboard .metric-value {
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 750;
+}
+
+/* Descrição dos indicadores */
+.patient-dashboard .stat-label,
+.patient-dashboard .metric-label {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+/* Tabelas e histórico */
+.patient-dashboard table {
+    font-size: 16px;
+}
+
+.patient-dashboard th {
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.patient-dashboard td {
+    font-size: 16px;
+    line-height: 1.6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Formulários */
+.patient-dashboard input,
+.patient-dashboard select,
+.patient-dashboard textarea {
+    font-size: 17px;
+    min-height: 50px;
+}
+
+.patient-dashboard input::placeholder,
+.patient-dashboard textarea::placeholder {
+    font-size: 16px;
+}
+
+/* Botões */
+.patient-dashboard button,
+.patient-dashboard .btn,
+.patient-dashboard a.btn {
+    font-size: 16px;
+    font-weight: 700;
+    min-height: 48px;
+}
+
+/* Cartões com mais espaço interno */
+.patient-dashboard .stat-card,
+.patient-dashboard .dashboard-card,
+.patient-dashboard .panel-card {
+    padding: 25px;
+}
+
+/* Links */
+.patient-dashboard a {
+    text-underline-offset: 4px;
+}
+
+/* Telas menores */
+@media (max-width: 768px) {
+    .patient-dashboard {
+        font-size: 16px;
+    }
+
+    .patient-dashboard .welcome-row h1 {
+        font-size: 29px;
+    }
+
+    .patient-dashboard .welcome-row p {
+        font-size: 17px;
+    }
+
+    .patient-dashboard h2 {
+        font-size: 23px;
+    }
+
+    .patient-dashboard h3 {
+        font-size: 19px;
+    }
+
+    .patient-dashboard .stat-value,
+    .patient-dashboard .metric-value {
+        font-size: 28px;
+    }
+
+    .patient-dashboard .stat-card,
+    .patient-dashboard .dashboard-card,
+    .patient-dashboard .panel-card {
+        padding: 20px;
+    }
+}
+
+
+/* =====================================
+   GLICOCHECK — TOAST ESTILO IPHONE
+===================================== */
+
+.gc-toast {
+    position: fixed;
+    top: 78px;
+    right: 24px;
+    z-index: 99999;
+    width: min(390px, calc(100vw - 32px));
+    padding: 18px 20px;
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: 22px;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.12),
+        0 2px 8px rgba(0,0,0,.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    animation: gcToastIn .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.gc-toast-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.gc-toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.gc-toast-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 750;
+    color: #1d1d1f;
+}
+
+.gc-toast-message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #55555a;
+}
+
+.gc-toast-close {
+    border: 0;
+    background: transparent;
+    color: #999;
+    font-size: 19px;
+    cursor: pointer;
+    padding: 0 2px;
+}
+
+.gc-toast-success .gc-toast-icon {
+    background: #e5f5eb;
+    color: #21864b;
+}
+
+.gc-toast-error .gc-toast-icon {
+    background: #fce9e8;
+    color: #a10f06;
+}
+
+.gc-toast-warning .gc-toast-icon {
+    background: #fff3dc;
+    color: #a66a00;
+}
+
+.gc-toast-info .gc-toast-icon {
+    background: #e8f1fc;
+    color: #2867a5;
+}
+
+@keyframes gcToastIn {
+    from {
+        opacity: 0;
+        transform: translateY(-18px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes gcToastOut {
+    to {
+        opacity: 0;
+        transform: translateY(-12px) scale(.97);
+    }
+}
+
+@media (max-width: 600px) {
+    .gc-toast {
+        top: 68px;
+        right: 12px;
+        width: calc(100vw - 24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gc-toast {
+        animation: none;
+    }
+}
+
+
+/* ==========================================
+   GLICOCHECK — NOTIFICAÇÕES COMPACTAS
+   Tamanho adaptável ao conteúdo
+========================================== */
+
+
+/* NOTIFICAÇÕES — TAMANHO ADAPTÁVEL */
+
+.gc-toast-stack {
+    position: fixed;
+    top: 76px;
+    right: 22px;
+    z-index: 999999;
+
+    width: fit-content;
+    max-width: min(340px, calc(100vw - 32px));
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+
+    pointer-events: none;
+}
+
+.gc-toast {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    background: rgba(255,255,255,.97);
+    border: 1px solid #ededf0;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.09);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    pointer-events: auto;
+    animation: gcToastEnter .3s ease both;
+}
+
+.gc-toast-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.gc-toast-content {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 245px;
+}
+
+.gc-toast-title {
+    margin: 0 0 2px;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 750;
+}
+
+.gc-toast-message {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #55555b;
+    overflow-wrap: anywhere;
+}
+
+.gc-toast-close {
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    margin: -3px -3px 0 0;
+}
+
+@media (max-width: 600px) {
+    .gc-toast-stack {
+        top: 66px;
+        right: 12px;
+        max-width: calc(100vw - 24px);
+    }
+
+    .gc-toast-content {
+        max-width: min(220px, calc(100vw - 110px));
+    }
+}
+
+
+/* ÍCONE */
+.gc-toast-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+/* CONTEÚDO */
+.gc-toast-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 1px;
+}
+
+.gc-toast-title {
+    display: block;
+    margin: 0 0 3px;
+
+    color: #1d1d1f;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.gc-toast-message {
+    margin: 0;
+
+    color: #55555b;
+    font-size: 14px;
+    font-weight: 450;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+/* BOTÃO FECHAR */
+.gc-toast-close {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+
+    margin: -3px -3px 0 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f1f3;
+    color: #777;
+
+    font-size: 19px;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.gc-toast-close:hover {
+    background: #e5e5e8;
+    color: #222;
+}
+
+/* CORES */
+.gc-toast-success .gc-toast-icon,
+.gc-toast-sucesso .gc-toast-icon {
+    background: #e5f5eb;
+    color: #21864b;
+}
+
+.gc-toast-error .gc-toast-icon,
+.gc-toast-danger .gc-toast-icon {
+    background: #fce9e8;
+    color: #a10f06;
+}
+
+.gc-toast-warning .gc-toast-icon,
+.gc-toast-aviso .gc-toast-icon {
+    background: #fff3dc;
+    color: #a66a00;
+}
+
+.gc-toast-info .gc-toast-icon {
+    background: #e8f1fc;
+    color: #2867a5;
+}
+
+/* ANIMAÇÕES */
+@keyframes gcToastEnter {
+    from {
+        opacity: 0;
+        transform: translateY(-9px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gcToastLeave {
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+.gc-toast.gc-toast-leaving {
+    animation: gcToastLeave .25s ease forwards;
+    pointer-events: none;
+}
+
+/* CELULAR */
+@media (max-width: 600px) {
+    .gc-toast-stack {
+        top: 66px;
+        right: 12px;
+        width: calc(100vw - 24px);
+        gap: 8px;
+    }
+
+    .gc-toast {
+        padding: 12px;
+        border-radius: 15px;
+    }
+}
+
+/* ACESSIBILIDADE */
+@media (prefers-reduced-motion: reduce) {
+    .gc-toast,
+    .gc-toast.gc-toast-leaving {
+        animation: none;
+    }
+}
+

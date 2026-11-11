@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /tmp/guest-jg9lku/Downloads/glicocheck/glico-check-sistemas/venv
+set -gx VIRTUAL_ENV /home/visionsystem/consolari/glico-check-sistemas/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

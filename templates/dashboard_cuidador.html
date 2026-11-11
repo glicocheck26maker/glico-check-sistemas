@@ -1,60 +1,72 @@
-{% extends "base.html" %}
+{% extends "dashboard_base.html" %}
+{% block titulo %}Painel do Cuidador · GlicoCheck{% endblock %}
+{% block dashboard_content %}
+<section class="welcome-row" id="overview">
+    <div><span class="section-kicker">ACOMPANHAMENTO COMPARTILHADO</span><h1>Olá, Bem-vindo {{ session.get('nome', 'Cuidador(a)') }}.</h1><p class="dashboard-subtitle">Painel Cuidador(a)</p><p>Organize o cuidado de quem você acompanha, respeitando suas permissões e sua rotina.</p></div>
+</section>
 
-{% block conteudo %}
-<style>
-    header, .top-bar, .navbar, .header-container, [class*="nav"], [class*="header"] { display: none !important; }
-</style>
-
-<div style="padding: 40px 60px !important; background: #ffffff !important; min-height: 100vh !important; box-sizing: border-box !important; max-width: 1200px !important; margin: 0 auto !important;">
-    
-    <div style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 35px !important;">
-        <div>
-            <h1 style="font-size: 26px !important; font-weight: 700 !important; color: #a10f06 !important; margin-bottom: 4px !important;">
-                Olá, Bem-vindo ({{ session.get('nome', 'Cuidador') }})
-            </h1>
-            <p style="font-size: 13px !important; color: #6b7280 !important; font-weight: 600 !important; margin: 0 !important; text-transform: uppercase;">
-                Painel do Cuidador(a) &bull; Gestão de Pacientes
-            </p>
-        </div>
-        <a href="/logout" style="background: #f3f4f6 !important; color: #374151 !important; padding: 10px 18px !important; border-radius: 10px !important; font-size: 13px !important; font-weight: 600 !important; text-decoration: none !important;">Sair</a>
-    </div>
-
-    <!-- Lista de Pacientes Vinculados -->
-    <h3 style="font-size: 18px !important; font-weight: 700 !important; color: #111827 !important; margin-bottom: 20px !important;">Seus Pacientes</h3>
-    
-    <div style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; margin-bottom: 40px !important;">
-        
-        <!-- Paciente 1 -->
-        <div style="background: #ffffff !important; padding: 24px !important; border-radius: 20px !important; border: 1px solid #f0f0f0 !important; box-shadow: 0 10px 25px rgba(0,0,0,0.03) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
-            <div style="display: flex !important; align-items: center !important; gap: 16px !important; margin-bottom: 16px !important;">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" alt="João" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover;">
-                <div>
-                    <h4 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0 0 4px 0;">João Silva</h4>
-                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Diabetes Tipo 2 &bull; Méd: Dr. Carlos</p>
-                </div>
-            </div>
-            <div style="background: #f9fafb; padding: 10px 14px; border-radius: 10px; font-size: 12px; color: #374151; margin-bottom: 16px;">
-                Última Glicemia: <strong style="color: #a10f06;">110 mg/dL</strong> (Hoje, 08:00)
-            </div>
-            <a href="/inicio" onclick="alert('Abrindo prontuário de João Silva para edição de lembretes e medicamentos')" style="background-color: #a10f06; color: #ffffff; text-align: center; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; display: block;">Gerenciar Perfil e Rotina</a>
-        </div>
-
-        <!-- Paciente 2 -->
-        <div style="background: #ffffff !important; padding: 24px !important; border-radius: 20px !important; border: 1px solid #f0f0f0 !important; box-shadow: 0 10px 25px rgba(0,0,0,0.03) !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;">
-            <div style="display: flex !important; align-items: center !important; gap: 16px !important; margin-bottom: 16px !important;">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Maria" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover;">
-                <div>
-                    <h4 style="font-size: 16px; font-weight: 700; color: #111827; margin: 0 0 4px 0;">Maria Oliveira</h4>
-                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Diabetes Tipo 1 &bull; Méd: Dra. Ana</p>
-                </div>
-            </div>
-            <div style="background: #f9fafb; padding: 10px 14px; border-radius: 10px; font-size: 12px; color: #374151; margin-bottom: 16px;">
-                Última Glicemia: <strong style="color: #a10f06;">142 mg/dL</strong> (Hoje, 09:30)
-            </div>
-            <a href="/inicio" onclick="alert('Abrindo prontuário de Maria Oliveira')" style="background-color: #a10f06; color: #ffffff; text-align: center; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; display: block;">Gerenciar Perfil e Rotina</a>
-        </div>
-
-    </div>
-
+{% if not patients %}
+<section class="content-card glass-panel onboarding-card">
+    <div class="onboarding-icon">♡</div><span class="section-kicker">PRIMEIRO PASSO</span><h2>Conecte a pessoa que você acompanha.</h2>
+    <p>Peça ao paciente um código de convite e informe abaixo. O vínculo só será criado quando o código válido for confirmado.</p>
+    <form action="{{ url_for('aceitar_convite') }}" method="POST" class="inline-form invite-form"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input class="field-input" name="codigo" placeholder="GC-XXXXXXXX" required><button class="btn-primary" type="submit">Conectar paciente</button></form>
+</section>
+{% else %}
+<div class="patient-picker glass-panel">
+    <div><span class="section-kicker">PESSOA ACOMPANHADA</span><strong>Selecione quem deseja acompanhar</strong></div>
+    <form method="GET" action="{{ url_for('inicio_cuidador') }}" class="picker-form">
+        <select class="field-input" name="paciente_id" onchange="this.form.submit()">
+            {% for patient in patients %}<option value="{{ patient.id }}" {% if selected and selected.id == patient.id %}selected{% endif %}>{{ patient.nome }}</option>{% endfor %}
+        </select>
+    </form>
 </div>
+{% if data %}
+<div class="stats-grid">
+    <article class="stat-card glass-panel stat-featured"><div class="stat-top"><span>Última medição</span><span class="stat-icon">◉</span></div>{% if data.last_measurement %}<strong>{{ '%.1f'|format(data.last_measurement.valor) }} <small>{{ data.last_measurement.unidade }}</small></strong><p>{{ data.last_measurement.medido_em.strftime('%d/%m/%Y às %H:%M') }}</p>{% else %}<strong>—</strong><p>Sem registros.</p>{% endif %}</article>
+    <article class="stat-card glass-panel"><div class="stat-top"><span>Registros em 7 dias</span><span class="stat-icon">▤</span></div><strong>{{ data.weekly_total }}</strong><p>medições disponíveis</p></article>
+    <article class="stat-card glass-panel"><div class="stat-top"><span>Tarefas pendentes</span><span class="stat-icon">✓</span></div><strong>{{ data.pending_tasks }}</strong><p>atividades para acompanhar</p></article>
+    <article class="stat-card glass-panel"><div class="stat-top"><span>Pessoa acompanhada</span><span class="stat-icon">♡</span></div><strong class="stat-name">{{ selected.nome.split(' ')[0] }}</strong><p>vínculo ativo</p></article>
+</div>
+<div class="dashboard-grid dashboard-grid-main">
+    <section class="content-card glass-panel" id="measurements">
+        <div class="card-heading"><div><span class="section-kicker">REGISTRO EM NOME DO PACIENTE</span><h2>Registrar glicemia</h2></div></div>
+        <form action="{{ url_for('registrar_medicao') }}" method="POST" class="compact-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="paciente_id" value="{{ selected.id }}">
+            <div class="field-grid"><div><label class="field-label" for="glucose_value">Valor (mg/dL)</label><input class="field-input" type="number" id="glucose_value" name="valor" min="1" max="2000" step="0.1" placeholder="Ex.: 120" required></div><div><label class="field-label" for="glucose_context">Contexto</label><select class="field-input" id="glucose_context" name="contexto"><option value="jejum">Jejum</option><option value="antes_refeicao">Antes da refeição</option><option value="apos_refeicao">Após a refeição</option><option value="ao_deitar">Ao deitar</option><option value="outro">Outro</option></select></div></div>
+            <label class="field-label" for="glucose_time">Data e horário</label><input class="field-input" type="datetime-local" id="glucose_time" name="medido_em" value="{{ now_local.strftime('%Y-%m-%dT%H:%M') }}">
+            <label class="field-label" for="glucose_note">Observações</label><textarea class="field-input field-textarea" id="glucose_note" name="observacoes" rows="2" placeholder="Sintomas ou contexto adicional (opcional)"></textarea>
+            <button class="btn-primary btn-full" type="submit">Salvar medição <span>→</span></button>
+        </form>
+    </section>
+    <section class="content-card glass-panel">
+        <div class="card-heading"><div><span class="section-kicker">HISTÓRICO COMPARTILHADO</span><h2>Últimas medições</h2></div></div>
+        {% for item in data.measurements[:7] %}<div class="measurement-row"><div class="row-icon red-soft">◉</div><div class="row-main"><strong>{{ '%.1f'|format(item.valor) }} {{ item.unidade }}</strong><small>{{ item.contexto.replace('_',' ').title() }} · {{ item.medido_em.strftime('%d/%m/%Y %H:%M') }}</small></div></div>{% else %}<p class="muted-copy">Ainda não há medições registradas.</p>{% endfor %}
+        <a class="text-link" href="{{ url_for('gerar_relatorio_pdf', patient_id=selected.id) }}">Abrir relatório em PDF ↗</a>
+    </section>
+</div>
+<div class="dashboard-grid dashboard-grid-lower">
+    <section class="content-card glass-panel" id="routine">
+        <div class="card-heading"><div><span class="section-kicker">ORGANIZAÇÃO DIÁRIA</span><h2>Rotina e lembretes</h2></div></div>
+        <form action="{{ url_for('criar_tarefa') }}" method="POST" class="compact-form"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="paciente_id" value="{{ selected.id }}">
+            <label class="field-label" for="care_task_title">Nova atividade</label><input class="field-input" id="care_task_title" name="titulo" placeholder="Ex.: lembrar do exame" maxlength="140" required>
+            <div class="field-grid"><div><label class="field-label" for="care_task_type">Tipo</label><select class="field-input" id="care_task_type" name="tipo"><option value="autocuidado">Autocuidado</option><option value="medicao">Medição</option><option value="medicamento">Medicamento</option><option value="consulta">Consulta</option><option value="exame">Exame</option><option value="outro">Outro</option></select></div><div><label class="field-label" for="care_task_date">Data e hora</label><input class="field-input" type="datetime-local" id="care_task_date" name="data_hora" value="{{ now_local.strftime('%Y-%m-%dT%H:%M') }}" required></div></div>
+            <textarea class="field-input field-textarea" name="descricao" rows="2" placeholder="Observação (opcional)"></textarea><button class="btn-secondary btn-full" type="submit">Adicionar lembrete <span>＋</span></button>
+        </form>
+        <div class="task-list">{% for task in data.tasks[:7] %}<div class="task-row {% if task.status == 'concluida' %}task-done{% endif %}"><div class="task-copy"><strong>{{ task.titulo }}</strong><small>{{ task.data_hora.strftime('%d/%m/%Y · %H:%M') }}</small></div>{% if task.status == 'pendente' %}<form action="{{ url_for('concluir_tarefa', task_id=task.id) }}" method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="icon-action" type="submit" title="Marcar como concluída">✓</button></form>{% else %}<span class="done-label">Concluída</span>{% endif %}</div>{% else %}<p class="muted-copy">Nenhuma atividade cadastrada.</p>{% endfor %}</div>
+    </section>
+    <section class="content-card glass-panel" id="agenda">
+        <div class="card-heading"><div><span class="section-kicker">PRÓXIMOS COMPROMISSOS</span><h2>Agenda</h2></div></div>
+        {% for appt in data.appointments %}<div class="appointment-row"><span class="calendar-date">{{ appt.data_hora.strftime('%d') }}<small>{{ appt.data_hora.strftime('%b') }}</small></span><div><strong>{{ appt.motivo or 'Consulta' }}</strong><small>{{ appt.data_hora.strftime('%H:%M') }} · {{ appt.medico_nome }}{% if appt.local %} · {{ appt.local }}{% endif %}</small></div></div>{% else %}<p class="muted-copy">Nenhuma consulta futura cadastrada.</p>{% endfor %}
+        {% if data.plan %}
+        <div class="plan-preview"><span class="section-kicker">PLANO DE CUIDADO</span><strong>{{ data.plan.titulo }}</strong><p>{{ data.plan.orientacoes }}</p><small>Orientação registrada por {{ data.plan.medico_nome }}</small></div>
+        {% endif %}
+        <div id="reports" class="report-panel"><strong>Relatório para consulta</strong><p>Exporte as medições registradas para compartilhar com a equipe de saúde.</p><a class="btn-secondary btn-full" href="{{ url_for('gerar_relatorio_pdf', patient_id=selected.id) }}">Gerar PDF <span>↓</span></a></div>
+    </section>
+</div>
+<section class="content-card glass-panel timeline-card" aria-label="Linha do cuidado compartilhada">
+    <div class="card-heading"><div><span class="section-kicker">HISTÓRICO COMPARTILHADO</span><h2>Linha do cuidado · {{ selected.nome }}</h2></div><span class="quiet-tag">Atividades recentes</span></div>
+    <div class="timeline-list">{% for event in data.timeline %}<div class="timeline-item"><span class="timeline-dot timeline-{{ event.event_type }}"></span><div><strong>{{ event.event_detail }}</strong><small>{{ event.event_at.strftime('%d/%m/%Y às %H:%M') }} · por {{ event.actor }}</small></div><span class="timeline-type">{{ {'medicao':'Medição','atividade':'Rotina','consulta':'Agenda','plano':'Plano'}[event.event_type] }}</span></div>{% else %}<p class="muted-copy">Ainda não há acontecimentos na linha do cuidado.</p>{% endfor %}</div>
+</section>
+{% endif %}
+{% endif %}
 {% endblock %}
